@@ -1,0 +1,1084 @@
+{
+  "name": "mbu_unified_dataset_extraction",
+  "strict": true,
+  "schema": {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "title": "MBU Unified Dataset Extraction",
+    "type": "object",
+    "description": "Single, repository-agnostic schema for Stage 3 extraction in the MBU project. All fields are present; use null when unknown.",
+    "additionalProperties": false,
+    "properties": {
+      "dataset_id": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Platform-native identifier/slug. Examples: HuggingFace 'owner/name', Zenodo record ID, Kaggle 'owner/dataset-slug', PapersWithCode dataset/task slug."
+      },
+      "dataset_name": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Human-readable dataset title or display name from the source platform (e.g., HF pretty_name/card title, Zenodo record title, Kaggle page title, PwC dataset name)."
+      },
+      "dataset_urls": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Primary dataset page first, followed by mirrors/alternates (HF, Zenodo, Kaggle, project page, etc.).",
+        "items": {
+          "type": "string",
+          "description": "URL (not schema-enforced here)"
+        }
+      },
+      "dataset_license": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "The dataset license as listed on the dataset page (verbatim when possible), e.g., 'CC BY 4.0', 'CC0', 'CDLA-Permissive-1.0', 'Apache-2.0', 'Proprietary', etc."
+      },
+      "domain": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Primary biomedical domain classification.",
+        "enum": [
+          "Ophthalmology",
+          "Radiology",
+          "Dermatology",
+          "Pathology",
+          "Surgery",
+          "Other-Medical",
+          "Non-medical"
+        ]
+      },
+      "platform_signals": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Uniform place for platform-native metrics/metadata used in quality reasoning.",
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Origin platform.",
+            "enum": [
+              "huggingface",
+              "zenodo",
+              "kaggle",
+              "paperswithcode"
+            ]
+          },
+          "downloads": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Download count or equivalent adoption signal from the platform."
+          },
+          "likes": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Likes/stars/thumbs-up count as platform validation."
+          },
+          "usability_score": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Kaggle 'usability' or equivalent platform metric if available (0–10 typically)."
+          },
+          "created_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Dataset creation timestamp in ISO 8601 if available."
+          },
+          "updated_at": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Last-modified timestamp in ISO 8601 if available."
+          },
+          "annotations_creators": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "HuggingFace card field when present (e.g., 'expert-generated', 'machine-generated')."
+          },
+          "language_creators": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "HuggingFace card field when present (e.g., 'machine-generated')."
+          }
+        },
+        "required": [
+          "source",
+          "downloads",
+          "likes",
+          "usability_score",
+          "created_at",
+          "updated_at",
+          "annotations_creators",
+          "language_creators"
+        ]
+      },
+      "publication_info": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Academic references and formal validation links tied to this dataset.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Type of reference link.",
+              "enum": [
+                "doi",
+                "arxiv",
+                "pubmed",
+                "journal_url",
+                "conference_url",
+                "institutional_url"
+              ]
+            },
+            "id_or_url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "DOI URL or direct URL to the reference (describe as URL; not enforced by format here)."
+            },
+            "title": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Paper/report title if available."
+            },
+            "venue": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Journal/conference/institution name if available."
+            },
+            "year": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "description": "Publication year if available."
+            }
+          },
+          "required": [
+            "type",
+            "id_or_url",
+            "title",
+            "venue",
+            "year"
+          ]
+        }
+      },
+      "github_repos": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "GitHub repositories directly relevant to this dataset (official code, loaders, evaluation, preprocessing).",
+        "items": {
+          "type": "string",
+          "description": "URL (not schema-enforced here)"
+        }
+      },
+      "other_repositories": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Non-GitHub repositories or ancillary resources (e.g., project website, data portal).",
+        "items": {
+          "type": "string",
+          "description": "URL (not schema-enforced here)"
+        }
+      },
+      "file_analysis": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Summary of file evidence used to determine modality and visual presence.",
+        "additionalProperties": false,
+        "properties": {
+          "visual_data_present_in_files": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if file types/paths/extensions indicate images/video/DICOM; false if only text/tabular; null if unclear."
+          },
+          "file_types_detected": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Distinct file type hints (e.g., 'jpg', 'png', 'tiff', 'dicom', 'nii.gz', 'mp4', 'csv', 'json', 'parquet').",
+            "items": {
+              "type": "string"
+            }
+          },
+          "example_filenames": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Representative filenames or paths that informed the inference.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "visual_modalities_detected": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "If determinable from filenames/card (e.g., 'fundus', 'OCT', 'CXR', 'MRI', 'H&E', 'laparoscopy').",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "visual_data_present_in_files",
+          "file_types_detected",
+          "example_filenames",
+          "visual_modalities_detected"
+        ]
+      },
+      "author_affiliations": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Known affiliations of authors/curators with type hints for institutional context.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Institution or organization name as written."
+            },
+            "type": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Institution type when inferable.",
+              "enum": [
+                "hospital",
+                "university",
+                "industry",
+                "research_institute",
+                "government",
+                "nonprofit",
+                "unknown"
+              ]
+            },
+            "country": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Country if apparent from context."
+            }
+          },
+          "required": [
+            "name",
+            "type",
+            "country"
+          ]
+        }
+      },
+      "data_collection": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Where/how the data were collected.",
+        "additionalProperties": false,
+        "properties": {
+          "summary": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Free-text summary of collection protocol, setting, geography, timeframe, and devices/modalities if known."
+          }
+        },
+        "required": [
+          "summary"
+        ]
+      },
+      "documentation_quality": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Assessed completeness/clarity of dataset documentation.",
+        "enum": [
+          "excellent",
+          "good",
+          "fair",
+          "poor"
+        ]
+      },
+      "primary_task": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Exactly one main task triple (parent modality → sub-modality → leaf). Values must come from the fixed taxonomy.",
+        "additionalProperties": false,
+        "properties": {
+          "modality": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Top-level modality group from the taxonomy.",
+            "enum": [
+              "Vision",
+              "Vision–Language",
+              "Not applicable - no visual component"
+            ]
+          },
+          "sub_modality": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Sub-category under the modality.",
+            "enum": [
+              "Image-Level Classification",
+              "Object and Lesion Detection",
+              "Segmentation",
+              "Anatomical Landmarks and Keypoints",
+              "Counting",
+              "Describe",
+              "Ask and Answer",
+              "Ground and Locate",
+              "Align and Retrieve",
+              "Not applicable - no visual component"
+            ]
+          },
+          "sub_sub_modality": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Leaf node (specific task) exactly as named in the taxonomy.",
+            "enum": [
+              "Binary classification",
+              "Multiclass classification",
+              "Multilabel classification",
+              "Ordinal grading",
+              "Lesion detection with bounding boxes",
+              "Anatomy detection with bounding boxes",
+              "Device detection with bounding boxes",
+              "Semantic segmentation",
+              "Instance segmentation",
+              "Single landmark detection",
+              "Multiple landmark detection",
+              "Direct count labels",
+              "Density or point map counting",
+              "Short medical caption generation",
+              "Long clinical report generation",
+              "Open ended question answering",
+              "Multiple choice question answering",
+              "Visual reasoning question answering",
+              "Referring expression to bounding box",
+              "Referring expression to segmentation mask",
+              "Multi phrase grounding",
+              "Image to text retrieval",
+              "Text to image retrieval",
+              "Image and text pair matching",
+              "Not applicable - no visual component"
+            ]
+          }
+        },
+        "required": [
+          "modality",
+          "sub_modality",
+          "sub_sub_modality"
+        ]
+      },
+      "secondary_tasks": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Zero or more additional task triples supported by the dataset.",
+        "items": {
+          "type": "object",
+          "description": "Additional task triple from the same taxonomy.",
+          "additionalProperties": false,
+          "properties": {
+            "modality": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Top-level modality group from the taxonomy.",
+              "enum": [
+                "Vision",
+                "Vision–Language",
+                "Not applicable - no visual component"
+              ]
+            },
+            "sub_modality": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Sub-category under the modality.",
+              "enum": [
+                "Image-Level Classification",
+                "Object and Lesion Detection",
+                "Segmentation",
+                "Anatomical Landmarks and Keypoints",
+                "Counting",
+                "Describe",
+                "Ask and Answer",
+                "Ground and Locate",
+                "Align and Retrieve",
+                "Not applicable - no visual component"
+              ]
+            },
+            "sub_sub_modality": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Leaf node (specific task) exactly as named in the taxonomy.",
+              "enum": [
+                "Binary classification",
+                "Multiclass classification",
+                "Multilabel classification",
+                "Ordinal grading",
+                "Lesion detection with bounding boxes",
+                "Anatomy detection with bounding boxes",
+                "Device detection with bounding boxes",
+                "Semantic segmentation",
+                "Instance segmentation",
+                "Single landmark detection",
+                "Multiple landmark detection",
+                "Direct count labels",
+                "Density or point map counting",
+                "Short medical caption generation",
+                "Long clinical report generation",
+                "Open ended question answering",
+                "Multiple choice question answering",
+                "Visual reasoning question answering",
+                "Referring expression to bounding box",
+                "Referring expression to segmentation mask",
+                "Multi phrase grounding",
+                "Image to text retrieval",
+                "Text to image retrieval",
+                "Image and text pair matching",
+                "Not applicable - no visual component"
+              ]
+            }
+          },
+          "required": [
+            "modality",
+            "sub_modality",
+            "sub_sub_modality"
+          ]
+        }
+      },
+      "task_reasoning": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Why the chosen taxonomy fits this dataset; include any tasks mentioned in the source description and how they map to the taxonomy leaves."
+      },
+      "flags": {
+        "type": "object",
+        "description": "Binary/enum flags with mandatory reasoning. Each flag is structured as { value, reasoning, evidence_ids? }.",
+        "additionalProperties": false,
+        "properties": {
+          "used_to_train_llm_or_vlm": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True only if there is explicit evidence that a released LLM/VLM (or similar large model) used this dataset for training/finetuning; false if explicitly stated as evaluation-only; null if unclear."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cite model cards/papers or dataset card statements naming this dataset as part of training. Be conservative—do not infer from popularity or vague wording."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "subset_or_split_of_another_dataset": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if this page/dataset is explicitly a subset/split/mirror of another dataset already registered elsewhere; false if explicitly original; null if unclear."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cite wording like 'subset of', 'split of', 'mirror/rehost of', or links to a parent dataset. Be conservative; if ambiguous, prefer null."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "biomedical_relevant": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if dataset is biomedical/medical; false if clearly non-medical."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Explain why the dataset is or isn’t biomedical."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "pmcoa_derived": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if derived from PubMed Central Open Access (PMCOA) articles or figures."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Explain indicators (PMCOA mention, scraped PMC figures, etc.)."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "synthetic_type": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Is the data real, synthetic, or mixed?",
+                "enum": [
+                  "real",
+                  "synthetic",
+                  "mixed"
+                ]
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Explain simulation/generation indicators (e.g., HF 'machine-generated') or why data appears real."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "no_visual_data": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if purely text/tabular without images/video; false if any visual data present."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Explain the file/card evidence leading to this conclusion."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "is_fine_grained_labels": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if labels differentiate subtle subtypes or ordered/severity stages (class granularity, not mask granularity)."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Explain the fine-grained class distinctions (e.g., stages, subtypes)."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "annotated_by_medical_professionals": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if annotation/labeling involved clinicians/biomedical experts."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Cite roles (radiologists, pathologists) or statements in docs."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "has_external_validation": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if peer-reviewed paper/preprint or recognized benchmark usage validates the dataset; false if none; null if unclear."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Summarize the validation evidence (papers, leaderboards)."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          },
+          "low_quality_flag": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "type": [
+                  "boolean",
+                  "null"
+                ],
+                "description": "True if there are clear quality concerns (noisy labels, poor documentation, trivial tasks) warranting caution."
+              },
+              "reasoning": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "description": "Detail the issues (label noise, text-only shortcuts, minimal docs, etc.)."
+              },
+              "evidence_ids": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "value",
+              "reasoning",
+              "evidence_ids"
+            ]
+          }
+        },
+        "required": [
+          "used_to_train_llm_or_vlm",
+          "subset_or_split_of_another_dataset",
+          "biomedical_relevant",
+          "pmcoa_derived",
+          "synthetic_type",
+          "no_visual_data",
+          "is_fine_grained_labels",
+          "annotated_by_medical_professionals",
+          "has_external_validation",
+          "low_quality_flag"
+        ]
+      },
+      "dataset_lineage": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "description": "Structured lineage for subsets/splits/mirrors/derived datasets.",
+        "additionalProperties": false,
+        "properties": {
+          "is_subset_or_split": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "description": "True if the dataset is explicitly a subset, split, mirror, rehost, or derivative of another dataset; false if explicitly original; null if unclear."
+          },
+          "relationship_type": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Relationship to the parent dataset when applicable.",
+            "enum": [
+              "subset",
+              "split",
+              "both",
+              "mirror",
+              "rehost",
+              "derived",
+              "unknown"
+            ]
+          },
+          "parent_dataset_id_or_url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Identifier or URL of the parent dataset when known (platform slug or external URL)."
+          },
+          "parent_platform": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Platform hosting the parent dataset, if known.",
+            "enum": [
+              "huggingface",
+              "zenodo",
+              "kaggle",
+              "paperswithcode",
+              "external"
+            ]
+          },
+          "reasoning": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Explain the lineage judgment and reference parent links/phrases (subset/split/mirror). Be conservative and prefer null if ambiguous."
+          },
+          "evidence_ids": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "is_subset_or_split",
+          "relationship_type",
+          "parent_dataset_id_or_url",
+          "parent_platform",
+          "reasoning",
+          "evidence_ids"
+        ]
+      },
+      "institutional_reasoning": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Explain any hospital/university/medical-institution involvement (or absence) based on affiliations, acknowledgments, or external links."
+      },
+      "quality_score": {
+        "type": [
+          "integer",
+          "null"
+        ],
+        "description": "Overall 0–100 score per MBU guideline (bounds not enforced here)."
+      },
+      "quality_reasoning": {
+        "type": [
+          "string",
+          "null"
+        ],
+        "description": "Justify the quality score with references to documentation, expert involvement, task difficulty, platform signals, and external validation."
+      },
+      "evidence": {
+        "type": [
+          "array",
+          "null"
+        ],
+        "description": "Auditable snippets/links supporting decisions. Reference these by ID from reasoning fields.",
+        "items": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique local evidence ID (e.g., 'ev1')."
+            },
+            "source": {
+              "type": "string",
+              "description": "Where the evidence came from.",
+              "enum": [
+                "huggingface",
+                "zenodo",
+                "kaggle",
+                "paperswithcode",
+                "external"
+              ]
+            },
+            "url": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "URL if applicable."
+            },
+            "file_or_field": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Which file or card field (e.g., 'README.md', 'dataset card', 'files.json')."
+            },
+            "snippet": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Short quote, filename list, or summary fragment used as evidence."
+            },
+            "line_hint": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "description": "Optional line/page/timestamp hint (e.g., 'L42-L60')."
+            }
+          },
+          "required": [
+            "id",
+            "source",
+            "url",
+            "file_or_field",
+            "snippet",
+            "line_hint"
+          ]
+        }
+      }
+    },
+    "required": [
+      "dataset_id",
+      "dataset_name",
+      "dataset_urls",
+      "dataset_license",
+      "domain",
+      "platform_signals",
+      "publication_info",
+      "github_repos",
+      "other_repositories",
+      "file_analysis",
+      "author_affiliations",
+      "data_collection",
+      "documentation_quality",
+      "primary_task",
+      "secondary_tasks",
+      "task_reasoning",
+      "flags",
+      "dataset_lineage",
+      "institutional_reasoning",
+      "quality_score",
+      "quality_reasoning",
+      "evidence"
+    ]
+  }
+}

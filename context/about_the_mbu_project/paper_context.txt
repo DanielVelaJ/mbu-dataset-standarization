@@ -1,0 +1,87 @@
+Central Question: Given the interest in generalist biomedical foundation models, what is the real zero-shot and few-shot  accuracy of these systems across biomedicine? 
+
+What is the problem? The availability of large-scale datasets across many biomedical domains has sparked interest in developing generalist biomedical foundation models (FMs)— models capable of solving tasks across biological and medical applications via zero-shot or few-shot learning. However, despite this growing interest, progress in the field remains difficult due to the lack of large-scale, diverse benchmarks that capture the breadth of tasks across biology and medicine, creating a benchmarking crisis. Moreover, recent attempts to develop such comprehensive benchmarks  have focused on reasoning capabilities, while close examination on failure modes  shows that the biggest failure of these systems is not cognition, rather perception, e.g. being able to identify basic objects and composition of an image. To this end, we propose the first large-scale biomedical benchmark spanning 500 different datasets across 100 tasks across biology, pathology, radiology, and surgery. Our approach standardizes multiple large-scale date collections and enables the evaluation of both embedding and generative models across perception and cognition tasks throughout biology and medicine via zero-shot and few-shot settings.  
+
+Why is it interesting and important? “You can't improve what you can't measure.” Despite growing interest in designing generalist biomedical foundation models, there is currently no standardized approach to evaluate their perception and cognition capabilities across the broad spectrum of biomedicine. Furthermore, the lack of standardization hinders meaningful comparison between embedding-based and autoregressive vision-language models (VLMs), making it impossible to systematically assess which models perform best and what compute strategies are most effective.
+
+Why is it hard? (E.g., why do naive approaches fail?) Creating such a benchmark requires both careful design and domain-specific expertise. Current meta-benchmarks often rely on widely used datasets that, while popular, are noisy and not widely respected by experts. Therefore, it is essential to establish a protocol that incorporates expert input from each relevant field to evaluate the quality and relevance of included benchmarks. Additionally, it is crucial to ensure that language biases do not make the tasks trivial—for example, by unintentionally favoring text cues over visual reasoning. To this end, generating challenging, vision-centric candidates for closed-form VQA is a necessary step.
+
+Our lab has a track record on developing such benchmarks in microscopy and surgery. Thus this proposal is simply an extension of our previous work.
+
+Why hasn't it been solved before? (Or, what's wrong with previous proposed solutions? How does mine differ?)  Previous efforts typically collect dataset across biomedicine for both training and evaluation. Thus to satisfy these two criteria, much emphasis is placed on bigger datasets, large collections of the same disease (limiting diversity). However, good quality biomedical datasets can also be small. Additionally, previous benchmarks fail to measure out-of-distribution (OOD) generalization or zero-shot performance—both of which are critical for evaluating foundation models. Unlike general-domain benchmarks, biomedical applications demand nuanced evaluation of model robustness and expert-level knowledge. Our approach decouples evaluation from training data, focuses on real-world clinical and biological challenges, and includes rigorous expert validation—setting a higher standard for benchmarking biomedical vision-language models.
+
+What are the key components of my approach and results? Also include any specific limitations. Our approach introduces merges the lessons learned from microbench and microvqa to collect a large-scale biomedical dataset:
+
+We will start by simply collecting (point of contact): 
+	Microscopy: (Alejandro)
+		Micro-Bench
+		Micro-VQA
+	Surgery (Anita)
+		Systematic Evaluation of Large Vision-Language Models for Surgical
+Artificial Intelligence
+Radiology: (Maya)
+Chexagent: Towards a foundation model for chest x-ray interpretation
+Pathology: (Max, from Faisal’s Lab)
+	TBD
+Dermatology
+TBD
+Ophthalmology
+	TBD
+
+Additionally we will add the collected benchmarks Alejandro has used for the  BIOMEDICA paper. By simply harmonizing these benchmarks I expect to collect around 300 datasets across all of these domains.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Experiments to Achieve MVP (2.5 months): 
+
+
+Month 1
+Week 1–2:
+ Integrate the MicroBench infrastructure with RefineBot to convert open-ended questions into closed-form VQA.
+ Establish an evaluation protocol for both embedding and autoregressive models.
+ Reuse and adapt evaluation code from VLMEvalKit.
+
+
+Week 3–4:
+ Standardize the main data sources.
+
+
+
+Month 2
+Week 1–3:
+ Add additional benchmarks to upsample underrepresented fields.
+
+
+Week 4:
+ Analyze failure modes of existing models.
+
+
+
+Month 3
+Week 1–2:
+ Writing and documentation.
+
+
+Week 3:
+ Set up and launch the benchmark website.
+
+
+
+
+
+

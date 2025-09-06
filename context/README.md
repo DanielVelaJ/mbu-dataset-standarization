@@ -1,0 +1,1 @@
+Here you will find all of the context files that are relevant to the project. It is important to read all of the files in this directory before starting the task so that you have a complete understanding of the project at hand and where we are in the process. More specific instructions will be given to you on a per task basis on the instructions directory.
