@@ -41,6 +41,14 @@ This template generates question-answer pairs that map to the datum schema as fo
   "uncertainty": "certain",
   "answer_confidence": 1.0,
   "rationale": "Tissue type or pathology classification based on segmented region analysis",
+  "spatial_reference": {
+    "reference_type": "polygon",
+    "polygon": "{tissue_region_polygon_coordinates}",
+    "annotation_id": "{tissue_classification_annotation_id}",
+    "highlighting_method": "fill",
+    "highlight_color": "yellow",
+    "highlight_opacity": 0.4
+  },
   "provenance": {
     "original_label": "{segmentation_class_id}",
     "rule_id": "domain-agnostic_segmentation_semantic_easy_3",
@@ -55,8 +63,32 @@ This template generates question-answer pairs that map to the datum schema as fo
 This template is suitable for datasets that have:
 - **Task Type**: Semantic segmentation (Vision → Segmentation → Semantic segmentation)
 - **Tissue Classification**: Labels that classify tissue types, pathologies, or regional characteristics
+- **Spatial Information**: Polygon coordinates for classified tissue regions
 - **Medical Context**: Classifications relevant to medical diagnosis or research
 - **Multi-Class Labels**: Multiple tissue/pathology types to distinguish between
+
+## Spatial Reference Integration
+
+This template generates **tissue classification questions** that reference specific segmented regions:
+
+### Spatial Requirements
+- **Required**: Polygon coordinates of the classified tissue region
+- **Coordinate Format**: Relative [0,1] coordinates
+- **Highlighting Method**: Fill (solid color highlighting)
+- **Visual Properties**: Yellow fill with 40% opacity (recommended)
+
+### Tissue Classification Focus
+- Spatial reference shows the **specific tissue region being classified**
+- Fill highlighting provides **clear region identification**
+- Enables **detailed tissue characterization**
+- Supports **pathology assessment workflows**
+
+### Implementation Notes
+- Extract coordinates from tissue classification masks
+- Use "fill" highlighting for clear region visualization
+- Link spatial_reference.annotation_id to tissue classification annotations
+- Yellow color provides good contrast for tissue identification
+- Moderate opacity (0.4) allows underlying tissue details to remain visible
 
 ## Template Usage Rules
 

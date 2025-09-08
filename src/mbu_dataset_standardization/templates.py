@@ -17,7 +17,7 @@ All templates inherit from BaseTemplate and implement the standardized interface
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 
-from mbu_dataset_standardization.datum import RawDataPoint, QuestionAnswer, StandardizedLabels
+from mbu_dataset_standardization.datum import RawDataPoint, QuestionAnswer, StandardizedAnnotations
 
 
 class BaseTemplate(ABC):
@@ -63,22 +63,22 @@ class BaseTemplate(ABC):
         """
         pass
     
-    def is_compatible(self, labels: StandardizedLabels) -> bool:
+    def is_compatible(self, annotations: StandardizedAnnotations) -> bool:
         """
-        Check if this template can handle the given labels.
+        Check if this template can handle the given annotations.
         
         Args:
-            labels: Standardized labels from loader
+            annotations: Standardized annotations from loader
             
         Returns:
             bool: True if template is compatible
         """
-        return labels.task_type in self.supported_task_types
+        return annotations.task_type in self.supported_task_types
     
     def _create_provenance(self, raw_data: RawDataPoint) -> Dict[str, Any]:
         """Helper method to create provenance information."""
         return {
-            "original_label": raw_data.labels.original_labels,
+            "original_label": raw_data.annotations.original_labels,
             "rule_id": self.template_id,
             "annotation_id": None,
             "created_by": "program"

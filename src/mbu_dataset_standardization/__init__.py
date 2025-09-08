@@ -26,13 +26,13 @@ __version__ = "0.1.0"
 __author__ = "MBU Project Team"
 
 # Core imports for public API
-from mbu_dataset_standardization.datum import Datum, QuestionAnswer, StandardizedLabels, RawDataPoint
+from mbu_dataset_standardization.datum import Datum, QuestionAnswer, StandardizedAnnotations, RawDataPoint
 from mbu_dataset_standardization.convert import convert_dataset
 
 __all__ = [
     "Datum",
     "QuestionAnswer", 
-    "StandardizedLabels",
+    "StandardizedAnnotations",
     "RawDataPoint",
     "convert_dataset",
 ]

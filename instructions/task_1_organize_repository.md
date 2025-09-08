@@ -38,7 +38,7 @@ Raw Dataset → Loader → RawDataPoint → Template → QuestionAnswer + Datum 
 - **Template Compatibility**: Templates can validate compatibility with datasets
 
 **✅ Enhanced Label Standardization (Latest):**
-- **StandardizedLabels**: Unified interface that all loaders produce for templates
+- **StandardizedAnnotations**: Unified interface that all loaders produce for templates
 - **Task Type Field**: `task_type` field ("classification-binary", "classification-multiclass", "classification-multilabel") for quick identification
 - **Cross-Task Compatibility**: Same label structure works for binary, multi-class, and multi-label tasks
 - **Template Validation**: Templates declare supported task types for automatic compatibility checking
@@ -46,7 +46,7 @@ Raw Dataset → Loader → RawDataPoint → Template → QuestionAnswer + Datum 
 
 ### Next Steps
 - ✅ **Repository Structure Created**: Complete `src/` directory structure with base classes and placeholders
-- ✅ **Base Classes Implemented**: BaseLoader, BaseTemplate, and core data structures (StandardizedLabels, RawDataPoint, QuestionAnswer, Datum)
+- ✅ **Base Classes Implemented**: BaseLoader, BaseTemplate, and core data structures (StandardizedAnnotations, RawDataPoint, QuestionAnswer, Datum)
 - ✅ **Architecture Documented**: Developer-friendly documentation in `docs/architecture.md` with clear explanations and examples
 - ✅ **Data Flow Clarified**: Complete walkthrough showing how data moves from raw dataset to final JSONL
 - ✅ **Domain-First Organization**: Templates organized by domain with proper naming convention and BaseTemplate domain attribute
@@ -67,7 +67,7 @@ src/mbu_dataset_standardization/
 ```
 
 **Key Features Implemented:**
-- ✅ Complete `StandardizedLabels` with `task_type` field for quick identification
+- ✅ Complete `StandardizedAnnotations` with `task_type` field for quick identification
 - ✅ **Pydantic models** for automatic validation and JSON serialization (instead of dataclasses)
 - ✅ Abstract base classes with clear interfaces
 - ✅ Clean, minimal code - no unnecessary validators or boilerplate

@@ -41,6 +41,14 @@ This template generates question-answer pairs that map to the datum schema as fo
   "uncertainty": "certain",
   "answer_confidence": 1.0,
   "rationale": "Segmentation quality verification based on expert annotation validation",
+  "spatial_reference": {
+    "reference_type": "polygon",
+    "polygon": "{segmentation_polygon_coordinates}",
+    "annotation_id": "{validation_annotation_id}",
+    "highlighting_method": "outline",
+    "highlight_color": "blue",
+    "highlight_opacity": 1.0
+  },
   "provenance": {
     "original_label": "{segmentation_quality_label}",
     "rule_id": "domain-agnostic_segmentation_semantic_easy_2",
@@ -56,7 +64,30 @@ This template is suitable for datasets that have:
 - **Task Type**: Semantic segmentation (Vision → Segmentation → Semantic segmentation)
 - **Quality Labels**: Information about segmentation accuracy or validation status
 - **Expert Validation**: Segmentations reviewed by medical professionals
+- **Spatial Information**: Polygon coordinates for the segmentation being evaluated
 - **Clear Structure Definition**: Well-defined target anatomical structures
+
+## Spatial Reference Integration
+
+This template generates **quality assessment questions** that reference specific segmented regions:
+
+### Spatial Requirements
+- **Required**: Polygon coordinates of the segmentation being evaluated
+- **Coordinate Format**: Relative [0,1] coordinates
+- **Highlighting Method**: Outline (boundary highlighting)
+- **Visual Properties**: Blue outline with full opacity (recommended)
+
+### Quality Assessment Focus
+- Spatial reference shows the **segmentation being evaluated**
+- Outline highlighting emphasizes **boundary accuracy**
+- Enables assessment of **segmentation completeness and precision**
+- Supports **expert validation workflows**
+
+### Implementation Notes
+- Extract coordinates from the segmentation mask being validated
+- Use "outline" highlighting to emphasize boundary quality
+- Link spatial_reference.annotation_id to the specific segmentation annotation
+- Blue color distinguishes quality assessment from identification tasks
 
 ## Template Usage Rules
 

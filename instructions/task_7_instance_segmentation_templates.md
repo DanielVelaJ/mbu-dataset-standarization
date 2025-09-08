@@ -72,8 +72,19 @@ Create **3 easy-difficulty templates** initially that can work with the most bas
 
 ### Template Ideas:
 1. **Instance Counting**: "How many [objects] are segmented in this image?"
+   - **Answer Type**: "number"
+   - **Spatial Reference**: Not needed (global question)
+   - **Example**: "How many cell nuclei are segmented in this histopathology image?"
+
 2. **Instance Identification**: "What type of [object] is shown in the highlighted segmented instance?"
+   - **Answer Type**: "single_label"  
+   - **Spatial Reference**: Required (polygon outline highlighting)
+   - **Example**: "What type of cell is shown in the highlighted segmented instance?"
+
 3. **Instance Property Assessment**: "What is the [property] of the highlighted segmented [object] in this image?"
+   - **Answer Type**: "single_label"
+   - **Spatial Reference**: Required (polygon highlighting)
+   - **Example**: "What is the size category of the highlighted segmented cell?"
 
 ### Advanced Template Ideas (Future):
 - **Spatial Relationships**: "Which segmented [object] is closest to [landmark]?"
@@ -120,7 +131,39 @@ Templates can reference specific instances in two ways:
   "answer": "15",
   "answer_type": "number",
   "provenance": {
-    "rule_id": "domain-agnostic_segmentation_instance_easy_1"
+    "rule_id": "domain-agnostic_segmentation_instance_easy_1",
+    "annotation_id": "nuclei_count_total",
+    "created_by": "program"
+  }
+}
+```
+
+#### 1b. Multiple Instance Highlighting (For Counting with Visual Reference)
+```json
+{
+  "qa_id": "1b",
+  "task": "Segmentation", 
+  "question": "How many cell nuclei are highlighted in this histopathology image?",
+  "answer": "5",
+  "answer_type": "number",
+  "spatial_reference": {
+    "reference_type": "multiple_regions",
+    "multiple_polygons": [
+      [[0.1, 0.1], [0.2, 0.1], [0.2, 0.2], [0.1, 0.2]],
+      [[0.3, 0.3], [0.4, 0.3], [0.4, 0.4], [0.3, 0.4]], 
+      [[0.5, 0.5], [0.6, 0.5], [0.6, 0.6], [0.5, 0.6]],
+      [[0.7, 0.1], [0.8, 0.1], [0.8, 0.2], [0.7, 0.2]],
+      [[0.1, 0.7], [0.2, 0.7], [0.2, 0.8], [0.1, 0.8]]
+    ],
+    "instance_ids": ["nucleus_01", "nucleus_02", "nucleus_03", "nucleus_04", "nucleus_05"],
+    "highlighting_method": "fill",
+    "highlight_color": "blue",
+    "highlight_opacity": 0.4
+  },
+  "provenance": {
+    "rule_id": "domain-agnostic_segmentation_instance_easy_1",
+    "annotation_id": "nuclei_subset_highlighted",
+    "created_by": "program"
   }
 }
 ```
@@ -133,21 +176,44 @@ Templates can reference specific instances in two ways:
   "question": "What type of cell is shown in the highlighted segmented instance?",
   "answer": "Epithelial cell",
   "answer_type": "single_label",
-  "geometry": {
-    "bbox": [[0.2, 0.3, 0.4, 0.5]],
-    "polygons": [[[0.2, 0.3], [0.4, 0.3], [0.4, 0.5], [0.2, 0.5]]]
+  "spatial_reference": {
+    "reference_type": "polygon",
+    "polygon": [[0.2, 0.3], [0.4, 0.3], [0.4, 0.5], [0.2, 0.5]],
+    "annotation_id": "cell_instance_07",
+    "highlighting_method": "outline",
+    "highlight_color": "yellow",
+    "highlight_opacity": 1.0
   },
   "provenance": {
     "rule_id": "domain-agnostic_segmentation_instance_easy_2",
-    "annotation_id": "instance_7"
+    "annotation_id": "cell_instance_07",
+    "created_by": "program"
   }
 }
 ```
 
-### Geometry Section Usage
-- **For counting questions**: No geometry needed (global image question)
-- **For instance-specific questions**: Include bbox/polygon of the highlighted instance
+### Spatial Reference Usage for Instance Segmentation
+- **For counting questions**: No spatial_reference needed (global image question)
+- **For instance-specific questions**: Include spatial_reference with polygon/bbox of highlighted instance
+- **Multiple instances**: Use multiple_polygons for questions referencing several instances
+- **Highlighting methods**: 
+  - "outline" for individual instance identification
+  - "fill" for multiple instance counting
+  - "overlay" for region-based questions
 - **annotation_id**: References which specific instance from the original dataset annotations
+
+### Instance Highlighting System
+Instance segmentation templates use the enhanced spatial reference system:
+- **spatial_reference field**: Explicitly links questions to specific instances
+- **Instance identification**: Individual instances highlighted with unique colors  
+- **Multiple instance support**: Questions can reference multiple instances simultaneously
+- **Coordinate format**: Relative [0,1] coordinates for portability
+- **Visual customization**: Configurable highlighting methods and colors
+
+### Schema Field Usage
+- **spatial_reference**: Contains polygon coordinates and highlighting specifications for MCVQA questions
+- **geometry**: Contains original dataset geometric information (used for reference, not highlighting)
+- **provenance**: Contains annotation_id linking back to original instance annotations
 
 ## Key Differences from Other Templates
 
@@ -217,22 +283,29 @@ Let's start with the easy difficulty templates first and ensure they can work wi
 ## Progress Tracking
 
 ### Current Status
-- **Task 7 Instructions**: ✅ **Created** - Comprehensive guidelines for instance segmentation template development
+- **Task 7 Instructions**: ✅ **Updated and Aligned** - Comprehensive guidelines with enhanced spatial reference system
 
 ### Next Steps
 1. **Create Template 1**: Instance counting template (`domain-agnostic_segmentation_instance_easy_1.md`)
+   - Global counting questions (no spatial reference)
+   - Multiple instance highlighting for subset counting
 2. **Create Template 2**: Instance identification template (`domain-agnostic_segmentation_instance_easy_2.md`)
+   - Single instance highlighting with outline method
+   - Instance-specific classification questions
 3. **Create Template 3**: Instance property assessment template (`domain-agnostic_segmentation_instance_easy_3.md`)
+   - Instance property evaluation with highlighting
+   - Medical characteristic assessment
 4. **Create README**: Overview document for instance segmentation template collection
 5. **Test Templates**: Validate with compatible instance segmentation datasets
 
-### Design Decisions Made
+### Design Decisions Made ✅ Updated
 ✅ **Task Specification**: Use "Instance Segmentation" in template header, "Segmentation" in JSON schema
-✅ **Highlighting Strategy**: Include highlighting capability using existing dataset masks for instance-specific questions
-✅ **Geometry Integration**: Use geometry section only for highlighted instance questions, include annotation_id for instance reference
-✅ **Temporal Sequences**: Not included - assume only basic single-image information
-✅ **Partially Visible Instances**: Not addressed - assume all instances are fully visible
-✅ **Confidence Levels**: Not included - keep templates simple
+✅ **Spatial Reference System**: Enhanced with annotation_id (not mask_id) and proper highlighting methods
+✅ **Schema Alignment**: Full integration with updated datum.py SpatialReference class
+✅ **Multiple Instance Support**: Comprehensive multiple_polygons and instance_ids implementation
+✅ **Highlighting Methods**: Outline for individual instances, fill for multiple instances
+✅ **Coordinate Format**: Relative [0,1] coordinates throughout
+✅ **Provenance Tracking**: Complete annotation_id linking to original instances
 
 ### Design Decisions Still To Be Made
 - Specific question patterns for each template

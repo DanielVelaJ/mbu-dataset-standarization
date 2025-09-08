@@ -163,6 +163,14 @@ Let's start with the easy difficulty templates first and ensure they can work wi
 - **Clinical Quality Control**: Templates support real-world segmentation validation workflows
 - **Cross-Domain Framework**: Universal applicability across medical imaging specialties
 - **Educational Framework**: Systematic approach to teaching pixel-level medical image analysis
+- **Spatial Awareness**: Explicit region-question linking enables precise spatial reasoning assessment
+- **Visual Highlighting**: Multiple highlighting methods support different evaluation contexts
+
+### **Spatial Reference Integration Completed:**
+- ✅ **All 3 templates updated** with spatial_reference field examples
+- ✅ **Highlighting specifications** for each template type (overlay, outline, fill)
+- ✅ **Implementation guidelines** for coordinate extraction and visualization
+- ✅ **Schema alignment** with enhanced datum.py spatial reference system
 
 ### **Key Differentiators from Classification Templates:**
 1. **Spatial Precision**: Pixel-level vs. image-level reasoning

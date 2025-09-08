@@ -123,7 +123,7 @@ Templates are organized by domain first, then by task type and difficulty:
 
 **Key Methods**:
 ```python
-def is_compatible(self, labels: StandardizedLabels) -> bool:
+def is_compatible(self, annotations: StandardizedAnnotations) -> bool:
     """Check if template is compatible with dataset labels"""
 
 def generate_qa(self, raw_data: RawDataPoint, dataset_meta: Dict) -> QuestionAnswer:
@@ -190,7 +190,7 @@ Contains:
 ```
 1. Raw Dataset          2. Loader Processes     3. Template Generates    4. Final Output
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
-│ chest_xray_14/  │    │ StandardizedLabels │  │ QuestionAnswer  │    │ datum.jsonl     │
+│ chest_xray_14/  │    │ StandardizedAnnotations │  │ QuestionAnswer  │    │ datum.jsonl     │
 │ ├── images/     │ → │ RawDataPoint      │ → │ + Datum sections │ → │ (One line per   │
 │ ├── labels.csv  │    │ (per image)      │    │ (per image)     │    │  image)         │
 │ └── splits.txt  │    └─────────────────┘    └─────────────────┘    └─────────────────┘
@@ -220,7 +220,7 @@ This is important! Our models work at **different levels**:
 
 | Model | Scope | Contains |
 |-------|-------|----------|
-| `StandardizedLabels` | **Single Image** | Labels for one image |
+| `StandardizedAnnotations` | **Single Image** | Labels for one image |
 | `RawDataPoint` | **Single Image** | One image + labels + metadata |
 | `QuestionAnswer` | **Single Image** | One Q&A about one image |
 | `Datum` | **Single Image** + **Dataset Info** | Complete JSONL entry |
@@ -229,13 +229,13 @@ This is important! Our models work at **different levels**:
 
 ## Key Data Structures Explained
 
-### 🏷️ StandardizedLabels - "The Universal Translator"
+### 🏷️ StandardizedAnnotations - "The Universal Translator"
 
 **Purpose**: Converts any dataset's label format into a common structure that templates can use.
 
 ```python
 # Example: Chest X-ray with multiple findings
-labels = StandardizedLabels(
+annotations = StandardizedAnnotations(
     task_type="classification-multilabel",
     target_classes=["pneumonia", "cardiomegaly", "no_finding"],
     active_classes=["pneumonia", "cardiomegaly"],  # What this image has
@@ -256,7 +256,7 @@ labels = StandardizedLabels(
 raw_data = RawDataPoint(
     image_path="data/chest_xray_14/images/00001.png",
     image_id="00001",
-    labels=labels,  # The StandardizedLabels from above
+    annotations=annotations,  # The StandardizedAnnotations from above
     metadata={"patient_age": 65, "view": "PA"},
     split="train"
 )
@@ -349,8 +349,8 @@ chest_xray_14/
 # ChestXray14Loader.load_raw_data()
 raw_labels = "Pneumonia|Cardiomegaly"  # From CSV
 
-# Loader creates StandardizedLabels
-labels = StandardizedLabels(
+# Loader creates StandardizedAnnotations
+annotations = StandardizedAnnotations(
     task_type="classification-multilabel",
     target_classes=["pneumonia", "cardiomegaly", "no_finding", ...],
     active_classes=["pneumonia", "cardiomegaly"],
@@ -371,7 +371,7 @@ raw_data = RawDataPoint(
 # BinaryTemplate1.generate_qa()
 def generate_qa(raw_data):
     # Template reads standardized labels
-    has_pneumonia = "pneumonia" in raw_data.labels.active_classes
+    has_pneumonia = "pneumonia" in raw_data.annotations.active_classes
     
     return QuestionAnswer(
         qa_id="1",
@@ -398,7 +398,7 @@ def generate_qa(raw_data):
 }
 ```
 
-**Key Insight**: `StandardizedLabels` is the bridge that lets any template work with any dataset!
+**Key Insight**: `StandardizedAnnotations` is the bridge that lets any template work with any dataset!
 
 ## Standardized Label Interface
 
@@ -427,8 +427,8 @@ Templates declare their supported task types for automatic compatibility checkin
 class BinaryTemplate1(BaseTemplate):
     supported_task_types = ["classification-binary"]
     
-    def is_compatible(self, labels: StandardizedLabels) -> bool:
-        return labels.task_type in self.supported_task_types
+    def is_compatible(self, annotations: StandardizedAnnotations) -> bool:
+        return annotations.task_type in self.supported_task_types
 ```
 
 ### Loader Label Normalization
@@ -437,7 +437,7 @@ Each loader converts dataset-specific formats to the standardized structure:
 
 ```python
 # Chest X-ray 14 (Multi-label)
-labels = StandardizedLabels(
+annotations = StandardizedAnnotations(
     task_type="classification-multilabel",
     target_classes=["pneumonia", "cardiomegaly", "atelectasis"],
     active_classes=["pneumonia", "cardiomegaly"],
@@ -446,7 +446,7 @@ labels = StandardizedLabels(
 )
 
 # DermNet (Multi-class)  
-labels = StandardizedLabels(
+annotations = StandardizedAnnotations(
     task_type="classification-multiclass",
     target_classes=["acne", "melanoma", "psoriasis"],
     active_classes=["melanoma"],
@@ -484,7 +484,7 @@ convert_dataset(
 2. **Implement three methods**:
    - `load_raw_data()` → yields `RawDataPoint` objects
    - `get_metadata()` → returns dataset info dict
-   - `normalize_labels()` → converts raw labels to `StandardizedLabels`
+   - `normalize_annotations()` → converts raw annotations to `StandardizedAnnotations`
 3. **Add to registry**: `LOADERS["my_dataset"] = MyDatasetLoader`
 
 ### Adding a New Template
@@ -510,7 +510,7 @@ class RadiologyBinaryTemplate1(BaseTemplate):
 ### Working with Pydantic Models
 ```python
 # Create models (automatic validation)
-labels = StandardizedLabels(task_type="classification-binary", ...)
+annotations = StandardizedAnnotations(task_type="classification-binary", ...)
 
 # Export to JSON (automatic serialization)
 datum_json = datum.model_dump_json(by_alias=True, exclude_none=True)
@@ -520,7 +520,7 @@ datum = Datum(**data_dict)
 ```
 
 ### Debugging Tips
-- **Check `StandardizedLabels`** if templates aren't working
+- **Check `StandardizedAnnotations`** if templates aren't working
 - **Verify `task_type`** matches between loader and template
 - **Use `original_labels`** to trace back to source data
 - **Enable Pydantic validation** to catch data issues early

@@ -40,10 +40,18 @@ This template generates question-answer pairs that map to the datum schema as fo
   "uncertainty": "certain",
   "answer_confidence": 1.0,
   "rationale": "Anatomical structure identification based on pixel-level segmentation mask",
+  "spatial_reference": {
+    "reference_type": "polygon",
+    "polygon": "{segmentation_polygon_coordinates}",
+    "annotation_id": "{original_annotation_id}",
+    "highlighting_method": "overlay",
+    "highlight_color": "red",
+    "highlight_opacity": 0.3
+  },
   "provenance": {
     "original_label": "{segmentation_class_label}",
     "rule_id": "domain-agnostic_segmentation_semantic_easy_1",
-    "annotation_id": "{mask_id}",
+    "annotation_id": "{original_annotation_id}",
     "created_by": "program"
   }
 }
@@ -54,8 +62,25 @@ This template generates question-answer pairs that map to the datum schema as fo
 This template is suitable for datasets that have:
 - **Task Type**: Semantic segmentation (Vision → Segmentation → Semantic segmentation)
 - **Annotation Structure**: Pixel-level masks or class labels for anatomical structures
+- **Spatial Information**: Polygon coordinates or mask boundaries for spatial referencing
 - **Clear Labels**: Well-defined anatomical structure names or tissue type classifications
 - **Medical Context**: Anatomical structures relevant to medical diagnosis
+
+## Spatial Reference Integration
+
+This template generates **region-specific questions** that require spatial highlighting:
+
+### Spatial Requirements
+- **Required**: Polygon coordinates from segmentation masks
+- **Coordinate Format**: Relative [0,1] coordinates
+- **Highlighting Method**: Overlay (semi-transparent mask)
+- **Visual Properties**: Red color with 30% opacity (recommended)
+
+### Implementation Notes
+- Extract polygon coordinates from original segmentation masks
+- Convert pixel coordinates to relative [0,1] format
+- Link spatial_reference.annotation_id to original annotation identifiers
+- Use "overlay" highlighting method for clear region identification
 
 ## Template Usage Rules
 

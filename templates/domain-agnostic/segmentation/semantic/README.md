@@ -20,18 +20,21 @@ This directory contains templates for converting semantic segmentation datasets 
 - **Pattern**: "What anatomical structure is highlighted in the segmented region of this {modality} image?"
 - **Purpose**: Basic anatomical structure identification
 - **Answer Type**: Single label (structure name)
+- **Spatial Reference**: Polygon overlay with red highlighting
 - **Use Cases**: Organ segmentation, anatomical landmark identification
 
 #### 2. **Segmentation Verification** (`domain-agnostic_segmentation_semantic_easy_2.md`)
 - **Pattern**: "Is the {structure} correctly segmented in this {modality} image?"
 - **Purpose**: Quality assessment of segmentation accuracy
 - **Answer Type**: Yes/No verification
+- **Spatial Reference**: Polygon outline with blue highlighting
 - **Use Cases**: Segmentation validation, quality control
 
 #### 3. **Regional Assessment** (`domain-agnostic_segmentation_semantic_easy_3.md`)
 - **Pattern**: "What type of {assessment_category} is identified in the segmented region of this {modality} image?"
 - **Purpose**: Tissue type and pathology classification
 - **Answer Type**: Single label (tissue/pathology type)
+- **Spatial Reference**: Polygon fill with yellow highlighting
 - **Use Cases**: Tissue characterization, pathology identification
 
 ## Domain Applications
@@ -81,16 +84,48 @@ These templates work with semantic segmentation datasets that have:
 - **single_label**: For structure identification and tissue classification
 - **yes_no**: For segmentation verification questions
 
+### Spatial Reference System
+All templates include **spatial_reference** fields that link questions to specific segmented regions:
+
+#### Template 1: Region Identification
+- **Highlighting**: `overlay` method with red color and 30% opacity
+- **Purpose**: Highlight the anatomical structure being identified
+- **Coordinate Source**: Original segmentation mask polygons
+
+#### Template 2: Segmentation Verification  
+- **Highlighting**: `outline` method with blue color and full opacity
+- **Purpose**: Emphasize segmentation boundaries for quality assessment
+- **Coordinate Source**: Segmentation mask being validated
+
+#### Template 3: Regional Assessment
+- **Highlighting**: `fill` method with yellow color and 40% opacity
+- **Purpose**: Clearly identify tissue region being classified
+- **Coordinate Source**: Tissue classification mask coordinates
+
+### Spatial Reference Benefits
+- **Explicit region linking**: Questions clearly reference specific image regions
+- **Visual highlighting**: Different methods for different question types
+- **Coordinate traceability**: Links back to original annotations
+- **Cross-modal compatibility**: Works with any segmentation format
+
 ### Segmentation-Specific Fields
 ```json
 {
   "task": "Segmentation",
+  "spatial_reference": {
+    "reference_type": "polygon",
+    "polygon": [[x, y], ...],
+    "annotation_id": "segmentation_mask_001",
+    "highlighting_method": "overlay",
+    "highlight_color": "red",
+    "highlight_opacity": 0.3
+  },
   "geometry": {
     "polygons": [[[x, y], ...]],
     "image_size": [W, H]
   },
   "provenance": {
-    "annotation_id": "{mask_id}"
+    "annotation_id": "{original_annotation_id}"
   }
 }
 ```

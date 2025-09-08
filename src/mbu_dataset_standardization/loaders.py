@@ -6,7 +6,7 @@ raw dataset formats into standardized RawDataPoint structures.
 
 Each loader is responsible for:
 - Parsing dataset-specific file formats (CSV, folder structure, etc.)
-- Converting labels to StandardizedLabels format
+- Converting annotations to StandardizedAnnotations format
 - Determining task type and dataset metadata
 - Handling train/val/test splits
 
@@ -16,7 +16,7 @@ All loaders inherit from BaseLoader and implement the standardized interface.
 from abc import ABC, abstractmethod
 from typing import Iterator, Dict, Any
 
-from mbu_dataset_standardization.datum import RawDataPoint, StandardizedLabels
+from mbu_dataset_standardization.datum import RawDataPoint, StandardizedAnnotations
 
 
 class BaseLoader(ABC):
@@ -51,16 +51,16 @@ class BaseLoader(ABC):
         pass
     
     @abstractmethod
-    def normalize_labels(self, raw_labels: Any, **context) -> StandardizedLabels:
+    def normalize_annotations(self, raw_annotations: Any, **context) -> StandardizedAnnotations:
         """
-        Convert dataset-specific labels to standardized format.
+        Convert dataset-specific annotations to standardized format.
         
         Args:
-            raw_labels: Labels in dataset's native format
+            raw_annotations: Annotations in dataset's native format
             **context: Additional context (image_path, metadata, etc.)
             
         Returns:
-            StandardizedLabels: Converted labels with task_type and standardized fields
+            StandardizedAnnotations: Converted annotations with task_type and standardized fields
         """
         pass
     

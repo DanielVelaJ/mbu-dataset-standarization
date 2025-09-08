@@ -2,7 +2,7 @@
 Data Structures for MBU Dataset Standardization
 
 This module defines the core data structures used throughout the conversion pipeline:
-- StandardizedLabels: Unified label interface that all loaders produce
+- StandardizedAnnotations: Unified annotation interface that all loaders produce
 - RawDataPoint: Intermediate structure from loaders to templates
 - QuestionAnswer: Individual Q&A pairs within datum
 - Datum: Complete output structure matching unified schema
@@ -100,8 +100,8 @@ class SpatialReference(BaseModel):
     multiple_polygons: Optional[List[List[List[float]]]] = None  # [[[x, y], ...], ...]
     
     # Reference to original annotation
-    mask_id: Optional[str] = None  # ID of the mask/annotation being referenced
-    instance_ids: Optional[List[str]] = None  # For multiple instances
+    annotation_id: Optional[str] = None  # ID of the original annotation being referenced
+    instance_ids: Optional[List[str]] = None  # For multiple instances (instance segmentation)
     
     # Description of highlighting method
     highlighting_method: Literal["overlay", "outline", "fill", "arrow", "none"] = "overlay"
@@ -111,7 +111,7 @@ class SpatialReference(BaseModel):
     highlight_opacity: Optional[float] = None  # 0.0 to 1.0
 
 
-class StandardizedLabels(BaseModel):
+class StandardizedAnnotations(BaseModel):
     """
     Unified label interface that all dataset loaders must produce.
     
@@ -141,12 +141,12 @@ class RawDataPoint(BaseModel):
     """
     Intermediate data structure produced by loaders.
     
-    Contains one data point (image + labels + metadata) in standardized format
+    Contains one data point (image + annotations + metadata) in standardized format
     that templates can reliably process.
     """
     image_path: str
     image_id: str
-    labels: StandardizedLabels
+    annotations: StandardizedAnnotations
     metadata: Dict[str, Any] = Field(default_factory=dict)
     split: str
 
