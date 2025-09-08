@@ -25,13 +25,14 @@ class BaseTemplate(ABC):
     Abstract base class for all question generation templates.
     
     Defines the standard interface that all templates must implement.
-    This ensures consistent template behavior across different task types.
+    Templates are organized by domain first, then by task type and difficulty.
     """
     
     # Template metadata (override in subclasses)
-    template_id: str = "base_template"
+    domain: str = "agnostic"                    # "agnostic", "radiology", "dermatology", etc.
+    template_id: str = "base_template"          # Domain-first naming: {domain}_{task}_{subtype}_{difficulty}
     task_type: str = "classification"
-    difficulty: str = "easy"  # "easy", "medium", "hard"
+    difficulty: str = "easy"                    # "easy", "medium", "hard" 
     supported_task_types: List[str] = []
     
     @abstractmethod
@@ -85,8 +86,20 @@ class BaseTemplate(ABC):
 
 
 # TODO: Add concrete template implementations here once template designs are finalized
-# Templates will be organized by task type and difficulty:
-# - Binary classification templates (easy, medium, hard)
-# - Multi-class classification templates (easy, medium, hard)  
-# - Multi-label classification templates (easy, medium, hard)
-# Each template should inherit from BaseTemplate and implement all abstract methods
+# Templates are organized by DOMAIN FIRST, then by task type and difficulty:
+# 
+# Domain-Agnostic Templates (work across all medical domains):
+# - AgnosticBinaryTemplate1, AgnosticBinaryTemplate2, AgnosticBinaryTemplate3
+# - AgnosticMulticlassTemplate1, AgnosticMulticlassTemplate2, AgnosticMulticlassTemplate3
+# - AgnosticMultilabelTemplate1, AgnosticMultilabelTemplate2, AgnosticMultilabelTemplate3
+#
+# Domain-Specific Templates (require medical domain expertise):
+# - RadiologyBinaryTemplate1, RadiologyBinaryTemplate2, RadiologyBinaryTemplate3
+# - DermatologyBinaryTemplate1, DermatologyBinaryTemplate2, DermatologyBinaryTemplate3
+# - PathologyBinaryTemplate1, OphthalmologyBinaryTemplate1, SurgeryBinaryTemplate1
+#
+# Each template should:
+# 1. Inherit from BaseTemplate
+# 2. Set domain attribute ("agnostic", "radiology", "dermatology", etc.)
+# 3. Set template_id following domain-first naming: "{domain}_{task}_{subtype}_{difficulty}"
+# 4. Implement all abstract methods

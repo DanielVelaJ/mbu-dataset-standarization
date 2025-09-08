@@ -60,11 +60,23 @@ src/
 │   └── utils.py                    # Helper functions and utilities
 docs/
 ├── architecture.md                 # This file - architecture documentation
-templates/                          # Template documentation (existing)
-├── classification/
-│   ├── binary/
-│   ├── multi-class/
-│   └── multi-label/
+templates/                          # Template documentation (domain-first organization)
+├── domain-agnostic/               # Templates that work across all medical domains
+│   ├── classification/
+│   │   ├── binary/
+│   │   ├── multiclass/
+│   │   └── multilabel/
+│   ├── detection/
+│   └── segmentation/
+└── domain-specific/               # Templates requiring domain expertise
+    ├── radiology/
+    │   ├── classification/
+    │   ├── detection/
+    │   └── segmentation/
+    ├── dermatology/
+    ├── pathology/
+    ├── ophthalmology/
+    └── surgery/
 ```
 
 ## Core Components
@@ -92,24 +104,46 @@ def get_metadata(self) -> Dict:
 
 **Purpose**: Generate questions and answers from standardized data.
 
-Contains template classes for different task types and difficulty levels:
-- `BaseTemplate`: Abstract base class for all templates
-- `BinaryTemplate1`: Binary classification template (easy)
-- `BinaryTemplate2`: Binary classification template (medium)
-- `BinaryTemplate3`: Binary classification template (hard)
-- `MulticlassTemplate1`: Multi-class classification template (easy)
-- Additional templates for other task types
+Templates are organized by domain first, then by task type and difficulty:
+
+**Domain-Agnostic Templates** (work across all medical domains):
+- `AgnosticBinaryTemplate1`: General binary classification (easy)
+- `AgnosticBinaryTemplate2`: General binary classification (medium)  
+- `AgnosticBinaryTemplate3`: General binary classification (hard)
+- `AgnosticMulticlassTemplate1`: General multi-class classification (easy)
+
+**Domain-Specific Templates** (require medical domain expertise):
+- `RadiologyBinaryTemplate1`: Radiology-specific binary classification
+- `DermatologyBinaryTemplate1`: Dermatology-specific binary classification
+- `PathologyBinaryTemplate1`: Pathology-specific binary classification
+- Additional domain-specific templates as needed
+
+**Template Naming Convention**: `{domain}_{task}_{subtype}_{difficulty}.md`
+- Examples: `agnostic_classification_binary_1.md`, `radiology_classification_binary_1.md`
 
 **Key Methods**:
 ```python
-def can_handle(self, loader: BaseLoader) -> bool:
-    """Check if template is compatible with this dataset"""
+def is_compatible(self, labels: StandardizedLabels) -> bool:
+    """Check if template is compatible with dataset labels"""
 
 def generate_qa(self, raw_data: RawDataPoint, dataset_meta: Dict) -> QuestionAnswer:
     """Generate ONE Q&A pair from raw data point"""
 
 def fill_datum_sections(self, raw_data: RawDataPoint, dataset_meta: Dict) -> Dict:
     """Fill the non-QA sections of datum (header, imaging, etc.)"""
+```
+
+**Template Domain Specification**:
+```python
+class RadiologyBinaryTemplate1(BaseTemplate):
+    domain = "radiology"                    # Domain specification
+    template_id = "radiology_classification_binary_1"
+    supported_task_types = ["classification-binary"]
+    
+class AgnosticBinaryTemplate1(BaseTemplate):
+    domain = "agnostic"                     # Works across all domains
+    template_id = "agnostic_classification_binary_1" 
+    supported_task_types = ["classification-binary"]
 ```
 
 ### 3. Conversion Orchestrator (`src/mbu_dataset_standardization/convert.py`)
@@ -428,12 +462,20 @@ labels = StandardizedLabels(
 ```python
 from mbu_dataset_standardization.convert import convert_dataset
 
-# Convert any dataset with any template
+# Convert any dataset with any template (domain-first naming)
 convert_dataset(
-    dataset_name="chest_xray_14",     # Must be in LOADERS dict
-    template_name="binary_1",         # Must be in TEMPLATES dict
+    dataset_name="chest_xray_14",           # Must be in LOADERS dict
+    template_name="radiology_classification_binary_1",  # Domain-first template name
     data_dir="data/chest_xray_14/",
-    output_path="output/chest_xray_14_binary_1.jsonl"
+    output_path="output/chest_xray_14_radiology_binary_1.jsonl"
+)
+
+# Or use domain-agnostic template
+convert_dataset(
+    dataset_name="chest_xray_14",
+    template_name="agnostic_classification_binary_1",
+    data_dir="data/chest_xray_14/",
+    output_path="output/chest_xray_14_agnostic_binary_1.jsonl"
 )
 ```
 
@@ -447,10 +489,23 @@ convert_dataset(
 
 ### Adding a New Template
 1. **Create template class** inheriting from `BaseTemplate`
-2. **Implement two methods**:
+2. **Specify domain and implement methods**:
+   - Set `domain` attribute ("radiology", "dermatology", "agnostic", etc.)
    - `generate_qa()` → creates `QuestionAnswer` from `RawDataPoint`
    - `fill_datum_sections()` → creates header/dataset/quality/etc. sections
-3. **Add to registry**: `TEMPLATES["my_template"] = MyTemplate`
+3. **Add to registry**: `TEMPLATES["radiology_classification_binary_1"] = RadiologyBinaryTemplate1`
+
+**Example**:
+```python
+class RadiologyBinaryTemplate1(BaseTemplate):
+    domain = "radiology"
+    template_id = "radiology_classification_binary_1"
+    supported_task_types = ["classification-binary"]
+    
+    def generate_qa(self, raw_data, dataset_meta):
+        # Radiology-specific question generation
+        pass
+```
 
 ### Working with Pydantic Models
 ```python

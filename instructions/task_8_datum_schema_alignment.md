@@ -1,0 +1,6 @@
+# Task 8: Datum Schema Alignment
+I want to make sure that our @task_6_semantic_segmentation_template.md  and @task_7_instance_segmentation_templates.md  correctly align with our datum schema. Here I my concerns: 
+
+1. How did task 6 handle the references needed for mcvqa questions? I think they reffer to the datum schema but the schema is not specified. 
+2. I think we have sources that may be conflicting about the datum schema. We have the @datum.py and the @datum_schema.md. The md was supposed to serve as a reference but of course we could modify it so that the schema made the most sense. The idea is that for each image, the datum schema should contain all of the questions and answers that can be made for that image (perhaps even using multiple question templates for the same image). Our datum schema should be able to support this. 
+We might have to look at task_6 and task7 instructions and the templates that were created from them to make sure that everything is correctly aligned. Can you help me with this? Please ask any questions you may have to help me better. 

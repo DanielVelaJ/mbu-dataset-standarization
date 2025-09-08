@@ -13,11 +13,12 @@ This package provides:
 Usage:
     from mbu_dataset_standardization.convert import convert_dataset
     
+    # Domain-first template naming
     convert_dataset(
         dataset_name="chest_xray_14",
-        template_name="binary_1", 
+        template_name="radiology_classification_binary_1", 
         data_dir="data/chest_xray_14/",
-        output_path="output/chest_xray_14_binary_1.jsonl"
+        output_path="output/chest_xray_14_radiology_binary_1.jsonl"
     )
 """
 

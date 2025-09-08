@@ -49,6 +49,7 @@ Raw Dataset → Loader → RawDataPoint → Template → QuestionAnswer + Datum 
 - ✅ **Base Classes Implemented**: BaseLoader, BaseTemplate, and core data structures (StandardizedLabels, RawDataPoint, QuestionAnswer, Datum)
 - ✅ **Architecture Documented**: Developer-friendly documentation in `docs/architecture.md` with clear explanations and examples
 - ✅ **Data Flow Clarified**: Complete walkthrough showing how data moves from raw dataset to final JSONL
+- ✅ **Domain-First Organization**: Templates organized by domain with proper naming convention and BaseTemplate domain attribute
 - Create concrete loader and template implementations once datasets and template designs are chosen
 - Start with one example loader and template to test the approach
 - Validate against the datum schema from `instructions/datum_schema.md`
@@ -80,3 +81,10 @@ src/mbu_dataset_standardization/
 - Automatic validation on object creation 
 - Schema compliance without custom serialization code
 - Critical for data quality across 500+ medical datasets
+
+**Design Decision: Domain-First Template Organization**
+- Templates organized by domain first: `domain-agnostic/` and `domain-specific/{domain}/`
+- Naming convention: `{domain}_{task}_{subtype}_{difficulty}.md`
+- Examples: `agnostic_classification_binary_1.md`, `radiology_classification_binary_1.md`
+- Enables medical domain expertise while maintaining general-purpose templates
+- BaseTemplate class includes `domain` attribute for template identification

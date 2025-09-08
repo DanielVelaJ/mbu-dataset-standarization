@@ -35,9 +35,11 @@ LOADERS: Dict[str, Type[BaseLoader]] = {
 }
 
 TEMPLATES: Dict[str, Type[BaseTemplate]] = {
-    # "binary_1": BinaryTemplate1,
-    # "binary_2": BinaryTemplate2,
-    # "multiclass_1": MulticlassTemplate1,
+    # Domain-first naming convention:
+    # "agnostic_classification_binary_1": AgnosticBinaryTemplate1,
+    # "agnostic_classification_binary_2": AgnosticBinaryTemplate2,
+    # "radiology_classification_binary_1": RadiologyBinaryTemplate1,
+    # "dermatology_classification_binary_1": DermatologyBinaryTemplate1,
 }
 
 
