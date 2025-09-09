@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_multiclass_easy_1`  
+**Template ID**: `domain-specific_pathology_classification_multiclass_easy_1`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Specific cancer type identification  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Specific cancer type identification  
+**Medical Domain**: Pathology (histopathological imaging and cancer classification)  
+**Domain-knowledge summary**: Requires specialized knowledge of cancer classification and histological tumor types. Understanding of carcinoma, sarcoma, lymphoma, melanoma characteristics, glandular patterns, squamous differentiation, and tissue-specific malignancies. Knowledge of pathological terminology for cancer classification, WHO tumor classification systems, histological tumor typing, and clinical correlation with specific cancer diagnoses.
 
 ## Template Description
 

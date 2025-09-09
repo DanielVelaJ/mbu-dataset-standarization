@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_multiclass_easy_3`  
+**Template ID**: `domain-specific_ophthalmology_classification_multiclass_easy_3`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Spatial location assessment of optic disc in fundus images  
-**Domain**: Ophthalmology (fundus imaging)
+**Question Pattern**: Spatial location assessment of optic disc in fundus images  
+**Medical Domain**: Ophthalmology (fundus imaging and spatial anatomy assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of optic disc anatomy and spatial orientation in fundus photography. Understanding of retinal quadrant anatomy, optic disc positioning, anatomical landmarks, macula-disc relationship, and fundus orientation. Knowledge of spatial assessment terminology, retinal geography, optic nerve head location patterns, and clinical significance of disc positioning for examination protocols.
 
 ## Template Description
 

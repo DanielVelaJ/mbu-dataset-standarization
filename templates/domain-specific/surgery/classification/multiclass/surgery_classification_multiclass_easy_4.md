@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_multiclass_easy_4`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Intraoperative tissue condition evaluation  
-**Domain**: Surgery (intraoperative imaging)
+**Question Pattern**: Intraoperative tissue condition evaluation  
+**Medical Domain**: Surgery (intraoperative imaging)  
+**Domain-knowledge summary**: Requires specialized surgical pathology knowledge for intraoperative tissue assessment. Must understand tissue viability indicators, inflammation signs, necrosis characteristics, healthy versus diseased tissue appearance, perfusion status, and ability to evaluate tissue condition for surgical decision-making during operative procedures.
 
 ## Template Description
 

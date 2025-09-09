@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_multiclass_easy_3`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Surgical instrument identification  
-**Domain**: Surgery (intraoperative imaging)
+**Question Pattern**: Surgical instrument identification  
+**Medical Domain**: Surgery (intraoperative imaging)  
+**Domain-knowledge summary**: Requires specialized surgical knowledge of operative instruments and their applications. Must understand various surgical tool types, laparoscopic instruments, electrocautery devices, cutting tools, grasping instruments, suturing materials, and ability to identify specialized equipment based on visual characteristics and surgical context.
 
 ## Template Description
 

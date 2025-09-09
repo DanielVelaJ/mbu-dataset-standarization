@@ -2,10 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `anatomical_landmarks_single_1`  
-**Task Type**: Anatomical Landmarks & Keypoints (Single)  
+**Template ID**: `domain-agnostic_anatomical-landmarks-keypoints_single_easy_1`  
+**Task Type**: Anatomical landmarks & keypoints (single)  
 **Difficulty**: Easy  
 **Question Pattern**: Single anatomical landmark location selection from coordinate region options  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of anatomical landmarks and spatial localization skills to identify precise coordinate locations of anatomical structures. Knowledge of anatomical reference points, landmark identification, and spatial reasoning across different imaging modalities, but does not require specialized domain expertise.  
 
 ## Template Description
 

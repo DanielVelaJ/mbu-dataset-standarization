@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_binary_easy_1`  
-**Task Type**: Binary Classification  
+**Task Type**: Binary classification  
 **Difficulty**: Easy  
-**Pattern**: Cell morphology normality assessment  
-**Domain**: Other-Medical (cellular microscopy)
+**Question Pattern**: Cell morphology normality assessment  
+**Medical Domain**: Other-Medical (cellular microscopy)  
+**Domain-knowledge summary**: Requires general medical knowledge for cellular analysis and morphological assessment. Must understand basic cell biology, normal cellular characteristics, pathological cell features, microscopy principles, and ability to distinguish healthy from abnormal cellular morphology across various cell types in biomedical research contexts.
 
 ## Template Description
 

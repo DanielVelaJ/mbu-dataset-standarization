@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_multiclass_easy_4`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Laboratory animal species recognition  
-**Domain**: Other-Medical (veterinary and research imaging)
+**Question Pattern**: Laboratory animal species recognition  
+**Medical Domain**: Other-Medical (veterinary and research imaging)  
+**Domain-knowledge summary**: Requires general veterinary and research knowledge for laboratory animal identification. Must understand animal anatomy, species characteristics, laboratory animal models, comparative anatomy, and ability to distinguish between different animal species used in biomedical research and veterinary applications.
 
 ## Template Description
 

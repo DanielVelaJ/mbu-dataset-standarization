@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_binary_easy_1`  
-**Task Type**: Binary Classification  
+**Task Type**: Binary classification  
 **Difficulty**: Easy  
-**Pattern**: Critical view of safety assessment  
-**Domain**: Surgery (laparoscopic cholecystectomy)
+**Question Pattern**: Critical view of safety assessment  
+**Medical Domain**: Surgery (laparoscopic cholecystectomy)  
+**Domain-knowledge summary**: Requires specialized surgical knowledge of laparoscopic cholecystectomy anatomy and safety protocols. Must understand Calot's triangle anatomy, critical view of safety criteria (clear identification of hepatocystic triangle with only two structures - cystic artery and cystic duct - entering the gallbladder), and ability to assess surgical safety landmarks to prevent bile duct injury during gallbladder removal.
 
 ## Template Description
 

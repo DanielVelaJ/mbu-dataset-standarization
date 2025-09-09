@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_counting_direct_easy_1`  
+**Template ID**: `domain-specific_pathology_counting_direct_easy_1`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Mitotic figure density evaluation  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Mitotic figure density evaluation  
+**Medical Domain**: Pathology (histopathological imaging and mitotic count assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of mitotic figure recognition and cell division assessment. Understanding of mitotic phases (prophase, metaphase, anaphase, telophase), mitotic figure morphology, proliferation markers, and mitotic count methodology. Knowledge of pathological terminology for cell division assessment, mitotic index calculation, proliferation evaluation, and clinical significance of mitotic activity in tumor grading and prognosis.
 
 ## Template Description
 

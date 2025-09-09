@@ -1,0 +1,4 @@
+---
+alwaysApply: false
+---
+Never mark tasks as complete if you have not run a manual validation step to ensure that the task is complete and correct.

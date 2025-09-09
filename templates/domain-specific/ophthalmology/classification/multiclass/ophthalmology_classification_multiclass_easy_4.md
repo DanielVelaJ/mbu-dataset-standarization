@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_multiclass_easy_4`  
+**Template ID**: `domain-specific_ophthalmology_classification_multiclass_easy_4`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Comparative pathology assessment between retinal quadrants  
-**Domain**: Ophthalmology (fundus imaging)
+**Question Pattern**: Comparative pathology assessment between retinal quadrants  
+**Medical Domain**: Ophthalmology (fundus imaging and comparative pathology assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of retinal pathology distribution and comparative assessment techniques. Understanding of retinal quadrant anatomy, pathological pattern recognition, disease distribution patterns, hemorrhage classification, exudate patterns, and comparative analysis methodology. Knowledge of retinal pathology terminology, quadrant-specific disease predilection, and clinical significance of pathological distribution patterns.
 
 ## Template Description
 

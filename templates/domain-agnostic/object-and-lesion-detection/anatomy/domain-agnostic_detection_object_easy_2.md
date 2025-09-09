@@ -3,9 +3,11 @@
 ## Template Overview
 
 **Template ID**: `domain-agnostic_detection_object_easy_2`  
-**Task Type**: Object Detection  
+**Task Type**: Object detection  
 **Difficulty**: Easy  
 **Question Pattern**: Anatomical structure identification in highlighted bounding boxes  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of anatomical terminology and ability to identify anatomical structures within highlighted bounding boxes. Knowledge of organ systems, anatomical landmarks, and medical imaging anatomy across different imaging modalities, but does not require specialized domain expertise.  
 
 ## Template Description
 

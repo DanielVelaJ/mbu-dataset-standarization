@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_landmarks_multiple_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Surgical landmark visibility evaluation  
-**Domain**: Surgery (anatomical landmark detection)
+**Question Pattern**: Surgical landmark visibility evaluation  
+**Medical Domain**: Surgery (anatomical landmark detection)  
+**Domain-knowledge summary**: Requires specialized surgical anatomy knowledge for intraoperative landmark identification. Must understand critical anatomical reference points, surgical navigation landmarks, vascular and neural anatomy, tissue plane relationships, and ability to assess landmark visibility and quality for surgical guidance and safety during operative procedures.
 
 ## Template Description
 

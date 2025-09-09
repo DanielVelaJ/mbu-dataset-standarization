@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `dermatology_classification_binary_easy_2`  
+**Template ID**: `domain-specific_dermatology_classification_binary_easy_2`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Inflammatory versus non-inflammatory skin condition assessment  
-**Domain**: Dermatology (skin imaging)
+**Question Pattern**: Inflammatory versus non-inflammatory skin condition assessment  
+**Medical Domain**: Dermatology (skin imaging and dermoscopy)  
+**Domain-knowledge summary**: Requires specialized knowledge of inflammatory skin conditions and their characteristic features. Understanding of inflammatory markers (erythema, scaling, papules, vesicles), dermatological pathophysiology, immune-mediated skin responses, and differential diagnosis between inflammatory and non-inflammatory conditions. Knowledge of dermatological terminology, treatment implications, and inflammatory dermatoses classification.
 
 ## Template Description
 
@@ -27,136 +28,69 @@ Binary choice with clinical options:
 - B. Non-inflammatory
 
 ### Template Variables
-- `{condition_type}`: The specific skin condition if available
-- `{inflammatory_signs}`: Visible signs of inflammation (erythema, scaling, papules)
-- `{anatomical_location}`: Body location of the condition
-- `{severity}`: Degree of inflammation if assessable
+- `{condition_type}`: The specific skin condition if available. Used in question construction to provide clinical context and in answer generation to determine inflammatory vs non-inflammatory classification based on dermatological diagnosis.
+- `{inflammatory_signs}`: Visible signs of inflammation (erythema, scaling, papules). Incorporated into question assessment and used to guide answer construction based on presence/absence of inflammatory markers.
+- `{anatomical_location}`: Body location of the condition. Used to provide clinical context and may influence inflammatory assessment based on site-specific dermatological patterns.
 
-### Clinical Context
-- **Inflammatory**: Conditions with active inflammation (dermatitis, psoriasis, eczema)
-- **Non-inflammatory**: Conditions without inflammatory response (vitiligo, post-inflammatory hyperpigmentation)
-- **Key Signs**: Erythema (redness), scaling, papules, vesicles, induration
-- **Clinical Importance**: Determines treatment approach and medication selection
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or annotations. Dermatological images (clinical photography, dermoscopy) are displayed as raw images to allow comprehensive assessment of inflammatory characteristics including erythema, scaling, papular changes, and overall tissue response patterns. No highlighting, diagnostic overlays, or inflammatory region marking is added to maintain authentic clinical evaluation conditions.
 
-## Mapping to Datum Schema
-
-```json
-{
-  "qa_id": "1",
-  "task": "Classification",
-  "question": "Does this skin condition show inflammatory characteristics?",
-  "answer": "A",
-  "answer_type": "single_label",
-  "options": [
-    "Inflammatory",
-    "Non-inflammatory"
-  ],
-  "difficulty": "easy",
-  "uncertainty": "certain",
-  "answer_confidence": 0.85,
-  "rationale": "Visible erythema, scaling, and papular changes indicate active inflammatory process",
-  "provenance": {
-    "original_label": "inflammatory",
-    "rule_id": "dermatology_classification_binary_easy_2",
-    "annotation_id": "inflammatory_region",
-    "created_by": "program"
-  }
-}
-```
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the inflammatory status from the original dataset (inflammatory/non-inflammatory, active/inactive, 0/1)
+- Map inflammatory cases ("inflammatory", "active", "dermatitis", "eczema", "1") to "Inflammatory"
+- Map non-inflammatory cases ("non-inflammatory", "inactive", "stable", "vitiligo", "0") to "Non-inflammatory"
+- Use dermatological assessment from dataset annotations focusing on inflammatory markers
+- Validate answer accuracy against established dermatological criteria for inflammatory conditions
 
 ## Dataset Requirements
 
-### Primary Requirements
-- **Images**: Clinical dermatological photographs showing skin conditions
-- **Labels**: Binary classification of inflammatory vs non-inflammatory status
-- **Quality**: Clear visualization of skin surface changes and inflammatory signs
-
-### Compatible Datasets
-- Dermatitis and eczema datasets
-- Psoriasis severity datasets
-- Inflammatory skin disease collections
-- Clinical dermatology atlases
-- Skin condition classification datasets
-
-### Minimum Standards
-- **Image Quality**: Sufficient resolution to assess inflammatory changes
-- **Annotation Quality**: Clinical dermatologist validation preferred
-- **Data Distribution**: Representative mix of inflammatory and non-inflammatory conditions
+This template is suitable for datasets that have:
+- **Task Type**: Binary classification (Vision → Image-Level Classification → Binary classification)
+- **Label Structure**: Binary labels indicating inflammatory/non-inflammatory status per image
+- **Image Types**: Dermatological images including clinical photography, dermoscopy showing inflammatory characteristics
+- **Assessment Requirements**: Sufficient image quality for evaluation of inflammatory markers (erythema, scaling, papules)
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include inflammatory skin condition datasets, dermatitis classification collections, eczema vs normal skin datasets, and dermatological atlases with expert-validated inflammatory assessments
 
 ## Template Usage Rules
 
-### Question Construction Rules
-1. Focus on "inflammatory characteristics" to guide clinical assessment
-2. Use standard dermatological terminology
-3. Maintain objectivity in question phrasing
-4. Align with clinical diagnostic workflows
-
-### Answer Assignment Rules
-1. Map "inflammatory", "dermatitis", "eczema", "psoriasis" → "Inflammatory"
-2. Map "non-inflammatory", "vitiligo", "post-inflammatory" → "Non-inflammatory"
-3. Consider acute vs chronic inflammatory patterns
-4. Evaluate based on visible inflammatory markers
-
-### Quality Control Guidelines
-1. Verify clinical accuracy with dermatological standards
-2. Ensure consistency with inflammatory disease classification
-3. Cross-validate with clinical inflammatory markers
-4. Review for proper inflammatory assessment criteria
+- **Implementation guidelines**: Use exact dermatological terminology from dataset annotations focusing on inflammatory markers and clinical assessment criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format:
+  - Labels "inflammatory", "dermatitis", "eczema", "psoriasis", "active", "1" → "Inflammatory"
+  - Labels "non-inflammatory", "vitiligo", "post-inflammatory", "inactive", "stable", "0" → "Non-inflammatory"
+  - Always use dataset ground truth labels as definitive inflammatory classification
+- **Conversion Process**: Extract inflammatory status from original dataset, identify condition type and inflammatory markers from metadata, generate questions using clinical inflammatory assessment terminology, present raw images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of inflammatory terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array ["Inflammatory", "Non-inflammatory"], and includes provenance tracking with original labels and rule_id "domain-specific_dermatology_classification_binary_easy_2"
 
 ## Examples
 
-### Example 1: Acute Dermatitis
-**Image**: Clinical photograph showing erythematous, scaling patches  
-**Question**: "Does this skin condition show inflammatory characteristics?"  
-**Answer**: A. Inflammatory  
-**Rationale**: Visible erythema, scaling, and edema indicate acute inflammatory dermatitis
+### Example 1: Acute Contact Dermatitis
+**Original Dataset Context and Annotation Format**: Dermatitis classification dataset with binary labels in CSV format (image_id, inflammatory_status) where 1 = inflammatory condition, 0 = non-inflammatory condition  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, annotations, or region highlighting  
+**Generated Question and ALL Answer Choices**: 
+- **Question**: "Does this skin condition show inflammatory characteristics?"
+- **Answer Choices**: ["Inflammatory", "Non-inflammatory"]
+- **Correct Answer**: "Inflammatory"  
+**Complete Conversion Process Explanation**: 
+1. Extract binary label "1" from dataset CSV indicating inflammatory classification
+2. Identify "contact dermatitis" as condition type from dataset metadata
+3. Generate question using inflammatory assessment terminology focused on visible characteristics
+4. Map positive inflammatory label to "Inflammatory" answer based on clinical criteria
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Active contact dermatitis case requiring recognition of inflammatory markers including erythema, vesiculation, scaling, and edema - tests dermatological assessment for inflammatory vs non-inflammatory classification based on established clinical criteria for inflammatory skin conditions
 
-### Example 2: Vitiligo
-**Image**: Clinical photograph of depigmented patches without erythema  
-**Question**: "Does this skin condition show inflammatory characteristics?"  
-**Answer**: B. Non-inflammatory  
-**Rationale**: Depigmentation without erythema, scaling, or other inflammatory signs characteristic of vitiligo
+### Example 2: Vitiligo Assessment  
+**Original Dataset Context and Annotation Format**: Skin condition classification dataset with diagnostic categories where "vitiligo" classification indicates non-inflammatory condition, stored in annotation file with image names and condition labels  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, overlays, or diagnostic annotations  
+**Generated Question and ALL Answer Choices**:
+- **Question**: "Does this skin condition show inflammatory characteristics?"
+- **Answer Choices**: ["Inflammatory", "Non-inflammatory"] 
+- **Correct Answer**: "Non-inflammatory"  
+**Complete Conversion Process Explanation**:
+1. Extract condition label "vitiligo" from dataset annotation indicating non-inflammatory classification
+2. Map "vitiligo" to non-inflammatory category based on dermatological classification
+3. Generate question using standardized inflammatory assessment terminology
+4. Convert non-inflammatory diagnosis to "Non-inflammatory" answer choice following label mapping rules
+5. Verify binary choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Vitiligo case demonstrating non-inflammatory dermatological condition with depigmentation without erythema, scaling, or inflammatory markers - tests ability to distinguish non-inflammatory conditions from inflammatory based on absence of inflammatory signs and presence of characteristic vitiligo patterns
 
-### Example 3: Psoriatic Plaques
-**Image**: Clinical photograph of well-demarcated erythematous plaques with silvery scale  
-**Question**: "Does this skin condition show inflammatory characteristics?"  
-**Answer**: A. Inflammatory  
-**Rationale**: Classic psoriatic plaques show erythema, scaling, and induration indicating chronic inflammation
-
-### Example 4: Post-Inflammatory Hyperpigmentation
-**Image**: Clinical photograph of darkened skin patches without active inflammation  
-**Question**: "Does this skin condition show inflammatory characteristics?"  
-**Answer**: B. Non-inflammatory  
-**Rationale**: Hyperpigmentation without current erythema or scaling represents post-inflammatory changes
-
-### Example 5: Contact Dermatitis
-**Image**: Clinical photograph of vesicular, erythematous eruption  
-**Question**: "Does this skin condition show inflammatory characteristics?"  
-**Answer**: A. Inflammatory  
-**Rationale**: Vesicles, erythema, and acute changes consistent with active contact dermatitis
-
-## Implementation Notes
-
-### Technical Considerations
-- Optimize color representation for erythema detection
-- Consider lighting conditions that may affect inflammation visibility
-- Implement proper skin tone calibration
-- Handle varying degrees of inflammatory severity
-
-### Clinical Validation
-- Align with dermatological inflammation assessment criteria
-- Consider both acute and chronic inflammatory patterns
-- Validate against clinical inflammatory markers
-- Cross-reference with dermatologist assessments
-
-### Dataset-Specific Adaptations
-- **Dermatitis datasets**: Focus on acute inflammatory changes
-- **Psoriasis datasets**: Emphasize chronic inflammatory patterns
-- **Mixed condition datasets**: Consider spectrum of inflammatory severity
-- **Clinical datasets**: Incorporate patient history when available
-
-### Quality Assurance
-- Regular review by dermatologists
-- Validation against inflammatory disease classification systems
-- Monitoring for consistent inflammatory pattern recognition
-- Updates based on evolving understanding of inflammatory skin diseases

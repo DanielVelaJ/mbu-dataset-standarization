@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `dermatology_classification_multiclass_easy_4`  
+**Template ID**: `domain-specific_dermatology_classification_multiclass_easy_4`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Anatomical location-specific dermatological diagnosis  
-**Domain**: Dermatology (skin imaging)
+**Question Pattern**: Anatomical location-specific dermatological diagnosis  
+**Medical Domain**: Dermatology (anatomical site assessment and topographical dermatology)  
+**Domain-knowledge summary**: Requires specialized knowledge of anatomical location-specific dermatological characteristics and site-based diagnostic patterns. Understanding of topographical dermatology, body site predilections for different conditions, anatomical variations in skin morphology, site-specific disease patterns, and correlation between anatomical location and diagnostic likelihood. Knowledge of dermatological anatomy, regional skin characteristics, and location-based differential diagnosis principles.
 
 ## Template Description
 
@@ -30,17 +31,20 @@ Multiclass choice with location-relevant diagnostic options:
 - E. Sebaceous hyperplasia
 
 ### Template Variables
-- `{anatomical_site}`: Specific body location (face, trunk, extremities)
-- `{age_related_factors}`: Age-appropriate differential diagnoses
-- `{sun_exposure_history}`: Chronic vs acute sun damage indicators
-- `{morphological_features}`: Lesion characteristics in anatomical context
+- `{anatomical_site}`: Specific body location (face, trunk, extremities). Used in question construction to provide topographical context and in answer generation to determine location-specific diagnosis based on site predilection patterns.
+- `{age_related_factors}`: Age-appropriate differential diagnoses. Incorporated into question assessment and used to guide answer construction based on age-specific dermatological patterns.
+- `{morphological_features}`: Lesion characteristics in anatomical context. Used to provide clinical context and determine diagnostic likelihood in answer rationale.
 
-### Clinical Context
-- **Seborrheic Keratosis**: Common on trunk/face in older adults, "stuck-on" appearance
-- **Solar Lentigo**: Sun-exposed areas, flat brown macules, age-related
-- **Melanocytic Nevus**: Common on trunk/extremities, symmetric pigmented lesions
-- **Dermatofibroma**: Often on legs, firm nodular lesions, may follow trauma
-- **Sebaceous Hyperplasia**: Facial, yellowish papules with central depression
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or annotations. Dermatological images (clinical photography showing anatomical context) are displayed as raw images to allow comprehensive assessment of both lesion characteristics and anatomical location context. No highlighting, anatomical marking, or site-specific overlays are added to maintain authentic clinical evaluation conditions for topographical assessment.
+
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the diagnosis from the original dataset considering anatomical location context
+- Map specific condition labels to anatomically-informed diagnostic categories
+- Use topographical assessment from dataset annotations focusing on location-specific diagnosis
+- Consider anatomical site predilection in diagnostic classification
+- Validate answer accuracy against established anatomical dermatology criteria and site-specific diagnostic principles
 
 ## Mapping to Datum Schema
 
@@ -73,97 +77,53 @@ Multiclass choice with location-relevant diagnostic options:
 
 ## Dataset Requirements
 
-### Primary Requirements
-- **Images**: Dermatological images with anatomical location metadata
-- **Labels**: Specific diagnoses with anatomical site information
-- **Quality**: Clear visualization of lesion characteristics and anatomical context
-
-### Compatible Datasets
-- Location-annotated dermatology databases
-- Anatomical site-specific lesion collections
-- Age-stratified dermatology datasets
-- Sun-exposure related skin lesion databases
-- Body site-specific dermatological atlases
-
-### Minimum Standards
-- **Image Quality**: Sufficient detail for morphological and contextual assessment
-- **Annotation Quality**: Clinical diagnosis with anatomical site specification
-- **Data Distribution**: Representative lesions across different anatomical locations
+This template is suitable for datasets that have:
+- **Task Type**: Multiclass classification (Vision → Image-Level Classification → Multiclass classification)
+- **Label Structure**: Multiple diagnosis labels with anatomical location context per image
+- **Image Types**: Dermatological images with clear anatomical site context and sufficient detail for location-specific assessment
+- **Assessment Requirements**: Sufficient image quality for evaluation of both morphological characteristics and anatomical location context
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include location-annotated dermatology databases, anatomical site-specific lesion collections, age-stratified dermatology datasets, sun-exposure related skin lesion databases, and body site-specific dermatological atlases with expert topographical validation
 
 ## Template Usage Rules
 
-### Question Construction Rules
-1. Explicitly reference "anatomical location and features" to emphasize context
-2. Use "most likely diagnosis" to acknowledge differential diagnosis considerations
-3. Incorporate location-specific disease prevalence in answer options
-4. Maintain clinical diagnostic reasoning approach
-
-### Answer Assignment Rules
-1. Consider anatomical site prevalence for each condition
-2. Match age-appropriate diagnoses for given locations
-3. Account for sun exposure patterns by anatomical site
-4. Use histopathological confirmation when available
-
-### Quality Control Guidelines
-1. Verify location-diagnosis correlations with clinical epidemiology
-2. Ensure age-appropriate differential diagnoses
-3. Cross-validate with anatomical site-specific disease prevalence
-4. Review for proper integration of morphological and topographical features
+- **Implementation guidelines**: Use exact dermatological terminology from dataset annotations focusing on anatomical location context and site-specific diagnostic criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format considering anatomical site prevalence:
+  - Site-specific condition labels mapped to anatomically-appropriate diagnostic categories
+  - Consider anatomical site predilection patterns for each condition
+  - Account for age-related and sun-exposure factors in site-specific diagnoses
+  - Always use dataset ground truth labels as definitive diagnostic classification
+- **Conversion Process**: Extract diagnosis and anatomical location from original dataset, identify site-specific features and morphological characteristics from metadata, generate questions using topographical assessment terminology, present raw images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of location-specific diagnostic terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array with anatomically-informed diagnostic categories, and includes provenance tracking with original labels and rule_id "domain-specific_dermatology_classification_multiclass_easy_4"
 
 ## Examples
 
-### Example 1: Seborrheic Keratosis on Trunk
-**Image**: Clinical photograph of warty, brown lesion on chest of elderly patient  
-**Question**: "Given the anatomical location and features, what is the most likely diagnosis?"  
-**Answer**: A. Seborrheic keratosis  
-**Rationale**: Warty, "stuck-on" appearance on trunk in older adult classic for seborrheic keratosis
+### Example 1: Site-Specific Seborrheic Keratosis Diagnosis
+**Original Dataset Context and Annotation Format**: Anatomical location dermatology dataset with site-specific diagnostic labels in CSV format (image_id, anatomical_site, diagnosis) where diagnoses include "seborrheic_keratosis", "solar_lentigo", "melanocytic_nevus", "dermatofibroma", "sebaceous_hyperplasia"  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, annotations, or anatomical site highlighting  
+**Generated Question and ALL Answer Choices**: 
+- **Question**: "Given the anatomical location and features, what is the most likely diagnosis?"
+- **Answer Choices**: ["Seborrheic keratosis", "Solar lentigo", "Melanocytic nevus", "Dermatofibroma", "Sebaceous hyperplasia"]
+- **Correct Answer**: "Seborrheic keratosis"  
+**Complete Conversion Process Explanation**: 
+1. Extract diagnosis label "seborrheic_keratosis" and anatomical site "trunk" from dataset CSV indicating site-specific classification
+2. Identify morphological features and anatomical context from dataset metadata
+3. Generate question using topographical assessment terminology emphasizing anatomical location context
+4. Map seborrheic keratosis label to answer choice considering trunk site predilection
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Seborrheic keratosis on trunk case requiring integration of anatomical location (trunk predilection) with morphological features (warty, stuck-on appearance) - tests site-specific diagnostic assessment for anatomical location vs morphological classification based on established criteria for topographical dermatology and anatomical site predilection patterns
 
-### Example 2: Solar Lentigo on Hand
-**Image**: Clinical photograph of flat brown macule on dorsal hand  
-**Question**: "Given the anatomical location and features, what is the most likely diagnosis?"  
-**Answer**: B. Solar lentigo  
-**Rationale**: Flat brown macule on chronically sun-exposed dorsal hand typical of solar lentigo
+### Example 2: Solar Lentigo Location-Specific Assessment  
+**Original Dataset Context and Annotation Format**: Site-specific dermatology atlas with expert anatomical annotations where "solar_lentigo" classification on "dorsal_hand" indicates chronic sun exposure lesion, stored in annotation file with image names, anatomical sites, and diagnoses  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, overlays, or site-specific annotations  
+**Generated Question and ALL Answer Choices**:
+- **Question**: "Given the anatomical location and features, what is the most likely diagnosis?"
+- **Answer Choices**: ["Seborrheic keratosis", "Solar lentigo", "Melanocytic nevus", "Dermatofibroma", "Sebaceous hyperplasia"] 
+- **Correct Answer**: "Solar lentigo"  
+**Complete Conversion Process Explanation**:
+1. Extract diagnosis label "solar_lentigo" and site "dorsal_hand" from dataset annotation indicating sun-exposure related classification
+2. Map solar lentigo to site-specific diagnostic category based on anatomical predilection
+3. Generate question using standardized topographical assessment terminology
+4. Convert site-specific diagnosis to "Solar lentigo" answer choice considering hand site predilection
+5. Verify multiclass choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Solar lentigo on dorsal hand case demonstrating characteristic anatomical site predilection for chronically sun-exposed areas with flat brown macule morphology - tests ability to integrate anatomical location context with morphological features for accurate site-specific diagnostic classification based on topographical dermatology principles
 
-### Example 3: Melanocytic Nevus on Back
-**Image**: Clinical photograph of symmetric brown lesion on upper back  
-**Question**: "Given the anatomical location and features, what is the most likely diagnosis?"  
-**Answer**: C. Melanocytic nevus  
-**Rationale**: Symmetric pigmented lesion on trunk with regular features consistent with benign nevus
-
-### Example 4: Dermatofibroma on Leg
-**Image**: Clinical photograph of firm, brown nodule on lower leg  
-**Question**: "Given the anatomical location and features, what is the most likely diagnosis?"  
-**Answer**: D. Dermatofibroma  
-**Rationale**: Firm nodular lesion on leg with characteristic morphology of dermatofibroma
-
-### Example 5: Sebaceous Hyperplasia on Face
-**Image**: Clinical photograph of yellowish papule with central depression on forehead  
-**Question**: "Given the anatomical location and features, what is the most likely diagnosis?"  
-**Answer**: E. Sebaceous hyperplasia  
-**Rationale**: Yellowish facial papule with central depression characteristic of sebaceous hyperplasia
-
-## Implementation Notes
-
-### Technical Considerations
-- Incorporate anatomical site metadata in analysis
-- Consider age-related disease prevalence patterns
-- Implement location-specific feature weighting
-- Handle variable image quality across anatomical sites
-
-### Clinical Validation
-- Align with epidemiological data for anatomical site disease prevalence
-- Cross-reference with age-specific disease patterns
-- Validate against clinical anatomical pathology correlations
-- Consider environmental exposure patterns by body site
-
-### Dataset-Specific Adaptations
-- **Age-stratified datasets**: Emphasize age-appropriate differential diagnoses
-- **Sun exposure databases**: Focus on chronically exposed vs protected sites
-- **Population-specific datasets**: Consider ethnic and geographic disease patterns
-- **Clinical datasets**: Incorporate patient demographics and history
-
-### Quality Assurance
-- Regular review by dermatologists familiar with anatomical site patterns
-- Validation against established epidemiological disease distributions
-- Monitoring for accurate integration of morphological and topographical features
-- Updates based on evolving understanding of anatomical site-specific disease patterns

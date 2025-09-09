@@ -3,9 +3,11 @@
 ## Template Overview
 
 **Template ID**: `domain-agnostic_detection_object_easy_1`  
-**Task Type**: Object Detection  
+**Task Type**: Object detection  
 **Difficulty**: Easy  
 **Question Pattern**: Lesion classification in highlighted bounding boxes  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of medical terminology for pathological findings and ability to classify lesions within highlighted bounding boxes. Knowledge of lesion types, pathological features, and medical imaging characteristics across different imaging modalities, but does not require specialized domain expertise.  
 
 ## Template Description
 

@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_multiclass_easy_3`  
+**Template ID**: `domain-specific_pathology_classification_multiclass_easy_3`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Inflammatory pattern recognition  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Inflammatory pattern recognition  
+**Medical Domain**: Pathology (histopathological imaging and inflammatory pathology assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of inflammatory patterns and immune cell recognition. Understanding of acute vs chronic inflammation, granulomatous inflammation, neutrophilic, lymphocytic, and eosinophilic patterns, inflammatory cell morphology, and tissue reaction patterns. Knowledge of pathological terminology for inflammatory pathology, immune cell identification, inflammatory pattern classification, and clinical correlation with inflammatory diseases.
 
 ## Template Description
 

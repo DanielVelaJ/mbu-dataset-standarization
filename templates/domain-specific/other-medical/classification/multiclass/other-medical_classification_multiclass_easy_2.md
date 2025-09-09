@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_multiclass_easy_2`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Brain region identification in neuroimaging  
-**Domain**: Other-Medical (neuroscience imaging)
+**Question Pattern**: Brain region identification in neuroimaging  
+**Medical Domain**: Other-Medical (neuroscience imaging)  
+**Domain-knowledge summary**: Requires general neuroscience knowledge for brain anatomy and neuroimaging interpretation. Must understand basic neuroanatomy, brain region identification, neuroimaging modalities, anatomical landmarks, and ability to recognize different brain structures and regions across various neuroimaging techniques for research applications.
 
 ## Template Description
 

@@ -3,9 +3,11 @@
 ## Template Overview
 
 **Template ID**: `domain-agnostic_detection_object_easy_3`  
-**Task Type**: Object Detection  
+**Task Type**: Object detection  
 **Difficulty**: Easy  
 **Question Pattern**: Medical device identification in highlighted bounding boxes  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of medical device terminology and ability to identify medical devices and instruments within highlighted bounding boxes. Knowledge of medical equipment, implants, surgical instruments, and diagnostic devices across different imaging modalities, but does not require specialized domain expertise.  
 
 ## Template Description
 

@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_multiclass_easy_2`  
+**Template ID**: `domain-specific_ophthalmology_classification_multiclass_easy_2`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Retinal pathology identification in OCT imaging  
-**Domain**: Ophthalmology (OCT retinal imaging)
+**Question Pattern**: Retinal pathology identification in OCT imaging  
+**Medical Domain**: Ophthalmology (OCT retinal imaging and pathology assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of OCT imaging and retinal pathology. Understanding of retinal layer anatomy, pathological changes, diabetic maculopathy, age-related macular degeneration, choroidal neovascularization, and retinal detachment patterns. Knowledge of OCT interpretation, cross-sectional retinal analysis, pathological feature recognition, and clinical correlation with retinal diseases.
 
 ## Template Description
 

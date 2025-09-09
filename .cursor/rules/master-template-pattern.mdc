@@ -1,0 +1,44 @@
+---
+alwaysApply: false
+---
+
+## Master Template Pattern Rule
+
+When creating multiple templates of the same type, ALWAYS follow this pattern:
+
+### 1. Create ONE Master Template First
+- Build the first template completely and validate it fully
+- Ensure it follows the 6-section format from `instructions/template_guidelines/general_template_guidelines.md`
+- Verify MCVQA compliance (single correct answer, multiple choice format)
+- Test with real dataset references from `data/dataset_metadata/datasets_metadata.csv`
+- Get the structure perfect before creating any additional templates
+
+### 2. Validate the Master Template
+- [ ] File exists in correct directory with proper naming convention
+- [ ] All 6 sections complete (Overview, Description, Pattern, Requirements, Usage Rules, Examples)
+- [ ] Template ID matches filename
+- [ ] MCVQA compliance verified (no free text, no multi-label)
+- [ ] Exactly 2 examples with real dataset references
+- [ ] Image presentation method specified
+- [ ] Answer construction process documented
+- [ ] Medical terminology accurate
+
+### 3. Use Master as Starting Point
+- Copy the validated master template for new templates
+- Modify only the specific content (variables, examples, medical domain)
+- Keep the structure, format, and section organization identical
+- Maintain the same level of detail and completeness
+
+### 4. Mini-Validation Cycles
+- After every 3-5 new templates, stop and validate
+- Check format consistency against the master
+- Verify MCVQA compliance
+- Confirm dataset references exist in metadata file
+
+### Key Benefits
+- Prevents large-scale rework (like the 79-template format issue in Task 13)
+- Ensures consistency across template collections
+- Reduces validation failures
+- Speeds up template creation once master is established
+
+**Remember**: Implementation first, documentation second. Never claim completion without physical file verification.

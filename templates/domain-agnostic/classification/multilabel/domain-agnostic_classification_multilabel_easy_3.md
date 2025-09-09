@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-- **Template ID**: domain-agnostic_classification_multilabel_easy_3
-- **Task Type**: Multi-label classification (clinical assessment)
-- **Difficulty**: Easy
-- **Pattern**: Multiple clinical criteria or feature assessment with set-based answers
-- **Domain**: Domain-agnostic (works across all medical specialties)
+**Template ID**: `domain-agnostic_classification_multilabel_easy_3`  
+**Task Type**: Multilabel classification (clinical assessment)  
+**Difficulty**: Easy  
+**Question Pattern**: Multiple clinical criteria or feature assessment with set-based answers  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of clinical assessment criteria and ability to evaluate multiple independent clinical features simultaneously. Knowledge of medical quality indicators, diagnostic criteria, and systematic clinical evaluation principles, but does not require specialized domain expertise.
 
 ## Template Description
 

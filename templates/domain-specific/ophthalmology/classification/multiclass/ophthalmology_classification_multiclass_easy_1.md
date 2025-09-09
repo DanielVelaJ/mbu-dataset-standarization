@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_multiclass_easy_1`  
+**Template ID**: `domain-specific_ophthalmology_classification_multiclass_easy_1`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Primary anatomical structure identification in fundus images  
-**Domain**: Ophthalmology (fundus imaging)
+**Question Pattern**: Primary anatomical structure identification in fundus images  
+**Medical Domain**: Ophthalmology (fundus imaging and retinal anatomy assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of retinal anatomy and fundus examination techniques. Understanding of optic nerve, macula, retinal vessels, fovea, and peripheral retinal landmarks. Knowledge of fundus photography interpretation, anatomical structure recognition, spatial relationships, and clinical significance of retinal anatomy. Expertise in ophthalmological terminology for retinal structures and fundus examination principles.
 
 ## Template Description
 

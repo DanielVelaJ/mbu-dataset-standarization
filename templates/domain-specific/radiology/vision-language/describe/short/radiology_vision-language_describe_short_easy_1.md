@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `radiology_vision-language_describe_short_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Vision-language (describe)  
 **Difficulty**: Easy  
-**Pattern**: Radiological finding description selection  
-**Domain**: Radiology (medical imaging)
+**Question Pattern**: Radiological finding description selection  
+**Medical Domain**: Radiology (medical imaging)  
+**Domain-knowledge summary**: Requires specialized radiological knowledge for medical imaging interpretation and report generation. Must understand radiological anatomy, pathological terminology, imaging findings description, clinical reporting standards, and ability to generate concise, clinically accurate descriptions of radiological findings across multiple imaging modalities.
 
 ## Template Description
 

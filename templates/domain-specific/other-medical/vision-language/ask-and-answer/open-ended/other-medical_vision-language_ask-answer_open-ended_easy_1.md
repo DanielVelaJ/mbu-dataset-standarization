@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_vision-language_ask-answer_open-ended_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Vision-language (ask-and-answer)  
 **Difficulty**: Easy  
-**Pattern**: Experimental interpretation selection  
-**Domain**: Other-Medical (experimental analysis)
+**Question Pattern**: Experimental interpretation selection  
+**Medical Domain**: Other-Medical (experimental analysis)  
+**Domain-knowledge summary**: Requires general medical research knowledge for experimental analysis and result interpretation. Must understand experimental methodology, statistical analysis principles, research design, data interpretation, and ability to analyze and interpret experimental results across various biomedical research contexts and methodological approaches.
 
 ## Template Description
 

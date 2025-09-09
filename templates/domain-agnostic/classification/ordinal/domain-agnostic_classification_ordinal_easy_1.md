@@ -2,10 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `classification_ordinal_1`  
-**Task Type**: Ordinal Classification  
+**Template ID**: `domain-agnostic_classification_ordinal_easy_1`  
+**Task Type**: Ordinal classification  
 **Difficulty**: Easy  
 **Question Pattern**: Severity/stage assessment with ordered multiple choice options  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of medical grading systems and disease progression. Knowledge of ordinal relationships in medical assessment, staging criteria, and ability to distinguish between severity levels based on visual indicators across different medical domains.  
 
 ## Template Description
 

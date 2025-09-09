@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_binary_easy_3`  
+**Template ID**: `domain-specific_pathology_classification_binary_easy_3`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: High-grade versus low-grade neoplasm differentiation  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: High-grade versus low-grade neoplasm differentiation  
+**Medical Domain**: Pathology (histopathological imaging and tumor grading assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of tumor grading systems and histological grade assessment. Understanding of nuclear pleomorphism, mitotic rate, cellular differentiation, architectural patterns, necrosis evaluation, and grading criteria. Knowledge of pathological terminology for tumor grading, histological grade determination, WHO grading systems, and clinical significance of grade assessment for prognosis and treatment planning.
 
 ## Template Description
 

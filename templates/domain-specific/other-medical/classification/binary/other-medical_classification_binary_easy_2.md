@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_binary_easy_2`  
-**Task Type**: Binary Classification  
+**Task Type**: Binary classification  
 **Difficulty**: Easy  
-**Pattern**: Medical imaging quality assessment  
-**Domain**: Other-Medical (imaging quality control)
+**Question Pattern**: Medical imaging quality assessment  
+**Medical Domain**: Other-Medical (imaging quality control)  
+**Domain-knowledge summary**: Requires general medical imaging knowledge for quality control assessment. Must understand imaging acquisition principles, image quality metrics, technical imaging standards, artifact recognition, and ability to evaluate whether medical images meet clinical versus research-grade quality standards across different imaging modalities.
 
 ## Template Description
 

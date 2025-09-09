@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `dermatology_classification_multiclass_easy_2`  
+**Template ID**: `domain-specific_dermatology_classification_multiclass_easy_2`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Dermoscopic pattern identification  
-**Domain**: Dermatology (dermoscopy imaging)
+**Question Pattern**: Dermoscopic pattern identification  
+**Medical Domain**: Dermatology (dermoscopy and dermatoscopic pattern analysis)  
+**Domain-knowledge summary**: Requires specialized knowledge of dermoscopic patterns and dermatoscopy interpretation. Understanding of dermoscopic structures (network, globules, streaks, dots, blotches), pattern recognition principles, dermoscopic criteria for different lesion types, and correlation between dermoscopic patterns and histopathological findings. Knowledge of dermoscopic terminology, pattern classification systems, and dermatoscopic diagnostic algorithms.
 
 ## Template Description
 
@@ -30,141 +31,72 @@ Multiclass choice with dermoscopic pattern options:
 - E. Multicomponent pattern
 
 ### Template Variables
-- `{pattern_description}`: Detailed description of the visible pattern
-- `{lesion_type}`: Type of lesion showing the pattern
-- `{pattern_distribution}`: How the pattern is distributed across the lesion
-- `{associated_features}`: Additional dermoscopic features present
+- `{pattern_description}`: Detailed description of the visible pattern. Used in question construction to provide clinical context and in answer generation to determine the correct dermoscopic pattern based on specialized dermoscopy criteria.
+- `{lesion_type}`: Type of lesion showing the pattern. Incorporated into question assessment and used to guide answer construction based on lesion-specific dermoscopic characteristics.
+- `{pattern_distribution}`: How the pattern is distributed across the lesion. Used to provide clinical context and determine pattern classification in answer rationale.
 
-### Clinical Context
-- **Reticular Pattern**: Network of lines, common in benign nevi
-- **Globular Pattern**: Round to oval structures, seen in various lesions
-- **Homogeneous Pattern**: Uniform coloration without specific structure
-- **Starburst Pattern**: Radial projections, often in Spitz nevi or melanoma
-- **Multicomponent Pattern**: Multiple patterns present, concerning for melanoma
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or annotations. Dermoscopic images are displayed as raw dermoscopy captures to allow comprehensive assessment of dermoscopic patterns including network structures, globular patterns, pigmentation distribution, and specialized dermoscopic features. No highlighting, pattern outlining, or dermoscopic structure marking is added to maintain authentic clinical dermoscopy evaluation conditions.
 
-## Mapping to Datum Schema
-
-```json
-{
-  "qa_id": "1",
-  "task": "Classification",
-  "question": "What is the primary dermoscopic pattern visible in this lesion?",
-  "answer": "A",
-  "answer_type": "single_label",
-  "options": [
-    "Reticular pattern",
-    "Globular pattern",
-    "Homogeneous pattern", 
-    "Starburst pattern",
-    "Multicomponent pattern"
-  ],
-  "difficulty": "easy",
-  "uncertainty": "certain",
-  "answer_confidence": 0.88,
-  "rationale": "Well-defined network of brown lines creating reticular pattern typical of benign nevus",
-  "provenance": {
-    "original_label": "reticular",
-    "rule_id": "dermatology_classification_multiclass_easy_2",
-    "annotation_id": "dermoscopic_pattern",
-    "created_by": "program"
-  }
-}
-```
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the dermoscopic pattern from the original dataset (reticular, globular, homogeneous, starburst, multicomponent)
+- Map specific pattern labels to standardized dermoscopic pattern categories
+- Use dermoscopic assessment from dataset annotations focusing on pattern classification
+- Validate answer accuracy against established dermoscopic pattern recognition criteria
+- Ensure clinical relevance of dermoscopic terminology and pattern descriptions
 
 ## Dataset Requirements
 
-### Primary Requirements
-- **Images**: High-quality dermoscopic images with clear pattern visualization
-- **Labels**: Dermoscopic pattern classifications by trained dermoscopists
-- **Quality**: Sufficient magnification and clarity for pattern recognition
-
-### Compatible Datasets
-- Dermoscopy pattern databases
-- ISIC dermoscopic challenges
-- Melanocytic lesion dermoscopy collections
-- Educational dermoscopy atlases
-- Pattern-annotated dermoscopy datasets
-
-### Minimum Standards
-- **Image Quality**: Clear dermoscopic visualization with proper illumination
-- **Annotation Quality**: Expert dermoscopist pattern identification
-- **Data Distribution**: Representative examples of each pattern type
+This template is suitable for datasets that have:
+- **Task Type**: Multiclass classification (Vision → Image-Level Classification → Multiclass classification)
+- **Label Structure**: Multiple dermoscopic pattern labels with specific pattern categories per image
+- **Image Types**: Dermoscopic images with clear pattern visualization and sufficient magnification for pattern recognition
+- **Assessment Requirements**: Sufficient image quality for evaluation of dermoscopic structures and pattern characteristics
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include dermoscopy pattern databases, ISIC dermoscopic challenges, melanocytic lesion dermoscopy collections, educational dermoscopy atlases, and pattern-annotated dermoscopy datasets with expert dermoscopist validation
 
 ## Template Usage Rules
 
-### Question Construction Rules
-1. Focus on "primary" pattern when multiple patterns may be present
-2. Use standard dermoscopic terminology
-3. Emphasize pattern recognition skills
-4. Maintain consistency with dermoscopic education standards
-
-### Answer Assignment Rules
-1. Map network/pigment network → "Reticular pattern"
-2. Map globules/dots → "Globular pattern"
-3. Map structureless/diffuse → "Homogeneous pattern"
-4. Map streaks/radial → "Starburst pattern"
-5. Map multiple patterns → "Multicomponent pattern"
-
-### Quality Control Guidelines
-1. Verify alignment with international dermoscopy standards
-2. Ensure consistency with dermoscopic pattern terminology
-3. Cross-validate with expert dermoscopist assessments
-4. Review for proper pattern classification criteria
+- **Implementation guidelines**: Use exact dermoscopic terminology from dataset annotations focusing on pattern recognition and dermoscopic assessment criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format:
+  - Pattern labels "network", "pigment network", "reticular" → "Reticular pattern"
+  - Pattern labels "globules", "dots", "globular" → "Globular pattern"  
+  - Pattern labels "structureless", "diffuse", "homogeneous" → "Homogeneous pattern"
+  - Pattern labels "streaks", "radial", "starburst" → "Starburst pattern"
+  - Pattern labels "multiple patterns", "multicomponent" → "Multicomponent pattern"
+  - Always use dataset ground truth labels as definitive pattern classification
+- **Conversion Process**: Extract dermoscopic pattern from original dataset, identify lesion type and pattern characteristics from metadata, generate questions using dermoscopic assessment terminology, present raw dermoscopic images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of dermoscopic terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array with dermoscopic pattern categories, and includes provenance tracking with original labels and rule_id "domain-specific_dermatology_classification_multiclass_easy_2"
 
 ## Examples
 
 ### Example 1: Reticular Pattern Recognition
-**Image**: Dermoscopic image showing well-defined brown network  
-**Question**: "What is the primary dermoscopic pattern visible in this lesion?"  
-**Answer**: A. Reticular pattern  
-**Rationale**: Clear network of intersecting brown lines creating classic reticular pattern
+**Original Dataset Context and Annotation Format**: Dermoscopy pattern classification dataset with pattern labels in CSV format (image_id, pattern_type) where labels include "reticular", "globular", "homogeneous", "starburst", "multicomponent"  
+**Image Presentation Method**: Raw dermoscopic image displayed without modifications, annotations, or pattern highlighting  
+**Generated Question and ALL Answer Choices**: 
+- **Question**: "What is the primary dermoscopic pattern visible in this lesion?"
+- **Answer Choices**: ["Reticular pattern", "Globular pattern", "Homogeneous pattern", "Starburst pattern", "Multicomponent pattern"]
+- **Correct Answer**: "Reticular pattern"  
+**Complete Conversion Process Explanation**: 
+1. Extract pattern label "reticular" from dataset CSV indicating network pattern classification
+2. Identify lesion type and dermoscopic characteristics from dataset metadata
+3. Generate question using dermoscopic assessment terminology focused on pattern identification
+4. Map reticular label to "Reticular pattern" answer choice based on dermoscopic criteria
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Reticular pattern case requiring recognition of network structures including intersecting brown lines and pigment network characteristics - tests dermoscopic pattern recognition for reticular vs other pattern classification based on established criteria for dermoscopic pattern analysis and classification
 
-### Example 2: Globular Pattern Identification
-**Image**: Dermoscopic image with multiple round brown structures  
-**Question**: "What is the primary dermoscopic pattern visible in this lesion?"  
-**Answer**: B. Globular pattern  
-**Rationale**: Multiple round to oval brown globules distributed throughout the lesion
+### Example 2: Globular Pattern Assessment  
+**Original Dataset Context and Annotation Format**: Dermoscopy education dataset with expert dermoscopist pattern annotations where "globular" classification indicates round to oval structures, stored in annotation file with image names and pattern labels  
+**Image Presentation Method**: Raw dermoscopic image displayed without modifications, overlays, or structural annotations  
+**Generated Question and ALL Answer Choices**:
+- **Question**: "What is the primary dermoscopic pattern visible in this lesion?"
+- **Answer Choices**: ["Reticular pattern", "Globular pattern", "Homogeneous pattern", "Starburst pattern", "Multicomponent pattern"] 
+- **Correct Answer**: "Globular pattern"  
+**Complete Conversion Process Explanation**:
+1. Extract pattern label "globular" from dataset annotation indicating globular pattern classification
+2. Map "globular" to globular pattern category based on dermoscopic morphology
+3. Generate question using standardized dermoscopic pattern assessment terminology
+4. Convert globular diagnosis to "Globular pattern" answer choice following label mapping rules
+5. Verify multiclass choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Globular pattern case demonstrating round to oval brown structures distributed throughout lesion - tests ability to distinguish globular patterns from other dermoscopic patterns based on morphological features and dermoscopic classification criteria for accurate pattern identification
 
-### Example 3: Homogeneous Pattern Assessment
-**Image**: Dermoscopic image showing uniform tan coloration without structure  
-**Question**: "What is the primary dermoscopic pattern visible in this lesion?"  
-**Answer**: C. Homogeneous pattern  
-**Rationale**: Uniform, structureless tan pigmentation without specific dermoscopic features
-
-### Example 4: Starburst Pattern Evaluation
-**Image**: Dermoscopic image with radial streaming at lesion periphery  
-**Question**: "What is the primary dermoscopic pattern visible in this lesion?"  
-**Answer**: D. Starburst pattern  
-**Rationale**: Radial projections extending from lesion center creating starburst appearance
-
-### Example 5: Multicomponent Pattern Recognition
-**Image**: Dermoscopic image showing network, globules, and structureless areas  
-**Question**: "What is the primary dermoscopic pattern visible in this lesion?"  
-**Answer**: E. Multicomponent pattern  
-**Rationale**: Multiple dermoscopic patterns present including network, globular, and homogeneous areas
-
-## Implementation Notes
-
-### Technical Considerations
-- Optimize for high-resolution dermoscopic image analysis
-- Implement pattern recognition algorithms specific to dermoscopic features
-- Consider variable lighting and magnification in dermoscopic images
-- Handle overlapping or transitional pattern areas
-
-### Clinical Validation
-- Align with international dermoscopy consensus guidelines
-- Cross-reference with established dermoscopic pattern criteria
-- Validate against expert dermoscopist pattern recognition
-- Consider pattern-lesion type correlations
-
-### Dataset-Specific Adaptations
-- **Educational datasets**: Emphasize clear, classic pattern examples
-- **Clinical datasets**: Handle subtle or mixed pattern presentations
-- **Challenge datasets**: Focus on diagnostically relevant patterns
-- **Research datasets**: Consider novel or evolving pattern classifications
-
-### Quality Assurance
-- Regular review by certified dermoscopists
-- Validation against dermoscopic pattern atlases
-- Monitoring for consistent pattern recognition across lesion types
-- Updates based on evolving dermoscopic terminology and criteria

@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-- **Template ID**: domain-agnostic_classification_multilabel_easy_2
-- **Task Type**: Multi-label classification (anatomical structures)
-- **Difficulty**: Easy
-- **Pattern**: Multiple anatomical structure identification with set-based answers
-- **Domain**: Domain-agnostic (works across all medical specialties)
+**Template ID**: `domain-agnostic_classification_multilabel_easy_2`  
+**Task Type**: Multilabel classification (anatomical structures)  
+**Difficulty**: Easy  
+**Question Pattern**: Multiple anatomical structure identification with set-based answers  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires basic understanding of human anatomy and ability to identify multiple anatomical structures simultaneously. Knowledge of organ systems, tissue types, and anatomical terminology across different imaging modalities, but does not require specialized domain expertise.
 
 ## Template Description
 

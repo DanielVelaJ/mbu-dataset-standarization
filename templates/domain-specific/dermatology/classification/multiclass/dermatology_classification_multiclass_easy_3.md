@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `dermatology_classification_multiclass_easy_3`  
+**Template ID**: `domain-specific_dermatology_classification_multiclass_easy_3`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Dermatological condition category identification  
-**Domain**: Dermatology (skin imaging)
+**Question Pattern**: Dermatological condition category identification  
+**Medical Domain**: Dermatology (morphological classification and diagnostic categorization)  
+**Domain-knowledge summary**: Requires specialized knowledge of dermatological condition categories and morphological classification systems. Understanding of major dermatological categories (inflammatory, infectious, neoplastic, autoimmune), morphological pattern recognition, diagnostic categorization principles, and systematic approach to dermatological diagnosis. Knowledge of dermatological nosology, condition classification systems, and category-specific characteristics.
 
 ## Template Description
 
@@ -30,141 +31,72 @@ Multiclass choice with morphological category options:
 - E. Neoplastic lesion
 
 ### Template Variables
-- `{morphological_features}`: Key morphological characteristics visible
-- `{distribution_pattern}`: How the condition is distributed anatomically
-- `{primary_lesions}`: Type of primary skin lesions present
-- `{secondary_changes}`: Additional features like scaling, crusting, or lichenification
+- `{morphological_features}`: Key morphological characteristics visible. Used in question construction to provide clinical context and in answer generation to determine the correct dermatological category based on morphological classification criteria.
+- `{distribution_pattern}`: How the condition is distributed anatomically. Incorporated into question assessment and used to guide answer construction based on category-specific distribution patterns.
+- `{primary_lesions}`: Type of primary skin lesions present. Used to provide clinical context and determine category classification in answer rationale.
 
-### Clinical Context
-- **Eczematous Dermatitis**: Inflammation with erythema, scaling, possible vesiculation
-- **Papulosquamous Disorder**: Papules and plaques with scaling (psoriasis, lichen planus)
-- **Vesiculobullous Disease**: Fluid-filled lesions (pemphigus, bullous pemphigoid)
-- **Infectious Condition**: Signs of bacterial, viral, or fungal infection
-- **Neoplastic Lesion**: Abnormal tissue growth, benign or malignant
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or annotations. Dermatological images (clinical photography, close-up views) are displayed as raw images to allow comprehensive assessment of morphological characteristics including lesion type, distribution patterns, surface changes, and overall condition features. No highlighting, categorization overlays, or diagnostic region marking is added to maintain authentic clinical evaluation conditions for morphological assessment.
 
-## Mapping to Datum Schema
-
-```json
-{
-  "qa_id": "1",
-  "task": "Classification",
-  "question": "Which dermatological condition category best describes this presentation?",
-  "answer": "B",
-  "answer_type": "single_label",
-  "options": [
-    "Eczematous dermatitis",
-    "Papulosquamous disorder",
-    "Vesiculobullous disease",
-    "Infectious condition",
-    "Neoplastic lesion"
-  ],
-  "difficulty": "easy",
-  "uncertainty": "certain",
-  "answer_confidence": 0.87,
-  "rationale": "Well-demarcated plaques with silvery scale characteristic of papulosquamous disorder",
-  "provenance": {
-    "original_label": "papulosquamous",
-    "rule_id": "dermatology_classification_multiclass_easy_3",
-    "annotation_id": "condition_category",
-    "created_by": "program"
-  }
-}
-```
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the dermatological category from the original dataset (eczematous, papulosquamous, vesiculobullous, infectious, neoplastic)
+- Map specific condition labels to standardized dermatological categories
+- Use morphological assessment from dataset annotations focusing on category classification
+- Validate answer accuracy against established dermatological categorization criteria
+- Ensure clinical relevance of morphological terminology and category descriptions
 
 ## Dataset Requirements
 
-### Primary Requirements
-- **Images**: Clinical dermatological photographs showing skin conditions
-- **Labels**: Morphological category classifications based on clinical features
-- **Quality**: Clear visualization of primary and secondary morphological features
-
-### Compatible Datasets
-- General dermatology condition databases
-- Morphological pattern classification collections
-- Clinical dermatology atlases
-- Educational dermatology datasets
-- Multi-condition dermatological databases
-
-### Minimum Standards
-- **Image Quality**: Sufficient detail for morphological feature assessment
-- **Annotation Quality**: Clinical dermatologist categorization preferred
-- **Data Distribution**: Representative examples of each morphological category
+This template is suitable for datasets that have:
+- **Task Type**: Multiclass classification (Vision → Image-Level Classification → Multiclass classification)
+- **Label Structure**: Multiple dermatological category labels with specific morphological classifications per image
+- **Image Types**: Clinical dermatological photographs with clear morphological features and sufficient detail for category assessment
+- **Assessment Requirements**: Sufficient image quality for evaluation of morphological characteristics and categorical classification
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include general dermatology condition databases, morphological pattern classification collections, clinical dermatology atlases, educational dermatology datasets, and multi-condition dermatological databases with expert categorization validation
 
 ## Template Usage Rules
 
-### Question Construction Rules
-1. Focus on "condition category" to emphasize morphological classification
-2. Use "best describes" to acknowledge potential overlap between categories
-3. Maintain standard dermatological morphological terminology
-4. Emphasize pattern recognition over specific diagnosis
-
-### Answer Assignment Rules
-1. Map inflammatory conditions with vesicles/eczema → "Eczematous dermatitis"
-2. Map scaly plaques and papules → "Papulosquamous disorder"
-3. Map blisters and bullae → "Vesiculobullous disease"
-4. Map pustules, impetigo, fungal infections → "Infectious condition"
-5. Map tumors, cysts, and abnormal growths → "Neoplastic lesion"
-
-### Quality Control Guidelines
-1. Verify alignment with dermatological morphology classification
-2. Ensure consistency with clinical pattern recognition principles
-3. Cross-validate with established morphological criteria
-4. Review for proper categorization based on primary features
+- **Implementation guidelines**: Use exact dermatological terminology from dataset annotations focusing on morphological classification and categorical assessment criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format:
+  - Category labels "eczematous", "dermatitis", "inflammatory" → "Eczematous dermatitis"
+  - Category labels "papulosquamous", "scaly plaques", "psoriasis" → "Papulosquamous disorder"
+  - Category labels "vesiculobullous", "blisters", "bullae" → "Vesiculobullous disease"
+  - Category labels "infectious", "bacterial", "fungal", "viral" → "Infectious condition"
+  - Category labels "neoplastic", "tumor", "growth", "lesion" → "Neoplastic lesion"
+  - Always use dataset ground truth labels as definitive category classification
+- **Conversion Process**: Extract dermatological category from original dataset, identify morphological features and condition characteristics from metadata, generate questions using categorical assessment terminology, present raw images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of morphological terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array with dermatological categories, and includes provenance tracking with original labels and rule_id "domain-specific_dermatology_classification_multiclass_easy_3"
 
 ## Examples
 
-### Example 1: Eczematous Dermatitis Recognition
-**Image**: Clinical photograph of erythematous, scaling patches with inflammation  
-**Question**: "Which dermatological condition category best describes this presentation?"  
-**Answer**: A. Eczematous dermatitis  
-**Rationale**: Erythema, scaling, and inflammatory changes typical of eczematous pattern
+### Example 1: Eczematous Dermatitis Category Classification
+**Original Dataset Context and Annotation Format**: Dermatological condition category dataset with morphological labels in CSV format (image_id, category_type) where labels include "eczematous", "papulosquamous", "vesiculobullous", "infectious", "neoplastic"  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, annotations, or morphological highlighting  
+**Generated Question and ALL Answer Choices**: 
+- **Question**: "Which dermatological condition category best describes this presentation?"
+- **Answer Choices**: ["Eczematous dermatitis", "Papulosquamous disorder", "Vesiculobullous disease", "Infectious condition", "Neoplastic lesion"]
+- **Correct Answer**: "Eczematous dermatitis"  
+**Complete Conversion Process Explanation**: 
+1. Extract category label "eczematous" from dataset CSV indicating inflammatory dermatitis classification
+2. Identify morphological features and condition characteristics from dataset metadata
+3. Generate question using categorical assessment terminology focused on morphological classification
+4. Map eczematous label to "Eczematous dermatitis" answer choice based on morphological criteria
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Eczematous dermatitis case requiring recognition of inflammatory characteristics including erythema, scaling, and inflammatory changes - tests dermatological categorical assessment for eczematous vs other category classification based on established criteria for morphological pattern recognition and dermatological categorization
 
-### Example 2: Papulosquamous Disorder Identification
-**Image**: Clinical photograph of well-demarcated plaques with silvery scale  
-**Question**: "Which dermatological condition category best describes this presentation?"  
-**Answer**: B. Papulosquamous disorder  
-**Rationale**: Well-demarcated plaques with characteristic scaling of papulosquamous disease
+### Example 2: Papulosquamous Disorder Category Assessment  
+**Original Dataset Context and Annotation Format**: Clinical dermatology categorization dataset with expert morphological annotations where "papulosquamous" classification indicates scaling papules and plaques, stored in annotation file with image names and category labels  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, overlays, or categorical annotations  
+**Generated Question and ALL Answer Choices**:
+- **Question**: "Which dermatological condition category best describes this presentation?"
+- **Answer Choices**: ["Eczematous dermatitis", "Papulosquamous disorder", "Vesiculobullous disease", "Infectious condition", "Neoplastic lesion"] 
+- **Correct Answer**: "Papulosquamous disorder"  
+**Complete Conversion Process Explanation**:
+1. Extract category label "papulosquamous" from dataset annotation indicating scaling plaque classification
+2. Map "papulosquamous" to papulosquamous disorder category based on morphological characteristics
+3. Generate question using standardized categorical assessment terminology
+4. Convert papulosquamous diagnosis to "Papulosquamous disorder" answer choice following label mapping rules
+5. Verify multiclass choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Papulosquamous disorder case demonstrating well-demarcated plaques with characteristic scaling - tests ability to distinguish papulosquamous patterns from other dermatological categories based on morphological features and categorical classification criteria for accurate condition categorization
 
-### Example 3: Vesiculobullous Disease Assessment
-**Image**: Clinical photograph of fluid-filled blisters on erythematous base  
-**Question**: "Which dermatological condition category best describes this presentation?"  
-**Answer**: C. Vesiculobullous disease  
-**Rationale**: Multiple fluid-filled vesicles and bullae characteristic of vesiculobullous disorders
-
-### Example 4: Infectious Condition Evaluation
-**Image**: Clinical photograph of pustular lesions with surrounding erythema  
-**Question**: "Which dermatological condition category best describes this presentation?"  
-**Answer**: D. Infectious condition  
-**Rationale**: Pustular lesions with inflammatory response suggestive of infectious etiology
-
-### Example 5: Neoplastic Lesion Classification
-**Image**: Clinical photograph of nodular growth with irregular surface  
-**Question**: "Which dermatological condition category best describes this presentation?"  
-**Answer**: E. Neoplastic lesion  
-**Rationale**: Nodular growth with abnormal architecture consistent with neoplastic process
-
-## Implementation Notes
-
-### Technical Considerations
-- Optimize for recognition of primary morphological features
-- Implement pattern recognition for different lesion distributions
-- Consider color and texture analysis for category differentiation
-- Handle overlapping morphological characteristics
-
-### Clinical Validation
-- Align with established dermatological morphology classification systems
-- Cross-reference with clinical pattern recognition principles
-- Validate against expert dermatologist categorization
-- Consider evolution of morphological patterns over time
-
-### Dataset-Specific Adaptations
-- **Educational datasets**: Emphasize classic morphological presentations
-- **Clinical datasets**: Handle mixed or evolving morphological patterns
-- **Research datasets**: Consider novel or atypical presentations
-- **Atlas datasets**: Focus on prototypical examples of each category
-
-### Quality Assurance
-- Regular review by dermatologists experienced in morphological classification
-- Validation against established dermatological pattern recognition criteria
-- Monitoring for consistent categorization across different conditions
-- Updates based on evolving understanding of dermatological morphology

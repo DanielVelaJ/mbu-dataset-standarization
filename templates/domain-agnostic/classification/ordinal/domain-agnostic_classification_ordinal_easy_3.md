@@ -2,10 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `classification_ordinal_3`  
-**Task Type**: Ordinal Classification  
+**Template ID**: `domain-agnostic_classification_ordinal_easy_3`  
+**Task Type**: Ordinal classification  
 **Difficulty**: Easy  
 **Question Pattern**: Comparative severity assessment with ordered intensity descriptors  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of clinical severity assessment and qualitative intensity measures. Knowledge of comparative severity scales using descriptors like mild, moderate, and severe, particularly for inflammatory conditions and degenerative diseases across medical specialties.  
 
 ## Template Description
 

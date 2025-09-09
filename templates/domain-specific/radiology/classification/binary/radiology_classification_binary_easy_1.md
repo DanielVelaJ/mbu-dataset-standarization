@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `radiology_classification_binary_easy_1`  
-**Task Type**: Binary Classification  
+**Task Type**: Binary classification  
 **Difficulty**: Easy  
-**Pattern**: Pneumonia presence assessment in chest radiographs  
-**Domain**: Radiology (chest imaging)
+**Question Pattern**: Pneumonia presence assessment in chest radiographs  
+**Medical Domain**: Radiology (chest imaging)  
+**Domain-knowledge summary**: Requires specialized radiological knowledge for chest X-ray interpretation and pneumonia diagnosis. Must understand pulmonary anatomy, consolidation patterns, air bronchogram signs, pleural effusion characteristics, normal versus abnormal chest radiographic findings, and ability to recognize classic pneumonia presentations across different patient populations.
 
 ## Template Description
 

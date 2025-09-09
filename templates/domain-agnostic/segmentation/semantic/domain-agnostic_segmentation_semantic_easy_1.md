@@ -3,9 +3,11 @@
 ## Template Overview
 
 **Template ID**: `domain-agnostic_segmentation_semantic_easy_1`  
-**Task Type**: Semantic Segmentation  
+**Task Type**: Semantic segmentation  
 **Difficulty**: Easy  
 **Question Pattern**: Anatomical structure identification in segmented regions  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of anatomical and pathological structures to classify tissue types within highlighted segmented regions. Knowledge of tissue characteristics, organ systems, and medical imaging anatomy across different modalities, but does not require specialized domain expertise.  
 
 ## Template Description
 

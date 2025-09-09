@@ -2,10 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `classification_ordinal_2`  
-**Task Type**: Ordinal Classification  
+**Template ID**: `domain-agnostic_classification_ordinal_easy_2`  
+**Task Type**: Ordinal classification  
 **Difficulty**: Easy  
 **Question Pattern**: Disease staging and progression assessment with ordered multiple choice options  
+**Medical Domain**: Domain-agnostic (applicable across all medical specialties)  
+**Domain-knowledge summary**: Requires understanding of disease staging systems and temporal progression patterns. Knowledge of cancer staging, pathological progression, and clinical staging criteria that assess disease advancement for treatment planning and prognosis across medical domains.  
 
 ## Template Description
 

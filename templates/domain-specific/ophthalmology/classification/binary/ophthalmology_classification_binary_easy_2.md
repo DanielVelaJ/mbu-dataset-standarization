@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_binary_easy_2`  
+**Template ID**: `domain-specific_ophthalmology_classification_binary_easy_2`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Pupillary response normality assessment  
-**Domain**: Ophthalmology (anterior segment imaging)
+**Question Pattern**: Pupillary response normality assessment  
+**Medical Domain**: Ophthalmology (anterior segment imaging and pupillary assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of pupillary anatomy and neurological assessment. Understanding of pupillary light reflex pathways, normal vs abnormal pupil responses, pupil size evaluation, consensual light reflex, relative afferent pupillary defect (RAPD), and neurological examination techniques. Knowledge of ophthalmological terminology for pupillary disorders, anterior segment anatomy, and clinical assessment of pupillary function.
 
 ## Template Description
 
@@ -27,14 +28,19 @@ Binary choice with response assessment:
 - B. Abnormal pupillary response
 
 ### Template Variables
-- `{response_type}`: Normal or abnormal pupillary response
-- `{modality}`: "anterior segment" for this template
-- `{pupil_characteristics}`: Description of pupil appearance and reactivity
+- `{response_type}`: Normal or abnormal pupillary response. Used in question construction to specify pupillary assessment and in answer generation to determine response classification based on neurological examination criteria.
+- `{pupil_characteristics}`: Description of pupil appearance and reactivity. Incorporated into question assessment and used to guide answer construction based on pupillary morphological features.
 
-### Clinical Context
-- **Normal Response**: Round, reactive pupil with appropriate size and light reflex
-- **Abnormal Response**: Fixed, dilated, constricted, or irregularly shaped pupil
-- **Clinical Importance**: Pupillary examination for neurological and ocular pathology
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or pupillary annotations. Anterior segment images are displayed as raw images to allow comprehensive assessment of pupillary anatomy including pupil size, shape, reactivity, and light reflex characteristics. No highlighting, pupil outlining, or response marking is added to maintain authentic clinical evaluation conditions for pupillary response assessment.
+
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the pupillary response assessment from the original dataset (normal_response, abnormal_response)
+- Map specific response labels to standardized pupillary assessment categories
+- Use neurological examination assessment from dataset annotations focusing on pupillary function evaluation
+- Validate binary choice format ensuring single correct response classification
+- Verify answer accuracy against established neurological examination criteria and pupillary assessment guidelines
 
 ## Mapping to Datum Schema
 
@@ -65,94 +71,51 @@ Binary choice with response assessment:
 
 This template is suitable for datasets that have:
 - **Task Type**: Binary classification (Vision → Image-Level Classification → Binary classification)
-- **Domain**: Ophthalmology with anterior segment photography
-- **Label Structure**: Binary labels for normal vs abnormal pupillary response
-- **Image Type**: Anterior segment photographs showing pupil and iris
-- **Assessment Focus**: Functional pupillary responses rather than structural abnormalities
-
-### Compatible Datasets
-- Pupil position detection datasets
-- Anterior segment analysis datasets
-- Neurological pupil assessment datasets
-- Eye tracking and pupillometry datasets
-- Clinical pupil examination databases
+- **Label Structure**: Binary pupillary response labels distinguishing normal from abnormal responses
+- **Image Types**: Anterior segment photographs with clear pupillary anatomy and functional assessment capability
+- **Assessment Requirements**: Sufficient image quality for evaluation of pupillary reactivity and neurological function
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include pupil position detection datasets, anterior segment analysis datasets, neurological pupil assessment datasets, eye tracking and pupillometry datasets, and clinical pupil examination databases with expert neurological validation
 
 ## Template Usage Rules
 
-1. **Functional Assessment**: Focus on pupillary reactivity rather than structural abnormalities
-2. **Clinical Terminology**: Use established neurological and ophthalmological terms
-3. **Response Characteristics**: Consider size, shape, symmetry, and light reactivity
-4. **Binary Classification**: Clear distinction between normal and abnormal responses
-5. **Lighting Conditions**: Account for illumination effects on pupil appearance
+- **Implementation guidelines**: Use exact neurological and ophthalmological terminology from dataset annotations focusing on pupillary function assessment and anterior segment examination criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format for pupillary response classification:
+  - Normal response labels mapped to "Normal pupillary response" category
+  - Abnormal response labels mapped to "Abnormal pupillary response" category
+  - Maintain functional accuracy in normal vs abnormal differentiation
+  - Always use dataset ground truth labels as definitive response classification
+- **Conversion Process**: Extract pupillary response assessment from original dataset, identify functional characteristics and neurological features from metadata, generate questions using neurological examination terminology, present raw anterior segment images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of pupillary response terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array with pupillary response categories, and includes provenance tracking with original labels and rule_id "domain-specific_ophthalmology_classification_binary_easy_2"
 
 ## Examples
 
-### Example 1: Normal Pupillary Response
-**Original Dataset**: Pupil Position Eye Dataset  
-**Original Label**: "normal"  
-**Generated Q&A**:
+### Example 1: Normal Pupillary Response Assessment
+**Original Dataset Context and Annotation Format**: Neurological assessment database with pupillary function labels in CSV format (image_id, response_type, clinical_assessment) where responses include "normal_response", "abnormal_response" for anterior segment examination training  
+**Image Presentation Method**: Raw anterior segment photograph displayed without modifications, pupillary annotations, or response highlighting  
+**Generated Question and ALL Answer Choices**: 
 - **Question**: "Does this pupil show normal reactive response in this anterior segment image?"
-- **Answer**: "A" (Normal pupillary response)
-- **Rationale**: "Round, reactive pupil with normal size and light reflex"
+- **Answer Choices**: ["Normal pupillary response", "Abnormal pupillary response"]
+- **Correct Answer**: "Normal pupillary response"  
+**Complete Conversion Process Explanation**: 
+1. Extract pupillary response label "normal_response" from dataset CSV indicating functional neurological assessment
+2. Identify pupillary characteristics and functional features from clinical assessment metadata
+3. Generate question using neurological examination terminology for response evaluation
+4. Map normal response label to "Normal pupillary response" answer choice maintaining functional accuracy
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Normal pupillary response case requiring assessment of round, reactive pupil with appropriate light reflex - tests functional neurological evaluation for pupillary examination based on established criteria for anterior segment assessment and pupillary function determination
 
-### Example 2: Abnormal Pupillary Response - Fixed Dilated
-**Original Dataset**: Neurological Assessment Dataset  
-**Original Label**: "abnormal"  
-**Generated Q&A**:
+### Example 2: Abnormal Pupillary Response Assessment  
+**Original Dataset Context and Annotation Format**: Clinical pupil examination database with expert neurological annotations where "abnormal_response" classification indicates impaired pupillary function, stored in annotation file with response types and clinical significance  
+**Image Presentation Method**: Raw anterior segment photograph displayed without modifications, overlays, or pupillary response highlighting  
+**Generated Question and ALL Answer Choices**:
 - **Question**: "Does this pupil show normal reactive response in this anterior segment image?"
-- **Answer**: "B" (Abnormal pupillary response)
-- **Rationale**: "Fixed dilated pupil suggesting neurological impairment"
+- **Answer Choices**: ["Normal pupillary response", "Abnormal pupillary response"] 
+- **Correct Answer**: "Abnormal pupillary response"  
+**Complete Conversion Process Explanation**:
+1. Extract response label "abnormal_response" from dataset annotation indicating impaired pupillary function
+2. Map abnormal response to functional assessment category based on neurological examination criteria
+3. Generate question using standardized neurological terminology for pupillary evaluation
+4. Convert abnormal classification to "Abnormal pupillary response" answer choice maintaining clinical accuracy
+5. Verify binary choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Abnormal pupillary response assessment demonstrating fixed, dilated, or irregularly shaped pupil indicating neurological impairment - tests ability to identify pupillary dysfunction for accurate neurological evaluation according to clinical examination principles
 
-### Example 3: Normal Constriction Response
-**Original Dataset**: Anterior Segment Dataset  
-**Original Label**: "normal"  
-**Generated Q&A**:
-- **Question**: "Does this pupil show normal reactive response in this anterior segment image?"
-- **Answer**: "A" (Normal pupillary response)
-- **Rationale**: "Appropriate pupillary constriction response to light stimulus"
-
-### Example 4: Abnormal Pupillary Response - Irregular Shape
-**Original Dataset**: Clinical Pupil Database  
-**Original Label**: "abnormal"  
-**Generated Q&A**:
-- **Question**: "Does this pupil show normal reactive response in this anterior segment image?"
-- **Answer**: "B" (Abnormal pupillary response)
-- **Rationale**: "Irregular pupil shape indicating possible trauma or pathology"
-
-### Example 5: Normal Symmetric Response
-**Original Dataset**: Eye Tracking Dataset  
-**Original Label**: "normal"  
-**Generated Q&A**:
-- **Question**: "Does this pupil show normal reactive response in this anterior segment image?"
-- **Answer**: "A" (Normal pupillary response)
-- **Rationale**: "Symmetric pupil with normal reactive characteristics"
-
-## Implementation Notes
-
-### Advantages
-- **Functional Assessment**: Tests understanding of physiological responses
-- **Neurological Relevance**: Important for brain injury and disease assessment
-- **Clinical Utility**: Applicable to emergency and routine examinations
-- **MCVQA Compatible**: Clear binary classification format
-- **Educational Value**: Teaches pupillary examination principles
-
-### Limitations
-- **Dynamic Assessment**: Static images may not capture full reactive response
-- **Lighting Dependency**: Pupil size varies significantly with illumination
-- **Context Limitation**: Cannot assess consensual light reflex
-- **Temporal Aspect**: Unable to evaluate response speed and recovery
-
-### Quality Considerations
-- Ensure consistent lighting conditions across dataset images
-- Verify that abnormal cases represent true pathological conditions
-- Consider normal variations in pupil size and reactivity
-- Account for age-related changes in pupillary responses
-- Validate clinical accuracy of normal vs abnormal classifications
-
-### Clinical Applications
-This template supports:
-- **Neurological Screening**: Assessment of brain function through pupillary responses
-- **Emergency Medicine**: Rapid neurological evaluation in trauma patients
-- **Ophthalmology Training**: Teaching normal vs abnormal pupillary findings
-- **Telemedicine**: Remote assessment of pupillary abnormalities
-- **Automated Screening**: AI-assisted pupillary examination tools

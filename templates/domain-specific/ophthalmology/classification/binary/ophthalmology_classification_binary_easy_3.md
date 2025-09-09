@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_binary_easy_3`  
+**Template ID**: `domain-specific_ophthalmology_classification_binary_easy_3`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Anatomical segment identification in ocular imaging  
-**Domain**: Ophthalmology (anterior and posterior segment imaging)
+**Question Pattern**: Anatomical segment identification in ocular imaging  
+**Medical Domain**: Ophthalmology (anterior and posterior segment imaging)  
+**Domain-knowledge summary**: Requires specialized knowledge of ocular anatomy and imaging modalities. Understanding of anterior segment structures (cornea, iris, lens, anterior chamber), posterior segment anatomy (retina, vitreous, optic nerve), different imaging techniques (slit-lamp, fundus photography, OCT), and anatomical landmarks for segment differentiation. Knowledge of ophthalmological terminology for eye anatomy, imaging interpretation, and clinical assessment of ocular structures.
 
 ## Template Description
 
@@ -27,14 +28,20 @@ Binary choice with anatomical segment options:
 - B. Posterior segment (retina, vitreous, optic nerve)
 
 ### Template Variables
-- `{segment}`: Anterior or posterior segment
-- `{modality}`: Imaging modality (fundus, slit-lamp, OCT, etc.)
-- `{anatomical_structures}`: Specific structures visible in the segment
+- `{segment}`: Anterior or posterior segment. Used in question construction to specify ocular anatomical region and in answer generation to determine segment classification based on anatomical examination criteria.
+- `{modality}`: Imaging modality (fundus, slit-lamp, OCT, etc.). Incorporated into question assessment providing imaging context.
+- `{anatomical_structures}`: Specific structures visible in the segment. Used to provide clinical context and determine anatomical segment classification in answer rationale.
 
-### Clinical Context
-- **Anterior Segment**: Front portion of the eye including cornea, iris, lens, anterior chamber
-- **Posterior Segment**: Back portion of the eye including retina, vitreous, optic nerve, choroid
-- **Clinical Importance**: Determines appropriate examination techniques and treatment specialties
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or anatomical annotations. Ocular segment images are displayed as raw images to allow comprehensive assessment of eye anatomy including anterior structures (cornea, iris, lens) and posterior structures (retina, vitreous, optic nerve). No highlighting, segment outlining, or anatomical marking is added to maintain authentic clinical evaluation conditions for anterior versus posterior segment identification.
+
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the anatomical segment label from the original dataset (anterior_segment, posterior_segment)
+- Map specific segment labels to standardized ocular anatomy categories
+- Use anatomical examination assessment from dataset annotations focusing on segment differentiation
+- Validate binary choice format ensuring single correct segment identification
+- Verify answer accuracy against established ophthalmological anatomy criteria and ocular examination guidelines
 
 ## Mapping to Datum Schema
 
@@ -65,94 +72,52 @@ Binary choice with anatomical segment options:
 
 This template is suitable for datasets that have:
 - **Task Type**: Binary classification (Vision → Image-Level Classification → Binary classification)
-- **Domain**: Ophthalmology with mixed anterior and posterior segment imaging
-- **Label Structure**: Binary labels for anterior vs posterior segment classification
-- **Image Type**: Various ophthalmic imaging modalities (fundus, slit-lamp, OCT, anterior segment photography)
-- **Anatomical Coverage**: Clear visualization of either anterior or posterior segment structures
-
-### Compatible Datasets
-- Mixed ophthalmology imaging datasets
-- Multi-modal eye imaging collections
-- Comprehensive eye examination datasets
-- Ophthalmic imaging training datasets
-- Clinical photography databases with mixed segments
+- **Label Structure**: Binary anatomical segment labels distinguishing anterior from posterior segments
+- **Image Types**: Various ophthalmic imaging modalities with clear anatomical segment visualization
+- **Assessment Requirements**: Sufficient image quality for evaluation of ocular anatomy and segment differentiation
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include mixed ophthalmology imaging datasets, multi-modal eye imaging collections, comprehensive eye examination datasets, ophthalmic imaging training datasets, and clinical photography databases with expert anatomical validation
 
 ## Template Usage Rules
 
-1. **Anatomical Accuracy**: Use correct ophthalmological anatomical terminology
-2. **Segment Definition**: Clear distinction between anterior and posterior segments
-3. **Modality Awareness**: Consider how different imaging techniques visualize segments
-4. **Clinical Context**: Maintain relevance to examination workflows
-5. **Structural Focus**: Emphasize anatomical structures rather than pathological findings
+- **Implementation guidelines**: Use exact ophthalmological terminology from dataset annotations focusing on ocular anatomy and segment differentiation criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format for anatomical segment identification:
+  - Anterior segment labels mapped to "Anterior segment (cornea, iris, lens)" category
+  - Posterior segment labels mapped to "Posterior segment (retina, vitreous, optic nerve)" category
+  - Maintain anatomical accuracy in anterior vs posterior differentiation
+  - Always use dataset ground truth labels as definitive segment classification
+- **Conversion Process**: Extract anatomical segment label from original dataset, identify structural characteristics and anatomical features from metadata, generate questions using ophthalmological examination terminology, present raw ocular images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of anatomical segment terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array with anatomical segment categories, and includes provenance tracking with original labels and rule_id "domain-specific_ophthalmology_classification_binary_easy_3"
 
 ## Examples
 
-### Example 1: Posterior Segment - Fundus Photography
-**Original Dataset**: Mixed Ophthalmology Dataset  
-**Original Label**: "posterior"  
-**Generated Q&A**:
+### Example 1: Posterior Segment Anatomical Identification
+**Original Dataset Context and Annotation Format**: Multi-modal ophthalmology dataset with anatomical segment labels in CSV format (image_id, segment_type, imaging_modality) where segments include "anterior_segment", "posterior_segment" for comprehensive eye examination training  
+**Image Presentation Method**: Raw ophthalmic image displayed without modifications, anatomical annotations, or segment highlighting  
+**Generated Question and ALL Answer Choices**: 
 - **Question**: "Does this image show anterior segment or posterior segment anatomy?"
-- **Answer**: "B" (Posterior segment - retina, vitreous, optic nerve)
-- **Rationale**: "Fundus photograph showing retinal blood vessels and optic disc"
+- **Answer Choices**: ["Anterior segment (cornea, iris, lens)", "Posterior segment (retina, vitreous, optic nerve)"]
+- **Correct Answer**: "Posterior segment (retina, vitreous, optic nerve)"  
+**Complete Conversion Process Explanation**: 
+1. Extract anatomical segment label "posterior_segment" from dataset CSV indicating fundus anatomy classification
+2. Identify structural characteristics and anatomical features from imaging modality metadata
+3. Generate question using ophthalmological examination terminology for segment identification
+4. Map posterior segment label to "Posterior segment (retina, vitreous, optic nerve)" answer choice maintaining anatomical accuracy
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Posterior segment identification case requiring recognition of retinal structures, vitreous, and optic nerve anatomy for comprehensive eye examination - tests fundamental anatomical segment differentiation for ocular anatomy based on established criteria for ophthalmological examination and imaging interpretation
 
-### Example 2: Anterior Segment - Slit Lamp Photography
-**Original Dataset**: Anterior Segment Collection  
-**Original Label**: "anterior"  
-**Generated Q&A**:
+### Example 2: Anterior Segment Anatomical Assessment  
+**Original Dataset Context and Annotation Format**: Comprehensive eye examination database with expert anatomical annotations where "anterior_segment" classification indicates front eye structures, stored in annotation file with segment names and clinical significance  
+**Image Presentation Method**: Raw ophthalmic image displayed without modifications, overlays, or anatomical segment highlighting  
+**Generated Question and ALL Answer Choices**:
 - **Question**: "Does this image show anterior segment or posterior segment anatomy?"
-- **Answer**: "A" (Anterior segment - cornea, iris, lens)
-- **Rationale**: "Slit lamp image showing cornea, iris, and anterior chamber structures"
+- **Answer Choices**: ["Anterior segment (cornea, iris, lens)", "Posterior segment (retina, vitreous, optic nerve)"] 
+- **Correct Answer**: "Anterior segment (cornea, iris, lens)"  
+**Complete Conversion Process Explanation**:
+1. Extract segment label "anterior_segment" from dataset annotation indicating front eye anatomy classification
+2. Map anterior segment to anatomical structure category based on ophthalmological examination criteria
+3. Generate question using standardized anatomical terminology for segment evaluation
+4. Convert anterior classification to "Anterior segment (cornea, iris, lens)" answer choice maintaining clinical accuracy
+5. Verify binary choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Anterior segment identification demonstrating cornea, iris, and lens structures visible in front eye examination - tests ability to differentiate anatomical segments for accurate ocular evaluation according to ophthalmological examination principles
 
-### Example 3: Posterior Segment - OCT Retinal Scan
-**Original Dataset**: Multi-modal Eye Dataset  
-**Original Label**: "posterior"  
-**Generated Q&A**:
-- **Question**: "Does this image show anterior segment or posterior segment anatomy?"
-- **Answer**: "B" (Posterior segment - retina, vitreous, optic nerve)
-- **Rationale**: "OCT cross-section showing retinal layers and vitreoretinal interface"
-
-### Example 4: Anterior Segment - Iris Detail
-**Original Dataset**: Comprehensive Eye Examination Dataset  
-**Original Label**: "anterior"  
-**Generated Q&A**:
-- **Question**: "Does this image show anterior segment or posterior segment anatomy?"
-- **Answer**: "A" (Anterior segment - cornea, iris, lens)
-- **Rationale**: "Detailed view of iris structure and pupillary margin"
-
-### Example 5: Posterior Segment - Optic Nerve Assessment
-**Original Dataset**: Glaucoma Screening Dataset  
-**Original Label**: "posterior"  
-**Generated Q&A**:
-- **Question**: "Does this image show anterior segment or posterior segment anatomy?"
-- **Answer**: "B" (Posterior segment - retina, vitreous, optic nerve)
-- **Rationale**: "Optic nerve head visualization for glaucoma assessment"
-
-## Implementation Notes
-
-### Advantages
-- **Fundamental Knowledge**: Tests basic ophthalmological anatomy understanding
-- **Clinical Relevance**: Determines appropriate examination and treatment approaches
-- **Modality Agnostic**: Works across different imaging techniques
-- **MCVQA Compatible**: Clear binary choice format
-- **Educational Foundation**: Essential for ophthalmology training and assessment
-
-### Limitations
-- **Basic Level**: Does not assess complex pathological understanding
-- **Imaging Dependency**: Requires clear visualization of anatomical structures
-- **Context Limited**: Cannot assess functional aspects of segments
-- **Pathology Neutral**: Does not incorporate disease-specific knowledge
-
-### Quality Considerations
-- Ensure clear visualization of characteristic anatomical structures
-- Verify consistent labeling across different imaging modalities
-- Consider edge cases with intermediate zone structures
-- Account for variations in image quality and illumination
-- Validate anatomical accuracy of segment classifications
-
-### Clinical Applications
-This template supports:
-- **Medical Education**: Teaching basic ocular anatomy to students and residents
-- **Imaging Triage**: Automated sorting of ophthalmic images by anatomical region
-- **Clinical Workflow**: Routing images to appropriate subspecialty services
-- **Quality Control**: Ensuring appropriate imaging protocols are followed
 - **Comprehensive Assessment**: Foundation for more advanced diagnostic evaluations

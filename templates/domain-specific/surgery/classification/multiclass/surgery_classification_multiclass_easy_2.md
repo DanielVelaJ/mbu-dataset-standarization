@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_multiclass_easy_2`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Anatomical structure recognition in surgical field  
-**Domain**: Surgery (intraoperative imaging)
+**Question Pattern**: Anatomical structure recognition in surgical field  
+**Medical Domain**: Surgery (intraoperative imaging)  
+**Domain-knowledge summary**: Requires specialized surgical anatomy knowledge for intraoperative structure identification. Must understand regional anatomy, tissue plane relationships, organ identification under surgical conditions, vascular anatomy, nerve locations, and ability to recognize anatomical landmarks during operative exposure across different surgical approaches.
 
 ## Template Description
 

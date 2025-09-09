@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_multiclass_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Surgical phase identification  
-**Domain**: Surgery (intraoperative imaging)
+**Question Pattern**: Surgical phase identification  
+**Medical Domain**: Surgery (intraoperative imaging)  
+**Domain-knowledge summary**: Requires specialized surgical knowledge of operative workflow and procedural phases. Must understand surgical anatomy, instrument usage patterns, tissue manipulation techniques, and ability to recognize distinct procedural stages including preparation, incision, dissection, resection, and closure phases across different surgical specialties.
 
 ## Template Description
 

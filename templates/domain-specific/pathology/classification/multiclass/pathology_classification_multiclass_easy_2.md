@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_multiclass_easy_2`  
+**Template ID**: `domain-specific_pathology_classification_multiclass_easy_2`  
 **Task Type**: Multiclass Classification  
 **Difficulty**: Easy  
-**Pattern**: Fundamental tissue type recognition  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Fundamental tissue type recognition  
+**Medical Domain**: Pathology (histopathological imaging and tissue classification)  
+**Domain-knowledge summary**: Requires specialized knowledge of basic tissue types and histological architecture. Understanding of epithelial, connective, muscle, and nervous tissue characteristics, cellular organization, extracellular matrix patterns, and tissue-specific features. Knowledge of pathological terminology for tissue classification, histological tissue recognition, developmental tissue patterns, and anatomical tissue distribution.
 
 ## Template Description
 

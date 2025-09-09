@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_binary_easy_2`  
-**Task Type**: Binary Classification  
+**Task Type**: Binary classification  
 **Difficulty**: Easy  
-**Pattern**: Intraoperative complication identification  
-**Domain**: Surgery (intraoperative imaging)
+**Question Pattern**: Intraoperative complication identification  
+**Medical Domain**: Surgery (intraoperative imaging)  
+**Domain-knowledge summary**: Requires specialized surgical knowledge of intraoperative complications and tissue pathology. Must understand normal versus abnormal tissue characteristics, bleeding patterns, tissue perforation signs, instrument-related injuries, and ability to recognize surgical complications requiring immediate intervention during operative procedures.
 
 ## Template Description
 

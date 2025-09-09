@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `ophthalmology_classification_ordinal_easy_1`  
+**Template ID**: `domain-specific_ophthalmology_classification_ordinal_easy_1`  
 **Task Type**: Ordinal Classification  
 **Difficulty**: Easy  
-**Pattern**: Diabetic retinopathy severity grading assessment  
-**Domain**: Ophthalmology (fundus imaging)
+**Question Pattern**: Diabetic retinopathy severity grading assessment  
+**Medical Domain**: Ophthalmology (fundus imaging and diabetic retinopathy assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of diabetic retinopathy classification and severity grading systems. Understanding of microaneurysms, hemorrhages, hard exudates, cotton wool spots, neovascularization, and proliferative changes. Knowledge of ETDRS grading criteria, severity progression (mild, moderate, severe NPDR, PDR), clinical significance of diabetic changes, and systematic retinal assessment for diabetes complications.
 
 ## Template Description
 

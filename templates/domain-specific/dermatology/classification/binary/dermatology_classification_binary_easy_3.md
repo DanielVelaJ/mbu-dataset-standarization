@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `dermatology_classification_binary_easy_3`  
+**Template ID**: `domain-specific_dermatology_classification_binary_easy_3`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Pigmented versus non-pigmented lesion classification  
-**Domain**: Dermatology (skin imaging)
+**Question Pattern**: Pigmented versus non-pigmented lesion classification  
+**Medical Domain**: Dermatology (skin imaging and dermoscopy)  
+**Domain-knowledge summary**: Requires specialized knowledge of pigmented skin lesions and melanin distribution patterns. Understanding of dermatological pigmentation mechanisms, lesion color assessment, differential diagnosis between pigmented and non-pigmented conditions, and recognition of various pigmentation patterns including melanocytic and non-melanocytic lesions. Knowledge of dermatological terminology and pigmentation-related pathology.
 
 ## Template Description
 
@@ -27,136 +28,69 @@ Binary choice with morphological options:
 - B. Non-pigmented
 
 ### Template Variables
-- `{lesion_description}`: Basic morphological description of the lesion
-- `{pigment_pattern}`: Type of pigmentation if present (uniform, variegated, network)
-- `{color_characteristics}`: Specific colors observed (brown, black, blue-gray)
-- `{anatomical_location}`: Body location where pigmentation patterns may vary
+- `{lesion_description}`: Basic morphological description of the lesion. Used in question construction to provide clinical context and in answer generation to determine pigmented vs non-pigmented classification based on dermatological assessment.
+- `{pigment_pattern}`: Type of pigmentation if present (uniform, variegated, network). Incorporated into question assessment and used to guide answer construction based on presence/absence of melanin patterns.
+- `{color_characteristics}`: Specific colors observed (brown, black, blue-gray). Used to provide clinical context and determine pigmentation status in answer rationale.
 
-### Clinical Context
-- **Pigmented**: Lesions containing melanin (nevi, melanoma, seborrheic keratoses)
-- **Non-pigmented**: Lesions without significant melanin (basal cell carcinoma, squamous cell carcinoma, dermatofibromas)
-- **Pigment Assessment**: Central to dermoscopic evaluation and lesion categorization
-- **Clinical Importance**: Guides differential diagnosis and biopsy decisions
+### Image Presentation
+Images are presented in their original form without visual modifications, overlays, or annotations. Dermatological images (clinical photography, dermoscopy) are displayed as raw images to allow comprehensive assessment of pigmentation characteristics including melanin distribution, color patterns, and overall lesion coloration. No highlighting, color enhancement, or pigmentation region marking is added to maintain authentic clinical evaluation conditions for pigment assessment.
 
-## Mapping to Datum Schema
-
-```json
-{
-  "qa_id": "1",
-  "task": "Classification",
-  "question": "Is this lesion primarily pigmented or non-pigmented?",
-  "answer": "A",
-  "answer_type": "single_label",
-  "options": [
-    "Pigmented",
-    "Non-pigmented"
-  ],
-  "difficulty": "easy",
-  "uncertainty": "certain",
-  "answer_confidence": 0.9,
-  "rationale": "Lesion shows prominent brown and black pigmentation with melanin deposition",
-  "provenance": {
-    "original_label": "pigmented",
-    "rule_id": "dermatology_classification_binary_easy_3",
-    "annotation_id": "lesion_pigmentation",
-    "created_by": "program"
-  }
-}
-```
+### Answer Construction
+**Correct Answer Generation**:
+- Extract the pigmentation status from the original dataset (pigmented/non-pigmented, melanocytic/non-melanocytic, 0/1)
+- Map pigmented cases ("pigmented", "melanocytic", "brown", "black", "1") to "Pigmented"
+- Map non-pigmented cases ("non-pigmented", "non-melanocytic", "flesh-colored", "erythematous", "0") to "Non-pigmented"
+- Use dermatological assessment from dataset annotations focusing on melanin presence
+- Validate answer accuracy against established dermatological criteria for pigmentation classification
 
 ## Dataset Requirements
 
-### Primary Requirements
-- **Images**: Dermatological images with clear visualization of pigmentation
-- **Labels**: Binary classification of pigmented vs non-pigmented status
-- **Quality**: Adequate color representation and resolution for pigment assessment
-
-### Compatible Datasets
-- Melanocytic lesion datasets
-- Skin lesion classification collections
-- Dermoscopy databases
-- Pigmented lesion atlases
-- General dermatology imaging datasets
-
-### Minimum Standards
-- **Image Quality**: True color representation for accurate pigment assessment
-- **Annotation Quality**: Dermatologist validation of pigmentation classification
-- **Data Distribution**: Representative samples of both pigmented and non-pigmented lesions
+This template is suitable for datasets that have:
+- **Task Type**: Binary classification (Vision → Image-Level Classification → Binary classification)
+- **Label Structure**: Binary labels indicating pigmented/non-pigmented status per image
+- **Image Types**: Dermatological images including clinical photography, dermoscopy with clear pigmentation visualization
+- **Assessment Requirements**: Sufficient image quality and color representation for evaluation of melanin content and pigment patterns
+- **Datasets from metadata file**: Compatible datasets available in `datasets_metadata.csv` include melanocytic lesion classification datasets, skin lesion datasets with pigmentation labels, dermoscopy collections with pigmented/non-pigmented annotations, and dermatological atlases with expert-validated pigmentation assessments
 
 ## Template Usage Rules
 
-### Question Construction Rules
-1. Use "primarily" to acknowledge that some lesions may have mixed characteristics
-2. Focus on pigmentation as the key distinguishing feature
-3. Maintain objective, descriptive language
-4. Align with standard dermatological morphological assessment
-
-### Answer Assignment Rules
-1. Map "pigmented", "melanocytic", "brown", "black" → "Pigmented"
-2. Map "non-pigmented", "amelanotic", "pink", "flesh-colored" → "Non-pigmented"
-3. Consider dominant pigmentation pattern for mixed lesions
-4. Use dermoscopic criteria when available
-
-### Quality Control Guidelines
-1. Verify color accuracy and calibration
-2. Ensure consistency with dermoscopic pigmentation assessment
-3. Cross-validate with melanin content when known
-4. Review for proper morphological classification
+- **Implementation guidelines**: Use exact dermatological terminology from dataset annotations focusing on pigmentation assessment and melanin content evaluation criteria
+- **Label mapping rules**: Convert original dataset annotations to MCVQA format:
+  - Labels "pigmented", "melanocytic", "brown", "black", "1" → "Pigmented"
+  - Labels "non-pigmented", "amelanotic", "pink", "flesh-colored", "0" → "Non-pigmented"
+  - Always use dataset ground truth labels as definitive pigmentation classification
+- **Conversion Process**: Extract pigmentation status from original dataset, identify lesion type and color characteristics from metadata, generate questions using pigmentation assessment terminology, present raw images without modifications, validate MCVQA compliance with single correct answer, ensure clinical relevance of pigmentation terminology
+- **Schema Alignment**: Output aligns with unified datum schema v1.0 using answer_type "single_label", task "Classification", difficulty "easy", options array ["Pigmented", "Non-pigmented"], and includes provenance tracking with original labels and rule_id "domain-specific_dermatology_classification_binary_easy_3"
 
 ## Examples
 
-### Example 1: Melanocytic Nevus
-**Image**: Dermoscopic image of brown, symmetric lesion with network pattern  
-**Question**: "Is this lesion primarily pigmented or non-pigmented?"  
-**Answer**: A. Pigmented  
-**Rationale**: Prominent brown pigmentation with typical melanocytic network pattern
+### Example 1: Pigmented Melanocytic Nevus
+**Original Dataset Context and Annotation Format**: Dermoscopy dataset with pigmentation labels in CSV format (image_id, pigmentation_status) where 1 = pigmented lesion, 0 = non-pigmented lesion  
+**Image Presentation Method**: Raw dermoscopic image displayed without modifications, annotations, or region highlighting  
+**Generated Question and ALL Answer Choices**: 
+- **Question**: "Is this lesion primarily pigmented or non-pigmented?"
+- **Answer Choices**: ["Pigmented", "Non-pigmented"]
+- **Correct Answer**: "Pigmented"  
+**Complete Conversion Process Explanation**: 
+1. Extract binary label "1" from dataset CSV indicating pigmented classification
+2. Identify "melanocytic nevus" as lesion type and "dermoscopy" as imaging modality from dataset
+3. Generate question using pigmentation assessment terminology focused on melanin content
+4. Map positive pigmentation label to "Pigmented" answer based on visual characteristics
+5. Validate MCVQA compliance with single correct answer format  
+**Clinical Rationale**: Pigmented melanocytic nevus case requiring recognition of melanin distribution patterns including brown pigmentation and network characteristics - tests dermatological assessment for pigmented vs non-pigmented classification based on established criteria for melanin content and dermoscopic pigmentation patterns
 
-### Example 2: Basal Cell Carcinoma
-**Image**: Clinical photograph of pink, pearly nodular lesion  
-**Question**: "Is this lesion primarily pigmented or non-pigmented?"  
-**Answer**: B. Non-pigmented  
-**Rationale**: Lesion shows characteristic pink, pearly appearance without significant pigmentation
+### Example 2: Non-Pigmented Basal Cell Carcinoma  
+**Original Dataset Context and Annotation Format**: Skin lesion classification dataset with morphological categories where "non-pigmented BCC" classification indicates absence of significant melanin, stored in annotation file with image names and pigmentation labels  
+**Image Presentation Method**: Raw clinical photograph displayed without modifications, overlays, or diagnostic annotations  
+**Generated Question and ALL Answer Choices**:
+- **Question**: "Is this lesion primarily pigmented or non-pigmented?"
+- **Answer Choices**: ["Pigmented", "Non-pigmented"] 
+- **Correct Answer**: "Non-pigmented"  
+**Complete Conversion Process Explanation**:
+1. Extract pigmentation label "non-pigmented" from dataset annotation indicating absence of melanin
+2. Map "non-pigmented BCC" to non-pigmented category based on dermatological morphology
+3. Generate question using standardized pigmentation assessment terminology
+4. Convert non-pigmented diagnosis to "Non-pigmented" answer choice following label mapping rules
+5. Verify binary choice format with single correct answer for MCVQA compliance  
+**Clinical Rationale**: Non-pigmented basal cell carcinoma case demonstrating lesion without significant melanin content showing characteristic pearly, pink appearance - tests ability to distinguish non-pigmented lesions from pigmented based on absence of melanin and presence of characteristic non-pigmented morphological features
 
-### Example 3: Seborrheic Keratosis
-**Image**: Clinical photograph of brown, warty lesion with "stuck-on" appearance  
-**Question**: "Is this lesion primarily pigmented or non-pigmented?"  
-**Answer**: A. Pigmented  
-**Rationale**: Well-pigmented brown lesion with characteristic seborrheic keratosis morphology
-
-### Example 4: Dermatofibroma
-**Image**: Clinical photograph of firm, brownish-pink nodular lesion  
-**Question**: "Is this lesion primarily pigmented or non-pigmented?"  
-**Answer**: B. Non-pigmented  
-**Rationale**: Predominantly pink with minimal pigmentation, typical of dermatofibroma
-
-### Example 5: Melanoma
-**Image**: Dermoscopic image showing variegated brown and black pigmentation  
-**Question**: "Is this lesion primarily pigmented or non-pigmented?"  
-**Answer**: A. Pigmented  
-**Rationale**: Multiple shades of brown and black pigmentation with irregular distribution
-
-## Implementation Notes
-
-### Technical Considerations
-- Ensure accurate color reproduction for pigment assessment
-- Implement proper white balance and color calibration
-- Consider impact of different imaging modalities on pigment visualization
-- Handle varying skin tones that may affect pigment perception
-
-### Clinical Validation
-- Align with dermoscopic pigmentation assessment criteria
-- Consider both clinical and dermoscopic pigmentation patterns
-- Validate against histopathological melanin content when available
-- Cross-reference with established morphological classification systems
-
-### Dataset-Specific Adaptations
-- **Dermoscopy datasets**: Emphasize dermoscopic pigment patterns
-- **Clinical photography**: Focus on gross pigmentation characteristics
-- **Mixed modality datasets**: Consider consistency across imaging types
-- **Pathology correlation**: Incorporate histopathological pigment assessment
-
-### Quality Assurance
-- Regular review by dermatologists experienced in pigmented lesions
-- Validation against dermoscopic pigmentation criteria
-- Monitoring for consistent pigmentation pattern recognition
-- Updates based on evolving dermoscopic and morphological standards

@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `radiology_classification_multilabel_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multilabel classification  
 **Difficulty**: Easy  
-**Pattern**: Primary radiological finding identification in chest X-rays  
-**Domain**: Radiology (chest imaging)
+**Question Pattern**: Primary radiological finding identification in chest X-rays  
+**Medical Domain**: Radiology (chest imaging)  
+**Domain-knowledge summary**: Requires specialized radiological knowledge for chest X-ray interpretation and finding prioritization. Must understand multiple pulmonary pathologies, clinical significance hierarchy, differential diagnosis principles, and ability to identify the most clinically important finding when multiple abnormalities are present in chest radiographs.
 
 ## Template Description
 

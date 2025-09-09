@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `surgery_classification_ordinal_easy_1`  
-**Task Type**: Ordinal Classification  
+**Task Type**: Ordinal classification  
 **Difficulty**: Easy  
-**Pattern**: Surgical skill level evaluation  
-**Domain**: Surgery (surgical education and assessment)
+**Question Pattern**: Surgical skill level evaluation  
+**Medical Domain**: Surgery (surgical education and assessment)  
+**Domain-knowledge summary**: Requires specialized surgical education knowledge and assessment expertise. Must understand surgical competency metrics, technical skill progression, instrument handling proficiency, suturing quality, tissue manipulation techniques, and ability to evaluate surgical performance levels from novice to expert based on visual assessment criteria.
 
 ## Template Description
 

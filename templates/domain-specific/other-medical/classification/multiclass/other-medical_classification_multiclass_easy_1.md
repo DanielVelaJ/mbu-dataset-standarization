@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_multiclass_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Cell type identification in microscopic images  
-**Domain**: Other-Medical (cellular microscopy)
+**Question Pattern**: Cell type identification in microscopic images  
+**Medical Domain**: Other-Medical (cellular microscopy)  
+**Domain-knowledge summary**: Requires general medical knowledge for cellular identification and classification. Must understand basic cell biology, cellular morphology differences, tissue types, microscopy characteristics, and ability to distinguish various cell types based on visual features across different tissue samples and research applications.
 
 ## Template Description
 

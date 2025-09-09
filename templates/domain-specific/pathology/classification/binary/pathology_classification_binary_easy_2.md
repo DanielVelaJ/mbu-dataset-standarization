@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_binary_easy_2`  
+**Template ID**: `domain-specific_pathology_classification_binary_easy_2`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Tumor versus normal tissue identification  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Tumor versus normal tissue identification  
+**Medical Domain**: Pathology (histopathological imaging and neoplasia detection)  
+**Domain-knowledge summary**: Requires specialized knowledge of normal tissue architecture and neoplastic changes. Understanding of normal histological patterns, cellular organization, tissue architecture, neoplastic transformation markers, and tumor recognition criteria. Knowledge of pathological terminology for tissue morphology, neoplasia detection, histological pattern recognition, and clinical significance of tumor identification.
 
 ## Template Description
 

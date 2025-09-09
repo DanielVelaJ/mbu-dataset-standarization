@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_vision-language_describe_short_easy_1`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Vision-language (describe)  
 **Difficulty**: Easy  
-**Pattern**: Scientific finding description selection  
-**Domain**: Other-Medical (biomedical research)
+**Question Pattern**: Scientific finding description selection  
+**Medical Domain**: Other-Medical (biomedical research)  
+**Domain-knowledge summary**: Requires general medical research knowledge for biomedical findings interpretation and scientific documentation. Must understand research methodology, scientific terminology, experimental design principles, data interpretation, and ability to generate accurate scientific descriptions of biomedical research findings across various research applications.
 
 ## Template Description
 

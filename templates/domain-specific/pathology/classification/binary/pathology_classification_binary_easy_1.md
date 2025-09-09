@@ -2,11 +2,12 @@
 
 ## Template Overview
 
-**Template ID**: `pathology_classification_binary_easy_1`  
+**Template ID**: `domain-specific_pathology_classification_binary_easy_1`  
 **Task Type**: Binary Classification  
 **Difficulty**: Easy  
-**Pattern**: Malignant versus benign tissue assessment  
-**Domain**: Pathology (histopathological imaging)
+**Question Pattern**: Malignant versus benign tissue assessment  
+**Medical Domain**: Pathology (histopathological imaging and malignancy assessment)  
+**Domain-knowledge summary**: Requires specialized knowledge of histopathological features and malignancy criteria. Understanding of cellular morphology, nuclear pleomorphism, mitotic activity, architectural patterns, invasive characteristics, and malignant transformation markers. Knowledge of pathological terminology for neoplasia, tumor grading systems, histological assessment criteria, and clinical correlation with malignant vs benign diagnoses.
 
 ## Template Description
 

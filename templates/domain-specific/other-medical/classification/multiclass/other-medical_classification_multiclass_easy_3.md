@@ -3,10 +3,11 @@
 ## Template Overview
 
 **Template ID**: `other-medical_classification_multiclass_easy_3`  
-**Task Type**: Multiclass Classification  
+**Task Type**: Multiclass classification  
 **Difficulty**: Easy  
-**Pattern**: Dental condition identification in oral radiographs  
-**Domain**: Other-Medical (dental imaging)
+**Question Pattern**: Dental condition identification in oral radiographs  
+**Medical Domain**: Other-Medical (dental imaging)  
+**Domain-knowledge summary**: Requires general dental knowledge for oral radiographic interpretation. Must understand basic dental anatomy, tooth structure, periodontal tissues, common dental pathologies, radiographic appearance of dental conditions, and ability to identify oral diseases and abnormalities in dental imaging.
 
 ## Template Description
 
