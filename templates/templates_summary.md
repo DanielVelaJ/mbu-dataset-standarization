@@ -1,321 +1,382 @@
-# Templates Summary
+# Medical Image Analysis Templates Summary
 
 ## Overview
 
-This document provides a comprehensive overview of all MCVQA (Multiple Choice Visual Question Answering) templates available in the MBU Dataset Standardization project. Templates are organized hierarchically by domain (agnostic vs specific) and task type, mirroring the directory structure.
+This document provides a comprehensive summary of all available templates in the MBU Dataset Standardization project. Templates convert medical datasets into MCVQA (Multiple Choice Visual Question Answering) format for standardized evaluation. All templates follow the standardized 6-section structure as defined in the template guidelines.
 
-**Total Templates**: 79 templates across 6 major task categories and 6 medical specialties
+**Total Templates**: 73 active templates  
+**Domains**: Domain-Agnostic (30) + Domain-Specific (43)  
+**Last Updated**: Based on current template structure analysis
 
 ---
 
-## Quick Navigation
+## Template Structure Summary
 
-- [Domain-Agnostic Templates](#domain-agnostic-templates) (43 templates)
-  - [Classification](#classification-28-templates) (28 templates)
-  - [Object & Lesion Detection](#object--lesion-detection-3-templates) (3 templates)
-  - [Segmentation](#segmentation-6-templates) (6 templates) 
-  - [Anatomical Landmarks](#anatomical-landmarks--keypoints-3-templates) (3 templates)
-  - [Vision-Language](#vision-language-3-templates) (3 templates)
-- [Domain-Specific Templates](#domain-specific-templates) (36 templates)
-  - [Dermatology](#dermatology-10-templates) (10 templates)
-  - [Ophthalmology](#ophthalmology-8-templates) (8 templates)
-  - [Other-Medical](#other-medical-8-templates) (8 templates)
-  - [Pathology](#pathology-8-templates) (8 templates)
-  - [Radiology](#radiology-3-templates) (3 templates)
-  - [Surgery](#surgery-10-templates) (10 templates)
+Each template includes:
+- **Template Name**: Descriptive title and purpose
+- **Task Type**: Classification, Detection, Segmentation, Landmarks, Counting, Vision-Language
+- **Difficulty**: Easy, Medium, Hard
+- **Question Pattern**: Template for question generation
+- **Answer Format**: MCVQA-compliant response structure
+- **Answer Choices**: Multiple choice options or specific formats
+- **Compatible Datasets**: References to datasets in metadata file
+- **Template ID**: Unique identifier
+- **File Location**: Path within templates directory
 
 ---
 
 # Domain-Agnostic Templates
 
-*Templates that work across all medical domains requiring only basic information (image + label + modality)*
-
-## Classification (28 templates)
+## Classification Templates
 
 ### Binary Classification (9 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Presence Detection | `classification_binary_1` | Easy | "Is {finding} present in this {modality} image?" | Yes/No | `domain-agnostic/classification/binary/domain-agnostic_classification_binary_easy_1.md` |
-| Multiple Choice with Distractors | `classification_binary_2` | Medium | "What condition is shown in this {modality} image?" | A/B/C/D (with distractors) | `domain-agnostic/classification/binary/classification_binary_2.md` |
-| Normal vs Abnormal | `classification_binary_3` | Easy | "Is this {modality} image normal or abnormal?" | Normal/Abnormal | `domain-agnostic/classification/binary/classification_binary_3.md` |
-| Likelihood Assessment | `classification_binary_4` | Medium | "What is the likelihood of {condition} in this {modality} image?" | Very unlikely/Unlikely/Likely/Very likely | `domain-agnostic/classification/binary/classification_binary_4.md` |
-| Exclusionary Assessment | `classification_binary_5` | Medium | "Can {condition} be ruled out based on this {modality} image?" | Yes, can be ruled out/No, cannot be ruled out | `domain-agnostic/classification/binary/classification_binary_5.md` |
-| Clear Evidence Assessment | `classification_binary_6` | Easy-Medium | "Is there clear evidence of {condition} in this {modality} image?" | Yes, clear evidence/No clear evidence | `domain-agnostic/classification/binary/classification_binary_6.md` |
-| Detection Capability | `classification_binary_7` | Easy-Medium | "Can {condition} be detected in this {modality} image?" | Yes, detectable/No, not detectable | `domain-agnostic/classification/binary/classification_binary_7.md` |
-| Definition-Based Assessment | `classification_binary_8` | Hard | "Which definition best describes what is shown in this {modality} image?" | Multiple choice with definitions | `domain-agnostic/classification/binary/classification_binary_8.md` |
-| Multi-Doctor Clinical Assessment | `classification_binary_9` | Hard | Complex clinical reasoning with doctor assessments | Doctor selection based on accuracy | `domain-agnostic/classification/binary/classification_binary_9.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Binary Classification Template 1: Presence Detection | Easy | "Is {finding} present in this {modality} image?" | Yes/No | `domain-agnostic_classification_binary_easy_1` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 3: Quality Assessment | Easy | "Is this {modality} image of diagnostic quality?" | Diagnostic Quality/Poor Quality | `domain-agnostic_classification_binary_easy_3` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 2: Comparison Assessment | Medium | "Is this {modality} image {comparison_criteria}?" | Yes/No | `domain-agnostic_classification_binary_medium_2` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 4: Temporal Assessment | Medium | "Does this {modality} image show {temporal_pattern}?" | Yes/No | `domain-agnostic_classification_binary_medium_4` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 5: Severity Assessment | Medium | "Is this {finding} classified as {severity_level}?" | Yes/No | `domain-agnostic_classification_binary_medium_5` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 6: Treatment Response | Medium | "Does this {modality} image show {response_type}?" | Yes/No | `domain-agnostic_classification_binary_medium_6` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 7: Progression Assessment | Medium | "Does this {modality} image show {progression_status}?" | Yes/No | `domain-agnostic_classification_binary_medium_7` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 8: Complex Feature Assessment | Hard | "Based on multiple criteria, is this {finding} present?" | Yes/No | `domain-agnostic_classification_binary_hard_8` | `domain-agnostic/classification/binary/` |
+| Binary Classification Template 9: Meta-Assessment | Hard | "Is this diagnostic assessment {assessment_quality}?" | Yes/No | `domain-agnostic_classification_binary_hard_9` | `domain-agnostic/classification/binary/` |
 
 ### Multiclass Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Basic Condition Identification | `agnostic_classification_multiclass_1` | Easy | "What medical condition is shown in this {modality} image?" | Multiple choice conditions | `domain-agnostic/classification/multiclass/agnostic_classification_multiclass_1.md` |
-| Disease Stage/Severity Grading | `agnostic_classification_multiclass_2` | Easy | "What {assessment_type} is shown in this {modality} image?" | Multiple choice grades/stages | `domain-agnostic/classification/multiclass/agnostic_classification_multiclass_2.md` |
-| Anatomical Region Identification | `agnostic_classification_multiclass_3` | Easy | "What anatomical {structure_type} is primarily shown in this {modality} image?" | Multiple choice anatomical regions | `domain-agnostic/classification/multiclass/agnostic_classification_multiclass_3.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Multi-Class Classification Template 1: Basic Condition Identification | Easy | "What medical condition is shown in this {modality} image?" | Multiple condition options (A-D/E) | `domain-agnostic_classification_multiclass_easy_1` | `domain-agnostic/classification/multiclass/` |
+| Multi-Class Classification Template 2: Disease Stage/Severity Grading | Easy | "What {assessment_type} is shown in this {modality} image?" | Multiple severity/stage levels (A-D/E) | `domain-agnostic_classification_multiclass_easy_2` | `domain-agnostic/classification/multiclass/` |
+| Multi-Class Classification Template 3: Anatomical Region Identification | Easy | "What anatomical {structure_type} is primarily shown in this {modality} image?" | Multiple anatomical structures (A-D/E) | `domain-agnostic_classification_multiclass_easy_3` | `domain-agnostic/classification/multiclass/` |
 
 ### Multilabel Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Multiple Findings Detection | `domain-agnostic_classification_multilabel_easy_1` | Easy | "Which of the following findings are present in this {modality} image?" | Multiple correct selections | `domain-agnostic/classification/multilabel/domain-agnostic_classification_multilabel_easy_1.md` |
-| Simultaneous Conditions Assessment | `domain-agnostic_classification_multilabel_easy_2` | Easy | "Which conditions can be identified in this {modality} image?" | Multiple conditions selection | `domain-agnostic/classification/multilabel/domain-agnostic_classification_multilabel_easy_2.md` |
-| Multi-System Abnormalities | `domain-agnostic_classification_multilabel_easy_3` | Easy | "What abnormalities are visible across different systems?" | Multi-system findings | `domain-agnostic/classification/multilabel/domain-agnostic_classification_multilabel_easy_3.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Multi-Label Classification Template 1: Multiple Finding Detection | Easy | "Which of the following findings are present?" | Multiple simultaneous selections | `domain-agnostic_classification_multilabel_easy_1` | `domain-agnostic/classification/multilabel/` |
+| Multi-Label Classification Template 2: Anatomical Region Assessment | Easy | "Which anatomical regions show abnormalities?" | Multiple region selections | `domain-agnostic_classification_multilabel_easy_2` | `domain-agnostic/classification/multilabel/` |
+| Multi-Label Classification Template 3: Pathology Pattern Recognition | Easy | "Which pathological patterns are visible?" | Multiple pattern selections | `domain-agnostic_classification_multilabel_easy_3` | `domain-agnostic/classification/multilabel/` |
 
 ### Ordinal Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Severity Grading | `domain-agnostic_classification_ordinal_easy_1` | Easy | "What is the severity grade of {condition} in this {modality} image?" | Ordered severity levels | `domain-agnostic/classification/ordinal/domain-agnostic_classification_ordinal_easy_1.md` |
-| Disease Stage Assessment | `domain-agnostic_classification_ordinal_easy_2` | Easy | "What stage of {condition} is shown in this {modality} image?" | Progressive disease stages | `domain-agnostic/classification/ordinal/domain-agnostic_classification_ordinal_easy_2.md` |
-| Progressive Assessment Scale | `domain-agnostic_classification_ordinal_easy_3` | Easy | "According to the {scale_name}, what grade is this {modality} image?" | Standardized grading scales | `domain-agnostic/classification/ordinal/domain-agnostic_classification_ordinal_easy_3.md` |
 
-## Object & Lesion Detection (3 templates)
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Ordinal Classification Template 1: Severity Grading | Easy | "What is the severity grade of {finding}?" | Ordered severity levels (Grade 1-5) | `domain-agnostic_classification_ordinal_easy_1` | `domain-agnostic/classification/ordinal/` |
+| Ordinal Classification Template 2: Stage Assessment | Easy | "What stage is demonstrated in this {modality} image?" | Ordered stage progression | `domain-agnostic_classification_ordinal_easy_2` | `domain-agnostic/classification/ordinal/` |
+| Ordinal Classification Template 3: Quality Scoring | Easy | "What quality score best describes this image?" | Ordered quality levels (1-5) | `domain-agnostic_classification_ordinal_easy_3` | `domain-agnostic/classification/ordinal/` |
 
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Lesion Detection | `domain-agnostic_detection_object_easy_1` | Easy | "Where is the {lesion_type} located in this {modality} image?" | Bounding box regions | `domain-agnostic/object-and-lesion-detection/lesion/domain-agnostic_detection_object_easy_1.md` |
-| Anatomical Structure Detection | `domain-agnostic_detection_object_easy_2` | Easy | "Where is the {anatomical_structure} located in this {modality} image?" | Anatomical bounding boxes | `domain-agnostic/object-and-lesion-detection/anatomy/domain-agnostic_detection_object_easy_2.md` |
-| Medical Device Detection | `domain-agnostic_detection_object_easy_3` | Easy | "Where is the {medical_device} located in this {modality} image?" | Device bounding boxes | `domain-agnostic/object-and-lesion-detection/device/domain-agnostic_detection_object_easy_3.md` |
+## Object and Lesion Detection Templates
 
-## Segmentation (6 templates)
+### Lesion Detection (1 template)
 
-### Semantic Segmentation (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Region Identification | `domain-agnostic_segmentation_semantic_easy_1` | Easy | "What anatomical structure is highlighted in the segmented region?" | Structure identification | `domain-agnostic/segmentation/semantic/domain-agnostic_segmentation_semantic_easy_1.md` |
-| Tissue Type Classification | `domain-agnostic_segmentation_semantic_easy_2` | Easy | "What type of tissue is shown in the segmented area?" | Tissue type selection | `domain-agnostic/segmentation/semantic/domain-agnostic_segmentation_semantic_easy_2.md` |
-| Pathology Segmentation | `domain-agnostic_segmentation_semantic_easy_3` | Easy | "What pathological condition is segmented in this region?" | Pathology identification | `domain-agnostic/segmentation/semantic/domain-agnostic_segmentation_semantic_easy_3.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Object Detection Template 1: Lesion Localization | Easy | "Where is the {lesion_type} located in this image?" | Bounding box coordinates | `domain-agnostic_detection_object_easy_1` | `domain-agnostic/object-and-lesion-detection/lesion/` |
+
+### Anatomy Detection (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Object Detection Template 2: Anatomical Structure Localization | Easy | "Where is the {anatomical_structure} located?" | Bounding box coordinates | `domain-agnostic_detection_object_easy_2` | `domain-agnostic/object-and-lesion-detection/anatomy/` |
+
+### Device Detection (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Object Detection Template 3: Medical Device Localization | Easy | "Where is the {medical_device} located?" | Bounding box coordinates | `domain-agnostic_detection_object_easy_3` | `domain-agnostic/object-and-lesion-detection/device/` |
+
+## Segmentation Templates
 
 ### Instance Segmentation (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Multiple Object Counting | `domain-agnostic_segmentation_instance_easy_1` | Easy | "How many {object_type} are segmented in this {modality} image?" | Count-based answers | `domain-agnostic/segmentation/instance/domain-agnostic_segmentation_instance_easy_1.md` |
-| Individual Object Classification | `domain-agnostic_segmentation_instance_easy_2` | Easy | "What type of object is highlighted in instance {instance_id}?" | Object type per instance | `domain-agnostic/segmentation/instance/domain-agnostic_segmentation_instance_easy_2.md` |
-| Instance Relationship Analysis | `domain-agnostic_segmentation_instance_easy_3` | Easy | "What is the spatial relationship between instances in this image?" | Spatial relationships | `domain-agnostic/segmentation/instance/domain-agnostic_segmentation_instance_easy_3.md` |
 
-## Anatomical Landmarks & Keypoints (3 templates)
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Instance Segmentation Template 1: Instance Counting | Easy | "How many {object_type} are segmented in this image?" | Numerical count | `domain-agnostic_segmentation_instance_easy_1` | `domain-agnostic/segmentation/instance/` |
+| Instance Segmentation Template 2: Instance Properties | Easy | "What is the {property} of the highlighted {object_type}?" | Property value options | `domain-agnostic_segmentation_instance_easy_2` | `domain-agnostic/segmentation/instance/` |
+| Instance Segmentation Template 3: Instance Relationships | Easy | "What is the spatial relationship between instances?" | Relationship options | `domain-agnostic_segmentation_instance_easy_3` | `domain-agnostic/segmentation/instance/` |
+
+### Semantic Segmentation (3 templates)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Semantic Segmentation Template 1: Region Classification | Easy | "What type of tissue is shown in the highlighted region?" | Tissue type options | `domain-agnostic_segmentation_semantic_easy_1` | `domain-agnostic/segmentation/semantic/` |
+| Semantic Segmentation Template 2: Area Assessment | Easy | "What percentage of the image shows {tissue_type}?" | Percentage ranges | `domain-agnostic_segmentation_semantic_easy_2` | `domain-agnostic/segmentation/semantic/` |
+| Semantic Segmentation Template 3: Region Properties | Easy | "What property characterizes the segmented region?" | Property options | `domain-agnostic_segmentation_semantic_easy_3` | `domain-agnostic/segmentation/semantic/` |
+
+## Anatomical Landmarks Templates
 
 ### Single Landmark (2 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Single Landmark Localization | `anatomical_landmarks_single_1` | Easy | "Where is the {landmark} located in this {modality} image?" | Coordinate regions | `domain-agnostic/anatomical-landmarks-keypoints/single/domain-agnostic_anatomical-landmarks-keypoints_single_easy_1.md` |
-| Landmark Distance Measurement | `domain-agnostic_anatomical-landmarks-keypoints_single_easy_2` | Easy | "What is the distance between {landmark1} and {landmark2}?" | Distance measurements | `domain-agnostic/anatomical-landmarks-keypoints/single/domain-agnostic_anatomical-landmarks-keypoints_single_easy_2.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Single Landmark Template 1: Point Localization | Easy | "Where is the {landmark_name} located?" | X,Y coordinates | `domain-agnostic_anatomical-landmarks-keypoints_single_easy_1` | `domain-agnostic/anatomical-landmarks-keypoints/single/` |
+| Single Landmark Template 2: Landmark Identification | Easy | "What landmark is indicated at the marked location?" | Landmark name options | `domain-agnostic_anatomical-landmarks-keypoints_single_easy_2` | `domain-agnostic/anatomical-landmarks-keypoints/single/` |
 
 ### Multiple Landmarks (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Multiple Landmark Identification | `domain-agnostic_anatomical-landmarks-keypoints_multiple_easy_1` | Easy | "Which landmarks are correctly identified in this {modality} image?" | Multiple landmark verification | `domain-agnostic/anatomical-landmarks-keypoints/multiple/domain-agnostic_anatomical-landmarks-keypoints_multiple_easy_1.md` |
 
-## Vision-Language (3 templates)
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Multiple Landmarks Template 1: Multi-Point Assessment | Easy | "How many {landmark_type} landmarks are visible?" | Numerical count | `domain-agnostic_anatomical-landmarks-keypoints_multiple_easy_1` | `domain-agnostic/anatomical-landmarks-keypoints/multiple/` |
 
-### Describe - Short (2 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Short Medical Caption Selection | `vision_language_describe_short_1` | Easy | "Which of the following best describes this {modality} image?" | Caption selection | `domain-agnostic/vision-language/describe/short/domain-agnostic_vision-language_describe_short_easy_1.md` |
-| Clinical Finding Description | `domain-agnostic_vision-language_describe_short_easy_2` | Easy | "Select the most accurate clinical description for this image" | Clinical descriptions | `domain-agnostic/vision-language/describe/short/domain-agnostic_vision-language_describe_short_easy_2.md` |
+## Vision-Language Templates
 
-### Describe - Long (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | File Location |
-|----------|----|-----------|-----------------|--------------|--------------| 
-| Comprehensive Medical Report | `domain-agnostic_vision-language_describe_long_easy_1` | Easy | "Which detailed report best describes this {modality} image?" | Long-form medical reports | `domain-agnostic/vision-language/describe/long/domain-agnostic_vision-language_describe_long_easy_1.md` |
+### Description - Short (2 templates)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Vision-Language Description Template 1: Short Medical Caption Selection | Easy | "Which best describes this {modality} image?" | Multiple caption options | `domain-agnostic_vision-language_describe_short_easy_1` | `domain-agnostic/vision-language/describe/short/` |
+| Vision-Language Description Template 2: Findings Description | Easy | "Which statement best describes the findings?" | Finding description options | `domain-agnostic_vision-language_describe_short_easy_2` | `domain-agnostic/vision-language/describe/short/` |
+
+### Description - Long (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Vision-Language Description Template 1: Comprehensive Medical Report Selection | Easy | "Which report best describes this image?" | Multiple detailed report options | `domain-agnostic_vision-language_describe_long_easy_1` | `domain-agnostic/vision-language/describe/long/` |
 
 ---
 
 # Domain-Specific Templates
 
-*Templates requiring medical domain expertise and specialized knowledge*
-
-## Dermatology (10 templates)
+## Dermatology Domain (8 templates)
 
 ### Binary Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Malignant vs Benign Assessment | `dermatology_classification_binary_easy_1` | Easy | "Is this lesion malignant or benign?" | Malignant/Benign | ISIC, HAM10000, Melanoma datasets | `domain-specific/dermatology/classification/binary/dermatology_classification_binary_easy_1.md` |
-| Melanoma Detection | `dermatology_classification_binary_easy_2` | Easy | "Is this a melanoma?" | Yes/No | Melanoma-specific datasets | `domain-specific/dermatology/classification/binary/dermatology_classification_binary_easy_2.md` |
-| Inflammatory vs Non-inflammatory | `dermatology_classification_binary_easy_3` | Easy | "Is this an inflammatory skin condition?" | Yes/No | Dermatology classification datasets | `domain-specific/dermatology/classification/binary/dermatology_classification_binary_easy_3.md` |
 
-### Multiclass Classification (5 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Skin Lesion Type Classification | `dermatology_classification_multiclass_easy_1` | Easy | "What type of skin lesion is this?" | Multiple lesion types | HAM10000, DermNet, ISIC | `domain-specific/dermatology/classification/multiclass/dermatology_classification_multiclass_easy_1.md` |
-| Skin Cancer Subtype | `dermatology_classification_multiclass_easy_2` | Easy | "What subtype of skin cancer is shown?" | Cancer subtypes | Melanoma classification datasets | `domain-specific/dermatology/classification/multiclass/dermatology_classification_multiclass_easy_2.md` |
-| Dermatological Condition Classification | `dermatology_classification_multiclass_easy_3` | Easy | "What dermatological condition is present?" | Skin conditions | DermNet, dermatology atlases | `domain-specific/dermatology/classification/multiclass/dermatology_classification_multiclass_easy_3.md` |
-| Pigmented Lesion Diagnosis | `dermatology_classification_multiclass_easy_4` | Easy | "What is the diagnosis for this pigmented lesion?" | Pigmented lesion types | Dermoscopy datasets | `domain-specific/dermatology/classification/multiclass/dermatology_classification_multiclass_easy_4.md` |
-
-### Ordinal Classification (2 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Melanoma ABCDE Severity | `dermatology_classification_ordinal_easy_1` | Easy | "What ABCDE severity grade is this melanoma?" | Grade 0-4 | Melanoma grading datasets | `domain-specific/dermatology/classification/ordinal/dermatology_classification_ordinal_easy_1.md` |
-
-## Ophthalmology (8 templates)
-
-### Binary Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Diabetic Retinopathy Detection | `ophthalmology_classification_binary_easy_1` | Easy | "Is diabetic retinopathy present?" | Yes/No | EyePACS, APTOS, IDRiD | `domain-specific/ophthalmology/classification/binary/ophthalmology_classification_binary_easy_1.md` |
-| Glaucoma Detection | `ophthalmology_classification_binary_easy_2` | Easy | "Are there signs of glaucoma?" | Yes/No | Glaucoma detection datasets | `domain-specific/ophthalmology/classification/binary/ophthalmology_classification_binary_easy_2.md` |
-| Age-related Macular Degeneration | `ophthalmology_classification_binary_easy_3` | Easy | "Is AMD present in this fundus image?" | Yes/No | AMD datasets | `domain-specific/ophthalmology/classification/binary/ophthalmology_classification_binary_easy_3.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Dermatology Malignant vs Benign Lesion Assessment | Easy | "Based on dermatological features, is this lesion malignant or benign?" | Malignant/Benign | `domain-specific_dermatology_classification_binary_easy_1` | `domain-specific/dermatology/classification/binary/` |
+| Dermatology Inflammatory vs Non-inflammatory Assessment | Easy | "Based on dermatological features, is this condition inflammatory or non-inflammatory?" | Inflammatory/Non-inflammatory | `domain-specific_dermatology_classification_binary_easy_2` | `domain-specific/dermatology/classification/binary/` |
+| Dermatology Pigmented vs Non-pigmented Lesion Assessment | Easy | "Based on dermatological features, is this a pigmented or non-pigmented lesion?" | Pigmented/Non-pigmented | `domain-specific_dermatology_classification_binary_easy_3` | `domain-specific/dermatology/classification/binary/` |
 
 ### Multiclass Classification (4 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Retinal Disease Classification | `ophthalmology_classification_multiclass_easy_1` | Easy | "What retinal condition is shown?" | Multiple retinal diseases | Multi-disease retinal datasets | `domain-specific/ophthalmology/classification/multiclass/ophthalmology_classification_multiclass_easy_1.md` |
-| Fundus Abnormality Detection | `ophthalmology_classification_multiclass_easy_2` | Easy | "What abnormality is visible in this fundus?" | Fundus abnormalities | Comprehensive eye datasets | `domain-specific/ophthalmology/classification/multiclass/ophthalmology_classification_multiclass_easy_2.md` |
-| Optic Disc Assessment | `ophthalmology_classification_multiclass_easy_3` | Easy | "What is the condition of the optic disc?" | Optic disc conditions | Glaucoma, papilledema datasets | `domain-specific/ophthalmology/classification/multiclass/ophthalmology_classification_multiclass_easy_3.md` |
-| Macular Condition Classification | `ophthalmology_classification_multiclass_easy_4` | Easy | "What macular condition is present?" | Macular diseases | AMD, diabetic maculopathy datasets | `domain-specific/ophthalmology/classification/multiclass/ophthalmology_classification_multiclass_easy_4.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Dermatology Skin Cancer Classification | Easy | "Based on dermatological features, what type of skin cancer is most likely?" | Multiple skin cancer types | `domain-specific_dermatology_classification_multiclass_easy_1` | `domain-specific/dermatology/classification/multiclass/` |
+| Dermatology Dermoscopic Pattern Recognition | Easy | "What dermoscopic pattern is predominantly visible?" | Multiple dermoscopic patterns | `domain-specific_dermatology_classification_multiclass_easy_2` | `domain-specific/dermatology/classification/multiclass/` |
+| Dermatology Condition Category Assessment | Easy | "What category of dermatological condition is shown?" | Multiple condition categories | `domain-specific_dermatology_classification_multiclass_easy_3` | `domain-specific/dermatology/classification/multiclass/` |
+| Dermatology Anatomical Location-Based Diagnosis | Easy | "Given the anatomical location and features, what is the most likely diagnosis?" | Multiple location-specific diagnoses | `domain-specific_dermatology_classification_multiclass_easy_4` | `domain-specific/dermatology/classification/multiclass/` |
 
 ### Ordinal Classification (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Diabetic Retinopathy Grading | `ophthalmology_classification_ordinal_easy_1` | Easy | "What grade of diabetic retinopathy is shown?" | Grade 0-4 | EyePACS, APTOS diabetic retinopathy | `domain-specific/ophthalmology/classification/ordinal/ophthalmology_classification_ordinal_easy_1.md` |
 
-## Other-Medical (8 templates)
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Dermatology Fitzpatrick Skin Type Assessment | Easy | "What Fitzpatrick skin type is shown in this image?" | Type I-VI (ordered) | `domain-specific_dermatology_classification_ordinal_easy_1` | `domain-specific/dermatology/classification/ordinal/` |
+
+## Ophthalmology Domain (8 templates)
 
 ### Binary Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| General Medical Abnormality | `other-medical_classification_binary_easy_1` | Easy | "Is there a medical abnormality in this image?" | Yes/No | Multi-domain medical datasets | `domain-specific/other-medical/classification/binary/other-medical_classification_binary_easy_1.md` |
-| Chronic vs Acute Condition | `other-medical_classification_binary_easy_2` | Easy | "Is this a chronic or acute condition?" | Chronic/Acute | Temporal medical datasets | `domain-specific/other-medical/classification/binary/other-medical_classification_binary_easy_2.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Ophthalmology Optic Disc vs Cup Differentiation | Easy | "Is the highlighted region the optic disc or optic cup?" | Optic disc/Optic cup | `domain-specific_ophthalmology_classification_binary_easy_1` | `domain-specific/ophthalmology/classification/binary/` |
+| Ophthalmology Pupil Response Assessment | Easy | "Does this pupil show normal reactive response?" | Normal/Abnormal response | `domain-specific_ophthalmology_classification_binary_easy_2` | `domain-specific/ophthalmology/classification/binary/` |
+| Ophthalmology Anterior vs Posterior Segment Identification | Easy | "Does this image show anterior or posterior segment anatomy?" | Anterior/Posterior segment | `domain-specific_ophthalmology_classification_binary_easy_3` | `domain-specific/ophthalmology/classification/binary/` |
 
 ### Multiclass Classification (4 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Medical Specialty Classification | `other-medical_classification_multiclass_easy_1` | Easy | "Which medical specialty would handle this case?" | Medical specialties | Cross-specialty datasets | `domain-specific/other-medical/classification/multiclass/other-medical_classification_multiclass_easy_1.md` |
-| Body System Classification | `other-medical_classification_multiclass_easy_2` | Easy | "Which body system is primarily affected?" | Body systems | Multi-system medical images | `domain-specific/other-medical/classification/multiclass/other-medical_classification_multiclass_easy_2.md` |
-| Imaging Modality Optimization | `other-medical_classification_multiclass_easy_3` | Easy | "What imaging modality would be most appropriate?" | Imaging modalities | Multi-modal datasets | `domain-specific/other-medical/classification/multiclass/other-medical_classification_multiclass_easy_3.md` |
-| Treatment Priority Assessment | `other-medical_classification_multiclass_easy_4` | Easy | "What is the treatment priority level?" | Priority levels | Triage, emergency datasets | `domain-specific/other-medical/classification/multiclass/other-medical_classification_multiclass_easy_4.md` |
 
-### Vision-Language (2 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Medical Report Generation | `other-medical_vision-language_describe_short_easy_1` | Easy | "Select the most appropriate medical report" | Report selection | Medical report datasets | `domain-specific/other-medical/vision-language/describe/short/other-medical_vision-language_describe_short_easy_1.md` |
-| Clinical Question Answering | `other-medical_vision-language_ask-answer_open-ended_easy_1` | Easy | "What is the most likely diagnosis?" | Diagnosis options | Medical VQA datasets | `domain-specific/other-medical/vision-language/ask-and-answer/open-ended/other-medical_vision-language_ask-answer_open-ended_easy_1.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Ophthalmology Anatomical Structure Identification | Easy | "What primary anatomical structure is shown in this fundus image?" | Multiple retinal structures | `domain-specific_ophthalmology_classification_multiclass_easy_1` | `domain-specific/ophthalmology/classification/multiclass/` |
+| Ophthalmology OCT Retinal Pathology Analysis | Easy | "What retinal pathology is identified in this OCT image?" | Multiple retinal pathologies | `domain-specific_ophthalmology_classification_multiclass_easy_2` | `domain-specific/ophthalmology/classification/multiclass/` |
+| Ophthalmology Optic Disc Location Assessment | Easy | "What is the spatial location of the optic disc?" | Multiple spatial locations | `domain-specific_ophthalmology_classification_multiclass_easy_3` | `domain-specific/ophthalmology/classification/multiclass/` |
+| Ophthalmology Comparative Fundus Analysis | Easy | "What comparative pathology assessment applies to retinal quadrants?" | Multiple comparative assessments | `domain-specific_ophthalmology_classification_multiclass_easy_4` | `domain-specific/ophthalmology/classification/multiclass/` |
 
-## Pathology (8 templates)
+### Ordinal Classification (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Ophthalmology Diabetic Retinopathy Grading | Easy | "What diabetic retinopathy severity grade is shown?" | Severity grades (ordered) | `domain-specific_ophthalmology_classification_ordinal_easy_1` | `domain-specific/ophthalmology/classification/ordinal/` |
+
+## Pathology Domain (8 templates)
 
 ### Binary Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Cancer vs Normal Tissue | `pathology_classification_binary_easy_1` | Easy | "Is this tissue malignant or normal?" | Malignant/Normal | Histopathology cancer datasets | `domain-specific/pathology/classification/binary/pathology_classification_binary_easy_1.md` |
-| Mitosis Detection | `pathology_classification_binary_easy_2` | Easy | "Is mitotic activity present?" | Yes/No | Mitosis detection datasets | `domain-specific/pathology/classification/binary/pathology_classification_binary_easy_2.md` |
-| Tissue Inflammation | `pathology_classification_binary_easy_3` | Easy | "Is there evidence of inflammation?" | Yes/No | Inflammatory pathology datasets | `domain-specific/pathology/classification/binary/pathology_classification_binary_easy_3.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Pathology Malignant vs Benign Tissue Classification | Easy | "Based on histopathological features, is this tissue malignant or benign?" | Malignant/Benign | `domain-specific_pathology_classification_binary_easy_1` | `domain-specific/pathology/classification/binary/` |
+| Pathology Tumor vs Normal Tissue Differentiation | Easy | "Based on histopathological features, is this tumor or normal tissue?" | Tumor/Normal tissue | `domain-specific_pathology_classification_binary_easy_2` | `domain-specific/pathology/classification/binary/` |
+| Pathology High-Grade vs Low-Grade Neoplasm Assessment | Easy | "Based on histopathological features, is this high-grade or low-grade?" | High-grade/Low-grade | `domain-specific_pathology_classification_binary_easy_3` | `domain-specific/pathology/classification/binary/` |
 
 ### Multiclass Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Cancer Type Classification | `pathology_classification_multiclass_easy_1` | Easy | "What type of cancer is shown?" | Cancer types | Multi-cancer histopathology | `domain-specific/pathology/classification/multiclass/pathology_classification_multiclass_easy_1.md` |
-| Tissue Type Identification | `pathology_classification_multiclass_easy_2` | Easy | "What type of tissue is this?" | Tissue types | Histopathology atlases | `domain-specific/pathology/classification/multiclass/pathology_classification_multiclass_easy_2.md` |
-| Histological Grade Assessment | `pathology_classification_multiclass_easy_3` | Easy | "What histological grade is this tumor?" | Tumor grades | Cancer grading datasets | `domain-specific/pathology/classification/multiclass/pathology_classification_multiclass_easy_3.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Pathology Cancer Type Classification | Easy | "What specific cancer type is identified in this histopathological image?" | Multiple cancer types | `domain-specific_pathology_classification_multiclass_easy_1` | `domain-specific/pathology/classification/multiclass/` |
+| Pathology Tissue Type Identification | Easy | "What fundamental tissue type is shown?" | Multiple tissue types | `domain-specific_pathology_classification_multiclass_easy_2` | `domain-specific/pathology/classification/multiclass/` |
+| Pathology Inflammatory Pattern Classification | Easy | "What inflammatory pattern is recognized?" | Multiple inflammatory patterns | `domain-specific_pathology_classification_multiclass_easy_3` | `domain-specific/pathology/classification/multiclass/` |
 
 ### Counting (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Cell Counting | `pathology_counting_direct_easy_1` | Easy | "How many {cell_type} are present?" | Numerical count | Cell counting datasets | `domain-specific/pathology/counting/direct/pathology_counting_direct_easy_1.md` |
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Pathology Mitotic Figure Counting Assessment | Easy | "What is the mitotic figure density evaluation?" | Multiple density categories | `domain-specific_pathology_counting_direct_easy_1` | `domain-specific/pathology/counting/direct/` |
 
 ### Segmentation (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Tumor Segmentation | `pathology_segmentation_instance_easy_1` | Easy | "Where are the tumor regions located?" | Segmentation masks | Pathology segmentation datasets | `domain-specific/pathology/segmentation/instance/pathology_segmentation_instance_easy_1.md` |
 
-## Radiology (3 templates)
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Pathology Nuclear Segmentation Quality Assessment | Easy | "What best describes the nuclear segmentation characteristics in this histopathological image?" | Multiple segmentation quality options | `domain-specific_pathology_segmentation_instance_easy_1` | `domain-specific/pathology/segmentation/instance/` |
 
-### Binary Classification (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Radiological Abnormality Detection | `radiology_classification_binary_easy_1` | Easy | "Is there a radiological abnormality?" | Yes/No | Chest X-ray, CT, MRI datasets | `domain-specific/radiology/classification/binary/radiology_classification_binary_easy_1.md` |
+## Surgery Domain (8 templates)
 
-### Multilabel Classification (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Multiple Radiological Findings | `radiology_classification_multilabel_easy_1` | Easy | "Which radiological findings are present?" | Multiple findings | ChestX-ray14, MIMIC-CXR | `domain-specific/radiology/classification/multilabel/radiology_classification_multilabel_easy_1.md` |
+### Binary Classification (2 templates)
 
-### Vision-Language (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Radiology Report Generation | `radiology_vision-language_describe_short_easy_1` | Easy | "Select the most accurate radiology report" | Report selection | MIMIC-CXR, RadGraph | `domain-specific/radiology/vision-language/describe/short/radiology_vision-language_describe_short_easy_1.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Surgery Critical View of Safety Achievement | Easy | "Has the critical view of safety been achieved?" | Critical view achieved/Not achieved | `surgery_classification_binary_easy_1` | `domain-specific/surgery/classification/binary/` |
+| Surgery Tissue Plane Assessment | Easy | "Is the tissue plane adequately developed?" | Adequate/Inadequate | `surgery_classification_binary_easy_2` | `domain-specific/surgery/classification/binary/` |
 
-## Surgery (10 templates)
+### Multiclass Classification (4 templates)
 
-### Binary Classification (3 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Surgical Tool Detection | `surgery_classification_binary_easy_1` | Easy | "Is a surgical tool visible in this frame?" | Yes/No | Surgical video datasets | `domain-specific/surgery/classification/binary/surgery_classification_binary_easy_1.md` |
-| Critical View Achievement | `surgery_classification_binary_easy_2` | Easy | "Has critical view been achieved?" | Yes/No | Laparoscopic surgery datasets | `domain-specific/surgery/classification/binary/surgery_classification_binary_easy_2.md` |
-
-### Multiclass Classification (5 templates)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Surgical Phase Recognition | `surgery_classification_multiclass_easy_1` | Easy | "What surgical phase is currently shown?" | Surgical phases | Cholec80, EndoVis, surgical workflows | `domain-specific/surgery/classification/multiclass/surgery_classification_multiclass_easy_1.md` |
-| Surgical Tool Classification | `surgery_classification_multiclass_easy_2` | Easy | "What surgical tool is being used?" | Tool types | Surgical instrument datasets | `domain-specific/surgery/classification/multiclass/surgery_classification_multiclass_easy_2.md` |
-| Anatomical Structure Recognition | `surgery_classification_multiclass_easy_3` | Easy | "What anatomical structure is visible?" | Anatomical structures | Surgical anatomy datasets | `domain-specific/surgery/classification/multiclass/surgery_classification_multiclass_easy_3.md` |
-| Surgical Procedure Classification | `surgery_classification_multiclass_easy_4` | Easy | "What type of surgical procedure is this?" | Procedure types | Multi-procedure surgical datasets | `domain-specific/surgery/classification/multiclass/surgery_classification_multiclass_easy_4.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Surgery Surgical Phase Recognition | Easy | "What surgical phase is currently shown in this surgical video frame?" | Multiple surgical phases | `surgery_classification_multiclass_easy_1` | `domain-specific/surgery/classification/multiclass/` |
+| Surgery Anatomical Structure Identification | Easy | "What anatomical structure is primarily visible?" | Multiple surgical structures | `surgery_classification_multiclass_easy_2` | `domain-specific/surgery/classification/multiclass/` |
+| Surgery Tool Identification | Easy | "What surgical tool is being used?" | Multiple surgical tools | `surgery_classification_multiclass_easy_3` | `domain-specific/surgery/classification/multiclass/` |
+| Surgery Complication Assessment | Easy | "What type of complication is evident?" | Multiple complication types | `surgery_classification_multiclass_easy_4` | `domain-specific/surgery/classification/multiclass/` |
 
 ### Ordinal Classification (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Surgical Skill Assessment | `surgery_classification_ordinal_easy_1` | Easy | "What skill level is demonstrated?" | Skill levels (Novice/Intermediate/Expert) | Surgical training datasets | `domain-specific/surgery/classification/ordinal/surgery_classification_ordinal_easy_1.md` |
 
-### Anatomical Landmarks (1 template)
-| Template | ID | Difficulty | Question Pattern | Answer Format | Compatible Datasets | File Location |
-|----------|----|-----------|-----------------|--------------|--------------------|--------------|
-| Surgical Landmark Detection | `surgery_landmarks_multiple_easy_1` | Easy | "Where are the key anatomical landmarks?" | Multiple landmark coordinates | Surgical navigation datasets | `domain-specific/surgery/anatomical-landmarks-keypoints/multiple/surgery_landmarks_multiple_easy_1.md` |
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Surgery Technical Skill Assessment | Easy | "What technical skill level is demonstrated?" | Skill levels (ordered) | `surgery_classification_ordinal_easy_1` | `domain-specific/surgery/classification/ordinal/` |
+
+### Landmarks (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Surgery Multiple Anatomical Landmarks | Easy | "How many surgical landmarks are identified?" | Numerical count | `surgery_landmarks_multiple_easy_1` | `domain-specific/surgery/anatomical-landmarks-keypoints/multiple/` |
+
+## Radiology Domain (3 templates)
+
+### Binary Classification (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Radiology Abnormality Detection | Easy | "Is there an abnormality present in this radiological image?" | Abnormal/Normal | `radiology_classification_binary_easy_1` | `domain-specific/radiology/classification/binary/` |
+
+### Multilabel Classification (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Radiology Multiple Finding Detection | Easy | "Which radiological findings are present?" | Multiple simultaneous findings | `radiology_classification_multilabel_easy_1` | `domain-specific/radiology/classification/multilabel/` |
+
+### Vision-Language (1 template)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Radiology Short Report Generation | Easy | "Which report best describes this radiological image?" | Multiple report options | `radiology_vision-language_describe_short_easy_1` | `domain-specific/radiology/vision-language/describe/short/` |
+
+## Other-Medical Domain (8 templates)
+
+### Binary Classification (2 templates)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Other-Medical Abnormality Detection | Easy | "Is there an abnormality present in this medical image?" | Abnormal/Normal | `other-medical_classification_binary_easy_1` | `domain-specific/other-medical/classification/binary/` |
+| Other-Medical Treatment Response Assessment | Easy | "Does this image show positive treatment response?" | Positive/Negative response | `other-medical_classification_binary_easy_2` | `domain-specific/other-medical/classification/binary/` |
+
+### Multiclass Classification (4 templates)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Other-Medical Condition Classification | Easy | "What medical condition is most likely shown?" | Multiple medical conditions | `other-medical_classification_multiclass_easy_1` | `domain-specific/other-medical/classification/multiclass/` |
+| Other-Medical Anatomical Region Classification | Easy | "What anatomical region is primarily shown?" | Multiple anatomical regions | `other-medical_classification_multiclass_easy_2` | `domain-specific/other-medical/classification/multiclass/` |
+| Other-Medical Finding Type Classification | Easy | "What type of medical finding is demonstrated?" | Multiple finding types | `other-medical_classification_multiclass_easy_3` | `domain-specific/other-medical/classification/multiclass/` |
+| Other-Medical Severity Assessment | Easy | "What severity level is most appropriate?" | Multiple severity levels | `other-medical_classification_multiclass_easy_4` | `domain-specific/other-medical/classification/multiclass/` |
+
+### Vision-Language (2 templates)
+
+| Template Name | Difficulty | Question Pattern | Answer Choices | Template ID | File Location |
+|---------------|------------|------------------|----------------|-------------|---------------|
+| Other-Medical Short Description | Easy | "Which description best fits this medical image?" | Multiple description options | `other-medical_vision-language_describe_short_easy_1` | `domain-specific/other-medical/vision-language/describe/short/` |
+| Other-Medical Open-Ended Q&A | Easy | "What is the answer to this medical question about the image?" | Multiple answer options | `other-medical_vision-language_ask-answer_open-ended_easy_1` | `domain-specific/other-medical/vision-language/ask-and-answer/open-ended/` |
 
 ---
 
-## Template Usage Guidelines
+## Template Statistics Summary
 
-### MCVQA Compliance
-- **Single Correct Answer**: Each question has exactly one correct answer
-- **Multiple Choice Format**: All questions provide discrete answer options
-- **No Free Text**: No open-ended text generation allowed
-- **Deterministic**: Answers must be objectively verifiable
-
-### Compatibility Requirements
-- **Domain-Agnostic**: Work with any medical dataset in their category
-- **Domain-Specific**: Require specialized medical knowledge and domain expertise
-- **Schema Compliance**: All templates align with unified datum schema v1.0
-- **Medical Accuracy**: Validated terminology and clinical relevance
-
-### Template Structure
-All templates follow the standardized 8-section format:
-1. Template Overview
-2. Template Description  
-3. Question Generation Pattern
-4. Mapping to Datum Schema
-5. Dataset Requirements
-6. Template Usage Rules
-7. Examples (minimum 5)
-8. Implementation Notes
-
----
-
-## Statistics Summary
-
-### By Domain
-- **Domain-Agnostic**: 43 templates (54%)
-- **Domain-Specific**: 36 templates (46%)
+### By Domain Type
+- **Domain-Agnostic**: 30 templates (41%)
+- **Domain-Specific**: 43 templates (59%)
 
 ### By Task Type
-- **Classification**: 59 templates (75%)
-  - Binary: 18 templates
-  - Multiclass: 24 templates  
+- **Classification**: 57 templates (78%)
+  - Binary: 29 templates
+  - Multiclass: 20 templates  
   - Multilabel: 4 templates
-  - Ordinal: 13 templates
+  - Ordinal: 4 templates
 - **Detection**: 3 templates (4%)
-- **Segmentation**: 7 templates (9%)
-- **Landmarks**: 4 templates (5%)
-- **Vision-Language**: 6 templates (7%)
+- **Segmentation**: 7 templates (10%)
+- **Landmarks**: 3 templates (4%)
+- **Vision-Language**: 6 templates (8%)
+- **Counting**: 1 template (1%)
 
 ### By Difficulty
-- **Easy**: 76 templates (96%)
-- **Medium**: 3 templates (4%)
+- **Easy**: 66 templates (90%)
+- **Medium**: 5 templates (7%)
 - **Hard**: 2 templates (3%)
 
-### By Medical Specialty (Domain-Specific)
-- **Surgery**: 10 templates (28%)
-- **Dermatology**: 10 templates (28%)
-- **Ophthalmology**: 8 templates (22%)
-- **Other-Medical**: 8 templates (22%)
-- **Pathology**: 8 templates (22%)
-- **Radiology**: 3 templates (8%)
+### By Medical Domain (Domain-Specific)
+- **Dermatology**: 8 templates (19%)
+- **Ophthalmology**: 8 templates (19%)
+- **Pathology**: 7 templates (17%)
+- **Surgery**: 8 templates (19%)
+- **Radiology**: 3 templates (7%)
+- **Other-Medical**: 8 templates (19%)
 
 ---
 
-*Last updated: Based on current repository state with 79 total templates across 6 task categories and 6 medical specialties*
+## Key Features and Standards
+
+### MCVQA Compliance
+All templates ensure:
+- **Single Correct Answer**: Each question has exactly one correct answer
+- **Multiple Choice Format**: Discrete answer options provided
+- **No Free Text**: No open-ended text generation
+- **Deterministic Answers**: Objectively verifiable responses
+
+### Template Structure Compliance
+All templates follow the standardized 6-section format:
+1. **Template Overview** (ID, Task Type, Difficulty, Question Pattern, Medical Domain, Domain-knowledge summary)
+2. **Template Description** (Purpose, clinical context, use cases)
+3. **Question Generation Pattern** (Question format, answer format, variables, image presentation, answer construction)
+4. **Dataset Requirements** (Task types, label structures, compatible datasets)
+5. **Template Usage Rules** (Implementation guidelines, label mapping, conversion process, schema alignment)
+6. **Examples** (Exactly 2 concrete examples with dataset references)
+
+### Naming Convention Compliance
+All templates follow the standardized naming pattern:
+- **Format**: `{domain}_{task}_{subtype}_{difficulty}_{number}.md`
+- **Template IDs**: Match filename structure
+- **Consistent Organization**: Hierarchical directory structure
+
+---
+
+## Usage Guidelines
+
+### Template Selection
+1. **Identify Task Type**: Classification, Detection, Segmentation, etc.
+2. **Determine Domain**: Domain-agnostic for general use, domain-specific for specialized medical fields
+3. **Select Difficulty**: Easy for basic tasks, Medium/Hard for complex reasoning
+4. **Check Compatibility**: Verify dataset requirements match your data structure
+
+### Implementation Process
+1. **Read Template**: Review all 6 sections thoroughly
+2. **Verify Dataset Compatibility**: Check dataset requirements section
+3. **Extract Variables**: Identify and populate template variables
+4. **Generate Questions**: Follow question generation pattern exactly
+5. **Validate MCVQA**: Ensure single correct answer and multiple choice format
+6. **Test Examples**: Use provided examples as validation references
+
+### Quality Assurance
+- **Medical Accuracy**: Verify clinical terminology and diagnostic criteria
+- **Schema Compliance**: Align with unified datum schema v1.0
+- **Consistency**: Maintain template structure and formatting standards
+- **Documentation**: Include provenance tracking and rule IDs
+
+---
+
+*This summary is automatically maintained and reflects the current state of all templates in the repository. For specific implementation details, refer to individual template files and the general template guidelines.*
